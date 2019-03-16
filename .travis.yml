@@ -21,11 +21,9 @@ licenses:
 
 before_install:
   - yes | sdkmanager "platforms;android-27"
-  - pwd
-  - cd MyNews
-  - ls -la
 
 before_script:
+  - cd MyNews
   - chmod +x gradlew
   - ./gradlew build jacocoTestReport assembleAndroidTest
   - echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL --abi $ANDROID_ABI
