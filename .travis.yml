@@ -10,9 +10,14 @@ env:
 
 android:
   components:
+    - tools
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
     - android-$EMULATOR_API_LEVEL
     - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
+
+    # Support library
+    - extra-android-support
+    - extra-android-m2repository
 
 before_install:
   - yes | sdkmanager "platforms;android-27"
