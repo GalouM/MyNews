@@ -35,7 +35,7 @@ before_script:
   - adb shell input keyevent 82 &
   - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
   - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
-  - ./gradlew connectedCheck
+  - ./gradlew connectedCheck --stacktrace
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
