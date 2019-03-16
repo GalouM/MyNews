@@ -47,4 +47,14 @@ public class MainActivityInstrumentedTest {
     public void checkSwipe(){
         onView(ViewMatchers.withId(R.id.main_activity_viewpager)).perform(swipeLeft()).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void checkIfSearchButtonIsDisplayed(){
+        onView(ViewMatchers.withId(R.id.menu_main_activity_search)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void checkIfMoreButtonIsDisplayed(){
+        onView(ViewMatchers.withId(R.id.menu_main_activity_more)).check(matches(isDisplayed()));
+    }
 }

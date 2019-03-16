@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_main_activity_search"
+        android:icon="@drawable/baseline_search_white_24"
+        app:showAsAction="ifRoom"
+        android:title="@string/menu_main_activity_search"/>
+    <item
+        android:id="@+id/menu_main_activity_more"
+        android:icon="@drawable/baseline_more_vert_white_24"
+        app:showAsAction="ifRoom"
+        android:title="@string/menu_main_activity_more"/>
+</menu>
