@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/main_activity_drawer_top"
+            android:title="@string/main_drawer_top"/>
+        <item
+            android:id="@+id/main_activity_drawer_pop"
+            android:title="@string/main_drawer_pop"/>
+        <item
+            android:id="@+id/main_activity_drawer_sport"
+            android:title="@string/main_drawer_sport"/>
+    </group>
+
+
+</menu>

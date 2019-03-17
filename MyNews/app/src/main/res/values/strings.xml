@@ -3,4 +3,11 @@
     <string name="menu_main_activity_search">Rechercher</string>
     <string name="menu_main_activity_more">Plus d\'actions</string>
 
+    <!-- Used in NavigationDrawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="main_drawer_sport">Sport</string>
+    <string name="main_drawer_pop">Most Popular</string>
+    <string name="main_drawer_top">Top Stories</string>
+
 </resources>
