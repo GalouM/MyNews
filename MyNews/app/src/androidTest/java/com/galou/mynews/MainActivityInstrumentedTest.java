@@ -63,10 +63,12 @@ public class MainActivityInstrumentedTest {
         onView(ViewMatchers.withId(R.id.menu_main_activity_more)).check(matches(isDisplayed()));
     }
 
+
     @Test
     public void checkNavigationDrawerIsDisplayed(){
         onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isDisplayed()));
     }
+
 
     @Test
     public void checkNavigationDrawerShowFragmentPopular() {
@@ -75,25 +77,26 @@ public class MainActivityInstrumentedTest {
         onView(ViewMatchers.withId(R.id.main_activity_nav_view)).perform(NavigationViewActions
                 .navigateTo(R.id.main_activity_drawer_pop));
         onView(ViewMatchers.withId(R.id.most_pop_frag_layout)).check(matches(isDisplayed()));
-        onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)));
     }
+
     @Test
-    public void checkNavigationDrawerShowFragmentTopStories() {
+    public void checkNavigationDrawerShowTopStories() {
         onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)))
                 .perform(DrawerActions.open());
         onView(ViewMatchers.withId(R.id.main_activity_nav_view)).perform(NavigationViewActions
                 .navigateTo(R.id.main_activity_drawer_top));
         onView(ViewMatchers.withId(R.id.top_stories_frag_layout)).check(matches(isDisplayed()));
-        onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)));
     }
+
     @Test
-    public void checkNavigationDrawerShowFragmentSport(){
+    public void checkNavigationDrawerShowSport() {
         onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)))
                 .perform(DrawerActions.open());
         onView(ViewMatchers.withId(R.id.main_activity_nav_view)).perform(NavigationViewActions
                 .navigateTo(R.id.main_activity_drawer_sport));
         onView(ViewMatchers.withId(R.id.sport_frag_layout)).check(matches(isDisplayed()));
-        onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)));
-
     }
+
+
+
 }
