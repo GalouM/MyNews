@@ -26,10 +26,11 @@
             android:id="@+id/main_activity_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B6C9F1"
-            app:tabIndicatorColor="@color/colorPrimary"
-            app:tabTextColor="#D4E0F8"
-            app:tabSelectedTextColor="#fff"/>
+            android:background="@color/colorPrimary"
+            app:tabIndicatorColor="@color/colorSecondary"
+            app:tabTextColor="@color/textPrimaryDark"
+            app:tabSelectedTextColor="@color/textPrimaryColor"
+            app:tabTextAppearance="@style/tabLayoutText"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/main_activity_viewpager"
