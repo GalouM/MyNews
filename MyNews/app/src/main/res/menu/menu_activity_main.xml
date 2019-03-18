@@ -6,8 +6,14 @@
         app:showAsAction="ifRoom"
         android:title="@string/menu_main_activity_search"/>
     <item
-        android:id="@+id/menu_main_activity_more"
-        android:icon="@drawable/baseline_more_vert_white_24"
-        app:showAsAction="ifRoom"
-        android:title="@string/menu_main_activity_more"/>
+        android:id="@+id/menu_main_activity_notifications"
+        app:showAsAction="never"
+        android:title="@string/main_menu_notifications"/>
+    <item
+        android:id="@+id/menu_main_activity_help"
+        app:showAsAction="never"
+        android:title="@string/main_menu_help"/>
+    <item
+        android:id="@+id/menu_main_activity_about"
+        android:title="@string/main_menu_about"/>
 </menu>

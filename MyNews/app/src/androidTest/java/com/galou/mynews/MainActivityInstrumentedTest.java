@@ -58,11 +58,6 @@ public class MainActivityInstrumentedTest {
         onView(ViewMatchers.withId(R.id.menu_main_activity_search)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void checkIfMoreButtonIsDisplayed(){
-        onView(ViewMatchers.withId(R.id.menu_main_activity_more)).check(matches(isDisplayed()));
-    }
-
 
     @Test
     public void checkNavigationDrawerIsDisplayed(){
