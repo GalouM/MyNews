@@ -1,5 +1,6 @@
 package com.galou.mynews.controllers.activities;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -84,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.main_activity_drawer_sport:
                 viewpager.setCurrentItem(2);
                 break;
+            case R.id.main_activity_drawer_search:
+                this.startSearchActivity();
+                break;
             default:
                  break;
         }
@@ -93,11 +97,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id  = item.getItemId();
+        switch (id){
+            case R.id.menu_main_activity_search:
+                this.startSearchActivity();
+                return true;
+            case R.id.menu_main_activity_notifications:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    @Override
     public void onBackPressed() {
         if(this.drawerLayout.isDrawerOpen(GravityCompat.START)){
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void startSearchActivity(){
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+
     }
 }

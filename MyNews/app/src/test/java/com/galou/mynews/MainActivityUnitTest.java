@@ -1,10 +1,15 @@
 package com.galou.mynews;
 
+import android.content.Intent;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.text.Layout;
 
 import com.galou.mynews.controllers.activities.MainActivity;
+import com.galou.mynews.controllers.activities.SearchActivity;
 import com.galou.mynews.controllers.adapters.PageAdapter;
+import com.galou.mynews.controllers.fragments.MostPopFragment;
+import com.galou.mynews.controllers.fragments.SportFragment;
 import com.galou.mynews.controllers.fragments.TopStoriesFragment;
 
 import org.junit.Before;
@@ -12,9 +17,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.fakes.RoboMenuItem;
+import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowIntent;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
+import static org.robolectric.Shadows.shadowOf;
 
 
 @RunWith(RobolectricTestRunner.class)
@@ -55,18 +66,35 @@ public class MainActivityUnitTest {
     public void clickNavDrawerTopStory()throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_top));
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "TOP STORIES");
+        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), TopStoriesFragment.class.getName());
     }
 
     @Test
     public void clickNavDrawerMostPop()throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_pop));
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "MOST POPULAR");
+        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), MostPopFragment.class.getName());
     }
 
     @Test
     public void clickNavDrawerSport()throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_sport));
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "SPORT");
+        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), SportFragment.class.getName());
+    }
+
+    @Test
+    public void clickNavDrawerSearch() throws Exception {
+        activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_search));
+        Intent intent = shadowOf(activity).getNextStartedActivity();
+        assertEquals(SearchActivity.class.getName(), intent.getComponent().getClassName());
+    }
+
+    @Test
+    public void clickToolBarSearch() throws Exception {
+        activity.onOptionsItemSelected(new RoboMenuItem(R.id.menu_main_activity_search));
+        Intent intent = shadowOf(activity).getNextStartedActivity();
+        assertEquals(SearchActivity.class.getName(), intent.getComponent().getClassName());
     }
 
 }
