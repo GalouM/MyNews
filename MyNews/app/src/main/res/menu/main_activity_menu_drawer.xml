@@ -26,7 +26,7 @@
                     android:id="@+id/main_activity_drawer_search"
                     android:title="@string/main_drawer_search"/>
                 <item
-                    android:id="@+id/main_activity_drawer_notifivation"
+                    android:id="@+id/main_activity_drawer_notification"
                     android:title="@string/main_drawer_notifications"/>
 
             </group>

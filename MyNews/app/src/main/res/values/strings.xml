@@ -9,8 +9,8 @@
     <string name="main_drawer_pop">Most Popular</string>
     <string name="main_drawer_top">Top Stories</string>
     <string name="my_news_category">My News</string>
-    <string name="search_category">Search</string>
-    <string name="main_drawer_search">Search</string>
+    <string name="search_category">Search Article</string>
+    <string name="main_drawer_search">Search Article</string>
     <string name="main_drawer_notifications">Notifications</string>
 
     <!-- Used in Toolbar -->
