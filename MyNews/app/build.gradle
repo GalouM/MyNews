@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'jacoco'
+apply plugin: 'jacoco-android'
 
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = "0.7.2.201409121644"
 }
 
 android {
