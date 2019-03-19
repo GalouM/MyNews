@@ -43,4 +43,17 @@ public class MainActivityInstrumentedTest {
         this.context = InstrumentationRegistry.getTargetContext();
     }
 
+
+    @Test
+    public void checkNavigationDrawerShowFragmentPopular() {
+        onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)))
+                .perform(DrawerActions.open());
+        onView(ViewMatchers.withId(R.id.main_activity_nav_view)).perform(NavigationViewActions
+                .navigateTo(R.id.main_activity_drawer_pop));
+        onView(ViewMatchers.withId(R.id.most_pop_frag_layout)).check(matches(isDisplayed()));
+    }
+
+
+
+
 }

@@ -1,9 +1,7 @@
 package com.galou.mynews;
 
 import android.content.Intent;
-import android.provider.Settings;
 import android.support.v4.view.ViewPager;
-import android.text.Layout;
 
 import com.galou.mynews.controllers.activities.MainActivity;
 import com.galou.mynews.controllers.activities.SearchActivity;
@@ -17,14 +15,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.fakes.RoboMenuItem;
-import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowIntent;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.robolectric.Shadows.shadowOf;
 
 
