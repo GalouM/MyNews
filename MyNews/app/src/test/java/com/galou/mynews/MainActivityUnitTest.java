@@ -17,8 +17,11 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.fakes.RoboMenuItem;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.robolectric.Shadows.shadowOf;
 
 
@@ -78,6 +81,13 @@ public class MainActivityUnitTest {
     }
 
     @Test
+    public void viewPagerFalseId()throws Exception {
+        int id = 50;
+        assertNull(pageAdapter.getPageTitle(id));
+        assertNull(pageAdapter.getItem(id));
+    }
+
+    @Test
     public void clickNavDrawerSearch() throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_search));
         Intent intent = shadowOf(activity).getNextStartedActivity();
@@ -85,8 +95,10 @@ public class MainActivityUnitTest {
     }
 
     @Test
-    public void clickToolBarSearch() throws Exception {
+    public void clickToolbarSearch() throws Exception {
         activity.onOptionsItemSelected(new RoboMenuItem(R.id.menu_main_activity_search));
+        Robolectric.getForegroundThreadScheduler().advanceBy(400, TimeUnit.MILLISECONDS);
+        Robolectric.flushForegroundThreadScheduler();
         Intent intent = shadowOf(activity).getNextStartedActivity();
         assertEquals(SearchActivity.class.getName(), intent.getComponent().getClassName());
     }

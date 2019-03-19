@@ -2,6 +2,8 @@ package com.galou.mynews;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -23,6 +25,7 @@ import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static org.junit.Assert.*;
 
 /**
@@ -45,12 +48,11 @@ public class MainActivityInstrumentedTest {
 
 
     @Test
-    public void checkNavigationDrawerShowFragmentPopular() {
+    public void checkNavigationDrawerCloseOnPressBack() {
         onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)))
                 .perform(DrawerActions.open());
-        onView(ViewMatchers.withId(R.id.main_activity_nav_view)).perform(NavigationViewActions
-                .navigateTo(R.id.main_activity_drawer_pop));
-        onView(ViewMatchers.withId(R.id.most_pop_frag_layout)).check(matches(isDisplayed()));
+        onView(isRoot()).perform(ViewActions.pressBack());
+        //onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)));
     }
 
 

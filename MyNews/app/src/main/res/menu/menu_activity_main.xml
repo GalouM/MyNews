@@ -4,7 +4,8 @@
         android:id="@+id/menu_main_activity_search"
         android:icon="@drawable/baseline_search_white_24"
         app:showAsAction="ifRoom"
-        android:title="@string/menu_main_activity_search"/>
+        android:title="@string/menu_main_activity_search"
+        android:transitionName="@string/animation_main_to_search_zoom"/>
     <item
         android:id="@+id/menu_main_activity_notifications"
         app:showAsAction="never"

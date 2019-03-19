@@ -12,8 +12,17 @@
     <string name="search_category">Search</string>
     <string name="main_drawer_search">Search</string>
     <string name="main_drawer_notifications">Notifications</string>
+
+    <!-- Used in Toolbar -->
     <string name="main_menu_notifications">Notifications</string>
     <string name="main_menu_help">Help</string>
     <string name="main_menu_about">About</string>
+
+
+    <!-- Animation -->
+    <string name="animation_main_to_search_zoom" translatable="false">AnimationMainToSearch</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

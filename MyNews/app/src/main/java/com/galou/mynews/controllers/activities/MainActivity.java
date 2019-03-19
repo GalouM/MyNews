@@ -1,6 +1,8 @@
 package com.galou.mynews.controllers.activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -13,6 +15,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.adapters.PageAdapter;
@@ -101,7 +105,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id  = item.getItemId();
         switch (id){
             case R.id.menu_main_activity_search:
-                this.startSearchActivity();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    View view = toolbar.findViewById(id);
+                    Intent intent = new Intent(this, SearchActivity.class);
+                    ActivityOptions options = ActivityOptions
+                            .makeSceneTransitionAnimation(this, view, getString(R.string.animation_main_to_search_zoom));
+                    startActivity(intent, options.toBundle());
+
+                } else {
+                    this.startSearchActivity();
+                }
                 return true;
             case R.id.menu_main_activity_notifications:
                 return true;
