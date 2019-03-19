@@ -7,13 +7,13 @@ jacoco {
 
 android {
     compileSdkVersion 27
+    testOptions.unitTests.includeAndroidResources = true
     defaultConfig {
         applicationId "com.galou.mynews"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -24,6 +24,12 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix '-debug'
             testCoverageEnabled true
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
         }
     }
 }
@@ -45,5 +51,8 @@ dependencies {
     // BUTTERKNIFE
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    // ROBOELECTRIC
+    testImplementation 'org.robolectric:robolectric:4.2'
 
 }

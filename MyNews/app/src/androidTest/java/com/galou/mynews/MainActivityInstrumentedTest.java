@@ -44,24 +44,8 @@ public class MainActivityInstrumentedTest {
     }
 
     @Test
-    public void checkTabLayoutIsDisplayed(){
-        onView(ViewMatchers.withId(R.id.main_activity_tabs)).perform(click()).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void checkSwipe(){
-        onView(ViewMatchers.withId(R.id.main_activity_viewpager)).perform(swipeLeft()).check(matches(isDisplayed()));
-    }
-
-    @Test
     public void checkIfSearchButtonIsDisplayed(){
         onView(ViewMatchers.withId(R.id.menu_main_activity_search)).check(matches(isDisplayed()));
-    }
-
-
-    @Test
-    public void checkNavigationDrawerIsDisplayed(){
-        onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isDisplayed()));
     }
 
 
