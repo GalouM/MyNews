@@ -1,6 +1,7 @@
 package com.galou.mynews;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 
 import com.galou.mynews.controllers.activities.MainActivity;
@@ -19,6 +20,7 @@ import org.robolectric.fakes.RoboMenuItem;
 
 import java.util.concurrent.TimeUnit;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -97,10 +99,15 @@ public class MainActivityUnitTest {
     @Test
     public void clickToolbarSearch() throws Exception {
         activity.onOptionsItemSelected(new RoboMenuItem(R.id.menu_main_activity_search));
-        Robolectric.getForegroundThreadScheduler().advanceBy(400, TimeUnit.MILLISECONDS);
-        Robolectric.flushForegroundThreadScheduler();
         Intent intent = shadowOf(activity).getNextStartedActivity();
         assertEquals(SearchActivity.class.getName(), intent.getComponent().getClassName());
+    }
+
+    @Test
+    public void onPressBack() throws Exception{
+        activity.onBackPressed();
+        assertTrue(activity.isFinishing());
+
     }
 
 }

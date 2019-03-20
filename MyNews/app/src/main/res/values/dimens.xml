@@ -4,4 +4,6 @@
 
     <dimen name="tab_layout_text_size">16sp</dimen>
     <dimen name="big_margin">30dip</dimen>
+
+    <dimen name="toolbar_text_size">25sp</dimen>
 </resources>

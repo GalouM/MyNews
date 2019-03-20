@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Views
     @BindView(R.id.main_activity_viewpager) ViewPager viewpager;
     @BindView(R.id.main_activity_tabs) TabLayout tabLayout;
-    @BindView(R.id.main_activity_toolbar) Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.main_activity_drawer) DrawerLayout drawerLayout;
     @BindView(R.id.main_activity_nav_view) NavigationView navigationView;
 

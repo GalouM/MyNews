@@ -14,13 +14,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/main_activity_toolbar"
-            android:minHeight="?attr/actionBarSize"
+        <include
+            layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titleTextColor="@android:color/white"
-            android:background="?attr/colorPrimary"/>
+            android:layout_height="wrap_content"/>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/main_activity_tabs"
