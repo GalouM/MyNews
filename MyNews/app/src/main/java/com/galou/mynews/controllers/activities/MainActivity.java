@@ -105,16 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id  = item.getItemId();
         switch (id){
             case R.id.menu_main_activity_search:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                    View view = toolbar.findViewById(id);
-                    Intent intent = new Intent(this, SearchActivity.class);
-                    ActivityOptions options = ActivityOptions
-                            .makeSceneTransitionAnimation(this, view, getString(R.string.animation_main_to_search_zoom));
-                    startActivity(intent, options.toBundle());
-
-                } else {
-                    this.startSearchActivity();
-                }
+                this.startSearchActivity();
                 return true;
             case R.id.menu_main_activity_notifications:
                 return true;
