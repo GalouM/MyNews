@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <!-- MAIN ACTIVITY -->
         <activity android:name=".controllers.activities.MainActivity">
             <intent-filter>
@@ -19,9 +18,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".controllers.activities.SearchActivity"
-            android:parentActivityName=".controllers.activities.MainActivity"
-            android:label="Search Articles"></activity>
+        <!-- SEARCH ACTIVITY -->
+        <activity
+            android:name=".controllers.activities.SearchActivity"
+            android:label="@string/search_articles_name_activity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
+
+        <!-- NOTIFICATIONS ACTIVITY -->
+        <activity
+            android:name=".controllers.activities.NotificationsActivity"
+            android:label="@string/notifications_articles_name_activity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
+
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 
 import com.galou.mynews.controllers.activities.MainActivity;
+import com.galou.mynews.controllers.activities.NotificationsActivity;
 import com.galou.mynews.controllers.activities.SearchActivity;
 import com.galou.mynews.controllers.adapters.PageAdapter;
 import com.galou.mynews.controllers.fragments.MostPopFragment;
@@ -97,10 +98,24 @@ public class MainActivityUnitTest {
     }
 
     @Test
+    public void clickNavDrawerNotifications() throws Exception {
+        activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_notification));
+        Intent intent = shadowOf(activity).getNextStartedActivity();
+        assertEquals(NotificationsActivity.class.getName(), intent.getComponent().getClassName());
+    }
+
+    @Test
     public void clickToolbarSearch() throws Exception {
         activity.onOptionsItemSelected(new RoboMenuItem(R.id.menu_main_activity_search));
         Intent intent = shadowOf(activity).getNextStartedActivity();
         assertEquals(SearchActivity.class.getName(), intent.getComponent().getClassName());
+    }
+
+    @Test
+    public void clickToolbarNotifications() throws Exception {
+        activity.onOptionsItemSelected(new RoboMenuItem(R.id.menu_main_activity_notifications));
+        Intent intent = shadowOf(activity).getNextStartedActivity();
+        assertEquals(NotificationsActivity.class.getName(), intent.getComponent().getClassName());
     }
 
     @Test

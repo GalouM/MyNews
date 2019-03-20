@@ -26,7 +26,7 @@ public class SearchActivityUnitTest {
     }
 
     @Test
-    public void activityShouldNotBeNull()throws Exception{
+    public void activityShouldNotBeNull() throws Exception {
         assertNotNull(activity);
     }
 

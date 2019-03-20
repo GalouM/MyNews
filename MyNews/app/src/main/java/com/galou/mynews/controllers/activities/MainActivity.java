@@ -1,8 +1,7 @@
 package com.galou.mynews.controllers.activities;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,38 +9,33 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.adapters.PageAdapter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     // Views
     @BindView(R.id.main_activity_viewpager) ViewPager viewpager;
     @BindView(R.id.main_activity_tabs) TabLayout tabLayout;
-    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.main_activity_drawer) DrawerLayout drawerLayout;
     @BindView(R.id.main_activity_nav_view) NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
         this.configureViewPagerAndTabs();
-        this.configureToolBar();
         this.configureDrawerLayout();
         this.configureNavigationView();
+    }
+
+    @Override
+    protected int getActivityLayout() {
+        return R.layout.activity_main;
     }
 
     // -------------------
@@ -54,9 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void configureToolBar(){
-        setSupportActionBar(toolbar);
-    }
 
     private void configureDrawerLayout(){
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -92,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.main_activity_drawer_search:
                 this.startSearchActivity();
                 break;
+            case R.id.main_activity_drawer_notification:
+                this.startNotificationsActivity();
+                break;
             default:
                  break;
         }
@@ -108,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this.startSearchActivity();
                 return true;
             case R.id.menu_main_activity_notifications:
+                this.startNotificationsActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -126,6 +121,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void startSearchActivity(){
         Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void startNotificationsActivity(){
+        Intent intent = new Intent(this, NotificationsActivity.class);
         startActivity(intent);
 
     }
