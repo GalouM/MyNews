@@ -26,5 +26,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_articles_name_activity">Search Articles</string>
     <string name="notifications_articles_name_activity">Notifications</string>
+    <string name="search_query_term">Search query term</string>
+    <string name="search_item_arts">Arts</string>
+    <string name="search_item_business">Business</string>
+    <string name="search_item_entrepreneurs">Entrepreneurs</string>
+    <string name="search_item_politics">Politics</string>
+    <string name="search_item_travel">Travel</string>
+    <string name="search_button">SEARCH</string>
 
 </resources>
