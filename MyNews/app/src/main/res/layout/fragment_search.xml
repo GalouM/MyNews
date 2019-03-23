@@ -27,6 +27,8 @@
             android:clickable="true"
             android:focusable="true"/>
 
+
+
         <EditText
             android:id="@+id/search_fragment_search_end_date"
             style="@android:style/Widget.DeviceDefault.Light.Spinner"

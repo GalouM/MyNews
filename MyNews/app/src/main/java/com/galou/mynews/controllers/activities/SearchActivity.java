@@ -73,7 +73,7 @@ public class SearchActivity extends BaseActivity implements BaseFragmentSearch.O
     // --------------
 
     @Override
-    public void onButtonClicked(View view) {
+    public void onButtonClicked() {
         String value = "Query Term: " + queryTerm + "\n"
                 + "Begin Date: " + queryBeginDate + "\n"
                 + "End Date: " + queryEndDate + "\n"

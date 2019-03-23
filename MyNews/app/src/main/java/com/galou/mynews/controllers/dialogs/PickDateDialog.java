@@ -1,4 +1,4 @@
-package com.galou.mynews.views;
+package com.galou.mynews.controllers.dialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,77 +26,99 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 /**
  * Created by galou on 2019-03-23
  */
-public class DatePickerView extends DialogFragment implements DialogInterface.OnClickListener {
+public class PickDateDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
-    // for bundle
-    Bundle bundle;
-    public static final String KEY_BUNDLE_DATE_DISPLAY = "dateDisplay";
-    public static final String KEY_BUNDLE_DATE_API = "dateAPI";
+    public interface OnOKButtonListener{
+        void onOkButtonListener (Calendar calendar, View view);
+    }
 
-    public static final SimpleDateFormat DATE_FORMAT_API = new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
-    public static final SimpleDateFormat DATE_FORMAT_DISPLAY = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+    private OnOKButtonListener mCallback;
 
+    public static final String TAG = "PickDateDialog";
 
+    //views
     private DatePicker datePicker;
 
-    private String dateToDisplay;
-    private String dateForAPI;
+    //for data
+    private Calendar calendar;
+    private View viewId;
+    private Calendar existingDate;
 
-    public DatePickerView() {}
+    public PickDateDialog() {}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bundle = new Bundle();
+        this.createCallbackToParent();
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        final DatePickerDialog.Builder datePickerDialog = new DatePickerDialog.Builder(getActivity());
+        final AlertDialog.Builder datePickerDialog = new AlertDialog.Builder(getActivity());
         datePicker = new DatePicker(getActivity());
         datePickerDialog.setView(datePicker);
+        if (existingDate != null){
+            datePicker.updateDate(existingDate.get(Calendar.YEAR), existingDate.get(Calendar.MONTH), existingDate.get(Calendar.DAY_OF_MONTH));
+        }
         datePickerDialog.setPositiveButton(getString(R.string.ok_button), this);
         datePickerDialog.setNegativeButton(getString(R.string.cancel_button), this);
-
 
         return  datePickerDialog.create();
     }
 
 
+    // --------------
+    // ACTIONS
+    // --------------
     @Override
     public void onClick(DialogInterface dialogInterface, int button) {
         if(button == BUTTON_POSITIVE){
             this.setDate();
-            bundle.putString(KEY_BUNDLE_DATE_DISPLAY,dateToDisplay);
-            bundle.putString(KEY_BUNDLE_DATE_API, dateForAPI);
-            this.setArguments(bundle);
-            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, getActivity().getIntent());
+            mCallback.onOkButtonListener(calendar, viewId);
 
 
         }
         if(button == BUTTON_NEGATIVE){
-            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_CANCELED, getActivity().getIntent());
+            dialogInterface.cancel();
 
         }
 
     }
 
-    private void checkIfDateAlreadySet(){
+    // --------------
+    // SETTERS
+    // --------------
+
+    public void setViewId(View view){
+        this.viewId = view;
 
     }
 
+    public void setExistingDate(Calendar date){
+        existingDate = date;
+
+    }
 
     private void setDate(){
         int month = datePicker.getMonth();
         int day = datePicker.getDayOfMonth();
         int year = datePicker.getYear();
-        Calendar date = Calendar.getInstance();
-        date.set(year,month,day);
-        dateForAPI = DATE_FORMAT_API.format(date.getTime());
-        dateToDisplay= DATE_FORMAT_DISPLAY.format(date.getTime());
+        calendar = Calendar.getInstance();
+        calendar.set(year,month,day);
     }
 
+    // --------------
+    // CALLBACK SUPPORT
+    // --------------
 
+    protected void createCallbackToParent(){
+        try{
+            mCallback = (OnOKButtonListener) getTargetFragment();
+
+        } catch (ClassCastException e){
+            throw new ClassCastException(e.toString()+"must implement OnOKButtonListener");
+        }
+    }
 
 }

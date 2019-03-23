@@ -1,22 +1,20 @@
 package com.galou.mynews.controllers.fragments;
 
 
-import android.app.DatePickerDialog;
-import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.DatePicker;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.activities.SearchActivity;
+import com.galou.mynews.controllers.dialogs.PickDateDialog;
 import com.galou.mynews.models.ErrorSelection;
-import com.galou.mynews.views.DatePickerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -25,7 +23,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends BaseFragmentSearch {
+public class SearchFragment extends BaseFragmentSearch implements PickDateDialog.OnOKButtonListener {
 
     // views
     @BindView(R.id.search_fragment_start_begin_date) EditText beginDateUser;
@@ -35,89 +33,50 @@ public class SearchFragment extends BaseFragmentSearch {
     private Calendar beginDate;
     private Calendar endDate;
 
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
+    public static final SimpleDateFormat DATE_FORMAT_API = new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
+    public static final SimpleDateFormat DATE_FORMAT_DISPLAY = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+    public static final int DIALOG_CODE = 12345;
 
     // --------------
     // ACTIONS
     // --------------
 
     @OnClick(R.id.search_fragment_search_button)
-    public void onClickSearchButton(final View view){
-        if (getQueryTerm().length() <= 0){
-            this.showAlertDialog(ErrorSelection.TERM);
-        } else if (getQuerySections().isEmpty()){
-            this.showAlertDialog(ErrorSelection.SECTION);
-        } else if (getQueryBeginDate().length() <= 0){
-            this.showAlertDialog(ErrorSelection.START_DATE);
-        } else if(isIncorrectEndDate()){
-            this.showAlertDialog(ErrorSelection.INCORRECT_DATE);
-        }else {
-            SearchActivity activity = (SearchActivity) getActivity();
-            activity.setQueryTerm(this.getQueryTerm());
-            activity.setQuerySection(this.getQuerySections());
-            activity.setQueryBeginDate(this.getQueryBeginDate());
-            activity.setQueryEndDate(this.getQueryEndDate());
-            mCallback.onButtonClicked(view);
+    public void onClickSearchButton(){
+        if (isAllDataCorrect()){
+            sentDataToActivity();
         }
     }
 
     @OnClick({R.id.search_fragment_start_begin_date, R.id.search_fragment_search_end_date})
     public void onClickDate(final View view){
-        final DatePickerDialog.Builder datePickerDialog = new DatePickerDialog.Builder(getActivity());
-        final DatePicker datePicker = new DatePicker(getActivity());
-
-        if(view == beginDateUser && beginDate != null) {
-            datePicker.updateDate(beginDate.get(Calendar.YEAR),beginDate.get(Calendar.MONTH), beginDate.get(Calendar.DAY_OF_MONTH));
-
+        PickDateDialog datePickerDialog = new PickDateDialog();
+        datePickerDialog.setTargetFragment(this, DIALOG_CODE);
+        datePickerDialog.setViewId(view);
+        if(view == beginDateUser && beginDate != null){
+            datePickerDialog.setExistingDate(beginDate);
         }
-        if(view == endDateUser && endDate != null) {
-            datePicker.updateDate(endDate.get(Calendar.YEAR),endDate.get(Calendar.MONTH), endDate.get(Calendar.DAY_OF_MONTH));
-
+        if(view == endDateUser && endDate != null){
+            datePickerDialog.setExistingDate(endDate);
         }
-        datePickerDialog.setView(datePicker);
-        datePickerDialog.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                int month = datePicker.getMonth();
-                int day = datePicker.getDayOfMonth();
-                int year = datePicker.getYear();
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(year,month,day);
-                String yearString = String.valueOf(year);
-                String monthString;
-                String dayString;
-                if (month < 9){
-                    monthString = "0" + String.valueOf(month+1);
-                } else {
-                    monthString = String.valueOf(month+1);
-                }
-                if (day < 10) {
-                    dayString = "0" + String.valueOf(day);
-                } else {
-                    dayString = String.valueOf(day);
-                }
-                String dateFromUser = monthString + "/" + dayString + "/" + yearString;
-                if(view == beginDateUser) {
-                    beginDate = calendar;
-                    beginDateUser.setText(dateFromUser);
-                }
-                if (view == endDateUser){
-                    endDate = calendar;
-                    endDateUser.setText(dateFromUser);
-                }
-            }
-        });
-        datePickerDialog.setNegativeButton(getString(R.string.cancel_button), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        datePickerDialog.show();
+        datePickerDialog.show(getFragmentManager().beginTransaction(), PickDateDialog.TAG);
+    }
+
+    @Override
+    public void onOkButtonListener(Calendar calendar, View view) {
+        if(view == beginDateUser){
+            beginDateUser.setText(convertCalendarForDisplay(calendar));
+            this.beginDate = calendar;
+        }
+        if(view == endDateUser){
+            endDateUser.setText(convertCalendarForDisplay(calendar));
+            this.endDate = calendar;
+        }
+
     }
 
     // --------------
-    // UTILS
+    // CONFIGURATION
     // --------------
 
     @Override
@@ -125,26 +84,54 @@ public class SearchFragment extends BaseFragmentSearch {
         return (R.layout.fragment_search);
     }
 
+    private Boolean isAllDataCorrect(){
+        if (getQueryTerm().length() <= 0){
+            this.showAlertDialog(ErrorSelection.TERM);
+            return false;
+        } else if (getQuerySections().isEmpty()){
+            this.showAlertDialog(ErrorSelection.SECTION);
+            return false;
+        } else if (beginDateUser.getText().length() <= 0){
+            this.showAlertDialog(ErrorSelection.START_DATE);
+            return false;
+        } else if(isIncorrectEndDate()) {
+            this.showAlertDialog(ErrorSelection.INCORRECT_DATE);
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    private void sentDataToActivity(){
+        SearchActivity activity = (SearchActivity) getActivity();
+        activity.setQueryTerm(this.getQueryTerm());
+        activity.setQuerySection(this.getQuerySections());
+        activity.setQueryBeginDate(convertCalendarForAPI(beginDate));
+        activity.setQueryEndDate(convertCalendarForAPI(endDate));
+        mCallback.onButtonClicked();
+
+    }
+
+
+    // --------------
+    // UTILS
+    // --------------
+
     private Boolean isIncorrectEndDate(){
         if(endDateUser.getText().length() > 0) {
-            return (!beginDate.getTime().before(endDate.getTime()));
+            return (endDate.getTime().before(beginDate.getTime()));
         } else {
             return false;
         }
     }
 
-    private String getQueryBeginDate(){
-        if (beginDateUser.getText().length() > 0) {
-            return DATE_FORMAT.format(beginDate.getTime());
-        } else {
-            return "";
-        }
+    private String convertCalendarForDisplay(Calendar calendar){
+        return DATE_FORMAT_DISPLAY.format(calendar.getTime());
     }
 
-    private String getQueryEndDate(){
-        if (endDateUser.getText().length() > 0){
-            return DATE_FORMAT.format(endDate.getTime());
-        } else
-            return "";
+    private String convertCalendarForAPI(Calendar calendar){
+        return DATE_FORMAT_API.format(calendar.getTime());
     }
+
 }

@@ -49,6 +49,6 @@ public class NotificationsFragment extends BaseFragmentSearch {
             }
         }
         activity.setNotificationsEnabled(switchNotification.isChecked());
-        mCallback.onButtonClicked(view);
+        mCallback.onButtonClicked();
     }
 }

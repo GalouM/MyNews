@@ -50,7 +50,7 @@ public class NotificationsActivity extends BaseActivity implements BaseFragmentS
     // -------------------
 
     @Override
-    public void onButtonClicked(View view) {
+    public void onButtonClicked() {
         if(isNotificationsEnabled){
             String text = "Notifications enabled" + "\n"
                     + "Query Term: " + queryTerm + "\n"
