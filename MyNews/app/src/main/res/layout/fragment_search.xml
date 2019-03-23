@@ -17,13 +17,15 @@
 
 
         <EditText
-            android:id="@+id/search_fragment_start_end_date"
+            android:id="@+id/search_fragment_start_begin_date"
             style="@android:style/Widget.DeviceDefault.Light.Spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="21/03/2017"
-            android:inputType="date"/>
+            android:inputType="date"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <EditText
             android:id="@+id/search_fragment_search_end_date"
@@ -36,6 +38,7 @@
 
 
 
+
     </LinearLayout>
 
    <include
@@ -45,6 +48,7 @@
        android:layout_margin="@dimen/small_margin"/>
 
     <Button
+        android:id="@+id/search_fragment_search_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/search_button"

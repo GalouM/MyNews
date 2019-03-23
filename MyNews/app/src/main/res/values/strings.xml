@@ -34,5 +34,13 @@
     <string name="search_item_travel">Travel</string>
     <string name="search_button">SEARCH</string>
     <string name="enable_notifications_once_per_day">Enable notifications (once per day)</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="missing_query_term_title">Missing Query Term</string>
+    <string name="mising_begin_date_title">Missing Begin Date</string>
+    <string name="missing_section_title">Missing Section</string>
+    <string name="missing_section_message">Please select at least one section</string>
+    <string name="missing_date_message">Please enter a begin date</string>
+    <string name="missing_term_message">Please enter a query term</string>
 
 </resources>

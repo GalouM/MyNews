@@ -1,11 +1,13 @@
 package com.galou.mynews.controllers.activities;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.galou.mynews.R;
+import com.galou.mynews.controllers.fragments.BaseFragmentSearch;
 import com.galou.mynews.controllers.fragments.NotificationsFragment;
 
-public class NotificationsActivity extends BaseActivity {
+public class NotificationsActivity extends BaseActivity implements BaseFragmentSearch.OnButtonClickedListener {
 
     private NotificationsFragment notificationsFragment;
 
@@ -32,6 +34,11 @@ public class NotificationsActivity extends BaseActivity {
                     .add(R.id.notifications_activity_frame_layout, notificationsFragment)
                     .commit();
         }
+
+    }
+
+    @Override
+    public void onButtonClicked(View view) {
 
     }
 }

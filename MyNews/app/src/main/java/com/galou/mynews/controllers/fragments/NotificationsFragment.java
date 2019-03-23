@@ -3,28 +3,40 @@ package com.galou.mynews.controllers.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.galou.mynews.R;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotificationsFragment extends Fragment {
+public class NotificationsFragment extends BaseFragmentSearch {
 
-
-    public NotificationsFragment() {
-        // Required empty public constructor
-    }
+    //views
+    @BindView(R.id.notification_fragment_switch) SwitchCompat switchNotification;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifications, container, false);
+    protected int getFragmentLayout() {
+        return R.layout.fragment_notifications;
     }
 
+    // --------------
+    // ACTIONS
+    // --------------
+    @OnClick(R.id.notification_fragment_switch)
+    public void onClickNotificationSwitch(){
+        if(switchNotification.isChecked()) {
+            Toast.makeText(getActivity(), "yop", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "nope", Toast.LENGTH_LONG).show();
+        }
+    }
 }

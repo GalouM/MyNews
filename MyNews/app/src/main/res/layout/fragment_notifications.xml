@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@string/enable_notifications_once_per_day"/>
         <android.support.v7.widget.SwitchCompat
+            android:id="@+id/notification_fragment_switch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
