@@ -34,7 +34,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="20/03/2018"
-            android:inputType="date" />
+            android:inputType="date"
+            android:clickable="true"
+            android:focusable="true"/>
 
 
 

@@ -74,7 +74,10 @@ public class SearchActivity extends BaseActivity implements BaseFragmentSearch.O
 
     @Override
     public void onButtonClicked(View view) {
-        String value = queryTerm + "/" + queryBeginDate + "/" + queryEndDate + "/" + querySection;
+        String value = "Query Term: " + queryTerm + "\n"
+                + "Begin Date: " + queryBeginDate + "\n"
+                + "End Date: " + queryEndDate + "\n"
+                + "Section: " + querySection;
         Toast.makeText(this, value, Toast.LENGTH_LONG).show();
 
     }

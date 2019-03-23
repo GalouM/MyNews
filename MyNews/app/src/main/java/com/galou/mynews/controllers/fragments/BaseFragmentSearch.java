@@ -28,7 +28,7 @@ public abstract class BaseFragmentSearch extends Fragment {
     protected OnButtonClickedListener mCallback;
 
     public interface OnButtonClickedListener{
-        public void onButtonClicked(View view);
+        void onButtonClicked(View view);
     }
 
     // --------------

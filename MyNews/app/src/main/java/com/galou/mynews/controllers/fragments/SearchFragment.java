@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.activities.SearchActivity;
 import com.galou.mynews.models.ErrorSelection;
+import com.galou.mynews.views.DatePickerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,8 +32,8 @@ public class SearchFragment extends BaseFragmentSearch {
     @BindView(R.id.search_fragment_search_end_date) EditText endDateUser;
 
     //for data
-    private Date beginDate;
-    private Date endDate;
+    private Calendar beginDate;
+    private Calendar endDate;
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
 
@@ -52,10 +53,10 @@ public class SearchFragment extends BaseFragmentSearch {
             this.showAlertDialog(ErrorSelection.INCORRECT_DATE);
         }else {
             SearchActivity activity = (SearchActivity) getActivity();
-            activity.setQueryTerm(getQueryTerm());
-            activity.setQuerySection(getQuerySections());
-            activity.setQueryBeginDate(getQueryBeginDate());
-            activity.setQueryEndDate(getQueryEndDate());
+            activity.setQueryTerm(this.getQueryTerm());
+            activity.setQuerySection(this.getQuerySections());
+            activity.setQueryBeginDate(this.getQueryBeginDate());
+            activity.setQueryEndDate(this.getQueryEndDate());
             mCallback.onButtonClicked(view);
         }
     }
@@ -64,22 +65,44 @@ public class SearchFragment extends BaseFragmentSearch {
     public void onClickDate(final View view){
         final DatePickerDialog.Builder datePickerDialog = new DatePickerDialog.Builder(getActivity());
         final DatePicker datePicker = new DatePicker(getActivity());
+
+        if(view == beginDateUser && beginDate != null) {
+            datePicker.updateDate(beginDate.get(Calendar.YEAR),beginDate.get(Calendar.MONTH), beginDate.get(Calendar.DAY_OF_MONTH));
+
+        }
+        if(view == endDateUser && endDate != null) {
+            datePicker.updateDate(endDate.get(Calendar.YEAR),endDate.get(Calendar.MONTH), endDate.get(Calendar.DAY_OF_MONTH));
+
+        }
         datePickerDialog.setView(datePicker);
         datePickerDialog.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                int month = datePicker.getMonth()+1;
+                int month = datePicker.getMonth();
                 int day = datePicker.getDayOfMonth();
                 int year = datePicker.getYear();
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year,month,day);
-                String dateFromUser = String.valueOf(month) + "/" + String.valueOf(day) + "/" + String.valueOf(year);
+                String yearString = String.valueOf(year);
+                String monthString;
+                String dayString;
+                if (month < 9){
+                    monthString = "0" + String.valueOf(month+1);
+                } else {
+                    monthString = String.valueOf(month+1);
+                }
+                if (day < 10) {
+                    dayString = "0" + String.valueOf(day);
+                } else {
+                    dayString = String.valueOf(day);
+                }
+                String dateFromUser = monthString + "/" + dayString + "/" + yearString;
                 if(view == beginDateUser) {
-                    beginDate = calendar.getTime();
+                    beginDate = calendar;
                     beginDateUser.setText(dateFromUser);
                 }
                 if (view == endDateUser){
-                    endDate = calendar.getTime();
+                    endDate = calendar;
                     endDateUser.setText(dateFromUser);
                 }
             }
@@ -103,8 +126,8 @@ public class SearchFragment extends BaseFragmentSearch {
     }
 
     private Boolean isIncorrectEndDate(){
-        if(endDate != null) {
-            return (!beginDate.before(endDate));
+        if(endDateUser.getText().length() > 0) {
+            return (!beginDate.getTime().before(endDate.getTime()));
         } else {
             return false;
         }
@@ -112,7 +135,7 @@ public class SearchFragment extends BaseFragmentSearch {
 
     private String getQueryBeginDate(){
         if (beginDateUser.getText().length() > 0) {
-            return DATE_FORMAT.format(beginDate);
+            return DATE_FORMAT.format(beginDate.getTime());
         } else {
             return "";
         }
@@ -120,7 +143,7 @@ public class SearchFragment extends BaseFragmentSearch {
 
     private String getQueryEndDate(){
         if (endDateUser.getText().length() > 0){
-            return DATE_FORMAT.format(endDate);
+            return DATE_FORMAT.format(endDate.getTime());
         } else
             return "";
     }

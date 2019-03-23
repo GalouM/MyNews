@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.galou.mynews.R;
+import com.galou.mynews.controllers.activities.NotificationsActivity;
+import com.galou.mynews.models.ErrorSelection;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,11 +34,21 @@ public class NotificationsFragment extends BaseFragmentSearch {
     // ACTIONS
     // --------------
     @OnClick(R.id.notification_fragment_switch)
-    public void onClickNotificationSwitch(){
+    public void onClickNotificationSwitch(final View view){
+        NotificationsActivity activity = (NotificationsActivity) getActivity();
         if(switchNotification.isChecked()) {
-            Toast.makeText(getActivity(), "yop", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "nope", Toast.LENGTH_LONG).show();
+            if (getQueryTerm().length() <= 0){
+                this.showAlertDialog(ErrorSelection.TERM);
+                switchNotification.setChecked(false);
+            } else if (getQuerySections().isEmpty()) {
+                this.showAlertDialog(ErrorSelection.SECTION);
+                switchNotification.setChecked(false);
+            } else {
+                activity.setQueryTerm(this.getQueryTerm());
+                activity.setQuerySection(this.getQuerySections());
+            }
         }
+        activity.setNotificationsEnabled(switchNotification.isChecked());
+        mCallback.onButtonClicked(view);
     }
 }
