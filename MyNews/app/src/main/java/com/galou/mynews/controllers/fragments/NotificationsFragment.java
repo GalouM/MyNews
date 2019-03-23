@@ -1,17 +1,15 @@
 package com.galou.mynews.controllers.fragments;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.activities.NotificationsActivity;
 import com.galou.mynews.models.ErrorSelection;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -20,6 +18,15 @@ import butterknife.OnClick;
  * A simple {@link Fragment} subclass.
  */
 public class NotificationsFragment extends BaseFragmentSearch {
+
+    // interface
+    protected OnButtonClickedListener mCallback;
+
+    public interface OnButtonClickedListener{
+        void onButtonNotificationClicked(String queryTerm, List<String> querySections, Boolean isNotificationEnabled);
+    }
+
+    // --------------
 
     //views
     @BindView(R.id.notification_fragment_switch) SwitchCompat switchNotification;
@@ -34,21 +41,41 @@ public class NotificationsFragment extends BaseFragmentSearch {
     // ACTIONS
     // --------------
     @OnClick(R.id.notification_fragment_switch)
-    public void onClickNotificationSwitch(final View view){
-        NotificationsActivity activity = (NotificationsActivity) getActivity();
+    public void onClickNotificationSwitch(){
+        this.setQueryTerm();
+        this.setQuerySections();
         if(switchNotification.isChecked()) {
-            if (getQueryTerm().length() <= 0){
-                this.showAlertDialog(ErrorSelection.TERM);
+            if (!isAllDataCorrect()) {
                 switchNotification.setChecked(false);
-            } else if (getQuerySections().isEmpty()) {
-                this.showAlertDialog(ErrorSelection.SECTION);
-                switchNotification.setChecked(false);
-            } else {
-                activity.setQueryTerm(this.getQueryTerm());
-                activity.setQuerySection(this.getQuerySections());
             }
         }
-        activity.setNotificationsEnabled(switchNotification.isChecked());
-        mCallback.onButtonClicked();
+        Boolean isNotificationOn = switchNotification.isChecked();
+        mCallback.onButtonNotificationClicked(queryTerm, querySections, isNotificationOn);
     }
+
+    private Boolean isAllDataCorrect() {
+        if (queryTerm.length() <= 0) {
+            this.showAlertDialog(ErrorSelection.TERM);
+            return false;
+        } else if (querySections.isEmpty()) {
+            this.showAlertDialog(ErrorSelection.SECTION);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // --------------
+    // FRAGMENT SUPPORT
+    // --------------
+
+    @Override
+    protected void createCallbackToParentActivity(){
+        try{
+            mCallback = (OnButtonClickedListener) getActivity();
+        } catch (ClassCastException e){
+            throw new ClassCastException(e.toString()+"must implement OnButtonClickedListener");
+        }
+    }
+
 }

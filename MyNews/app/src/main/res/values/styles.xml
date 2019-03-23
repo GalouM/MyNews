@@ -14,7 +14,7 @@
     </style>
     <!-- TOOLBAR TITLE THEME -->
     <style name="ToolBarTheme.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">@dimen/tab_layout_text_size</item>
+        <item name="android:textSize">@dimen/toolbar_text_size</item>
     </style>
 
     <!-- TAB THEME -->

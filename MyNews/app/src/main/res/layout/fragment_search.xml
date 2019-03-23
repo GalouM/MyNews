@@ -15,30 +15,49 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/small_margin">
 
-
-        <EditText
-            android:id="@+id/search_fragment_start_begin_date"
-            style="@android:style/Widget.DeviceDefault.Light.Spinner"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="21/03/2017"
-            android:inputType="date"
-            android:clickable="true"
-            android:focusable="true"/>
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/begin_date"/>
 
+            <EditText
+                android:id="@+id/search_fragment_start_begin_date"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="date"
+                android:focusable="false"
+                android:textSize="@dimen/text_sate_size"
+                android:labelFor="@string/begin_date"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/search_fragment_search_end_date"
-            style="@android:style/Widget.DeviceDefault.Light.Spinner"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="20/03/2018"
-            android:inputType="date"
-            android:clickable="true"
-            android:focusable="true"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/end_date"/>
+
+            <EditText
+                android:id="@+id/search_fragment_search_end_date"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="date"
+                android:focusable="false"
+                android:textSize="@dimen/text_sate_size"
+                android:labelFor="@string/end_date" />
+        </LinearLayout>
 
 
 

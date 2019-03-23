@@ -25,15 +25,8 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseFragmentSearch extends Fragment {
 
-    protected OnButtonClickedListener mCallback;
-
-    public interface OnButtonClickedListener{
-        void onButtonClicked();
-    }
-
-    // --------------
-
     protected abstract int getFragmentLayout();
+    protected abstract void createCallbackToParentActivity();
 
     // views
     @BindView(R.id.query_term) EditText userTerm;
@@ -43,6 +36,10 @@ public abstract class BaseFragmentSearch extends Fragment {
     @BindView(R.id.search_item_politics) CheckBox boxPolitics;
     @BindView(R.id.search_item_sport) CheckBox boxSport;
     @BindView(R.id.search_item_travel) CheckBox boxTravel;
+
+    //data
+    protected String queryTerm;
+    protected List<String> querySections;
 
     protected BaseFragmentSearch(){}
 
@@ -60,32 +57,30 @@ public abstract class BaseFragmentSearch extends Fragment {
         this.createCallbackToParentActivity();
     }
 
-    protected String getQueryTerm(){
-        return userTerm.getText().toString();
+    protected void setQueryTerm(){
+        this.queryTerm = userTerm.getText().toString();
     }
 
-    protected List<String> getQuerySections(){
-        List<String> querySection = new ArrayList<>();
+    protected void setQuerySections(){
+        this.querySections = new ArrayList<>();
         if(this.boxArts.isChecked()){
-            querySection.add(boxArts.getText().toString());
+            querySections.add(boxArts.getText().toString());
         }
         if(this.boxBusiness.isChecked()){
-            querySection.add(boxBusiness.getText().toString());
+            querySections.add(boxBusiness.getText().toString());
         }
         if(this.boxEntrepreneurs.isChecked()){
-            querySection.add(boxEntrepreneurs.getText().toString());
+            querySections.add(boxEntrepreneurs.getText().toString());
         }
         if(this.boxPolitics.isChecked()){
-            querySection.add(boxPolitics.getText().toString());
+            querySections.add(boxPolitics.getText().toString());
         }
         if(this.boxSport.isChecked()){
-            querySection.add(boxSport.getText().toString());
+            querySections.add(boxSport.getText().toString());
         }
         if(this.boxTravel.isChecked()){
-            querySection.add(boxTravel.getText().toString());
+            querySections.add(boxTravel.getText().toString());
         }
-
-        return querySection;
 
     }
 
@@ -105,8 +100,8 @@ public abstract class BaseFragmentSearch extends Fragment {
                 alertDialog.setMessage(getString(R.string.missing_section_message));
                 break;
             case INCORRECT_DATE:
-                alertDialog.setTitle("Incorrect Date");
-                alertDialog.setMessage("Please select an end date after the begin date");
+                alertDialog.setTitle(getString(R.string.incorrect_date_title));
+                alertDialog.setMessage(getString(R.string.incorrect_date_message));
         }
 
         alertDialog.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {
@@ -118,15 +113,4 @@ public abstract class BaseFragmentSearch extends Fragment {
         alertDialog.show();
     }
 
-    // --------------
-    // FRAGMENT SUPPORT
-    // --------------
-
-    protected void createCallbackToParentActivity(){
-        try{
-            mCallback = (OnButtonClickedListener) getActivity();
-        } catch (ClassCastException e){
-            throw new ClassCastException(e.toString()+"must implement OnButtonClickedListener");
-        }
-    }
 }

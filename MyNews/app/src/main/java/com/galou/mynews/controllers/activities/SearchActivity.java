@@ -1,16 +1,18 @@
 package com.galou.mynews.controllers.activities;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.fragments.BaseFragmentSearch;
+import com.galou.mynews.controllers.fragments.NotificationsFragment;
 import com.galou.mynews.controllers.fragments.SearchFragment;
 
 import java.util.List;
 
-public class SearchActivity extends BaseActivity implements BaseFragmentSearch.OnButtonClickedListener  {
+public class SearchActivity extends BaseActivity implements SearchFragment.OnButtonClickedListener {
 
 
     private SearchFragment searchFragment;
@@ -47,33 +49,13 @@ public class SearchActivity extends BaseActivity implements BaseFragmentSearch.O
 
     }
 
-    // -------------------
-    // SETTER
-    // -------------------
-
-
-    public void setQueryTerm(String queryTerm) {
-        this.queryTerm = queryTerm;
-    }
-
-    public void setQuerySection(List<String> querySection) {
-        this.querySection = querySection;
-    }
-
-    public void setQueryBeginDate(String queryBeginDate) {
-        this.queryBeginDate = queryBeginDate;
-    }
-
-    public void setQueryEndDate(String queryEndDate) {
-        this.queryEndDate = queryEndDate;
-    }
-
     // --------------
     // CallBack
     // --------------
 
     @Override
-    public void onButtonClicked() {
+    public void onButtonSearchClicked(String queryTerm, String queryBeginDate,
+                                      @Nullable String queryEndDate, List<String> querySections) {
         String value = "Query Term: " + queryTerm + "\n"
                 + "Begin Date: " + queryBeginDate + "\n"
                 + "End Date: " + queryEndDate + "\n"
@@ -81,4 +63,5 @@ public class SearchActivity extends BaseActivity implements BaseFragmentSearch.O
         Toast.makeText(this, value, Toast.LENGTH_LONG).show();
 
     }
+
 }

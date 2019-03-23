@@ -10,13 +10,13 @@ import com.galou.mynews.controllers.fragments.NotificationsFragment;
 
 import java.util.List;
 
-public class NotificationsActivity extends BaseActivity implements BaseFragmentSearch.OnButtonClickedListener {
+public class NotificationsActivity extends BaseActivity implements NotificationsFragment.OnButtonClickedListener {
 
     private NotificationsFragment notificationsFragment;
 
     //for data
     private String queryTerm;
-    private List<String> querySection;
+    private List<String> querySections;
     private boolean isNotificationsEnabled;
 
     @Override
@@ -49,12 +49,13 @@ public class NotificationsActivity extends BaseActivity implements BaseFragmentS
     // ACTION
     // -------------------
 
+
     @Override
-    public void onButtonClicked() {
-        if(isNotificationsEnabled){
+    public void onButtonNotificationClicked(String queryTerm, List<String> querySections, Boolean isNotificationEnabled) {
+        if(isNotificationEnabled){
             String text = "Notifications enabled" + "\n"
                     + "Query Term: " + queryTerm + "\n"
-                    + "Sections: " + querySection;
+                    + "Sections: " + querySections;
             Toast.makeText(this, text, Toast.LENGTH_LONG).show();
         } else {
             String text = "Notifications disabled";
@@ -63,19 +64,4 @@ public class NotificationsActivity extends BaseActivity implements BaseFragmentS
 
     }
 
-    // -------------------
-    // SETTERS
-    // -------------------
-
-    public void setQueryTerm(String queryTerm) {
-        this.queryTerm = queryTerm;
-    }
-
-    public void setQuerySection(List<String> querySection) {
-        this.querySection = querySection;
-    }
-
-    public void setNotificationsEnabled(boolean notificationsEnabled) {
-        isNotificationsEnabled = notificationsEnabled;
-    }
 }

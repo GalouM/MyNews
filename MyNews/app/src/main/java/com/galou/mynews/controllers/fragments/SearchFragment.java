@@ -2,7 +2,9 @@ package com.galou.mynews.controllers.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatSpinner;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.galou.mynews.models.ErrorSelection;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -25,6 +28,16 @@ import butterknife.OnClick;
  */
 public class SearchFragment extends BaseFragmentSearch implements PickDateDialog.OnOKButtonListener {
 
+    // interface
+    protected OnButtonClickedListener mCallback;
+
+    public interface OnButtonClickedListener{
+        void onButtonSearchClicked(String queryTerm, String queryBeginDate,
+                                   @Nullable String queryEndDate, List<String> querySections);
+    }
+
+    // --------------
+
     // views
     @BindView(R.id.search_fragment_start_begin_date) EditText beginDateUser;
     @BindView(R.id.search_fragment_search_end_date) EditText endDateUser;
@@ -33,8 +46,10 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     private Calendar beginDate;
     private Calendar endDate;
 
-    public static final SimpleDateFormat DATE_FORMAT_API = new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
-    public static final SimpleDateFormat DATE_FORMAT_DISPLAY = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+    public static final SimpleDateFormat DATE_FORMAT_API =
+            new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
+    public static final SimpleDateFormat DATE_FORMAT_DISPLAY =
+            new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
     public static final int DIALOG_CODE = 12345;
 
     // --------------
@@ -43,6 +58,8 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
 
     @OnClick(R.id.search_fragment_search_button)
     public void onClickSearchButton(){
+        this.setQueryTerm();
+        this.setQuerySections();
         if (isAllDataCorrect()){
             sentDataToActivity();
         }
@@ -85,10 +102,10 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     }
 
     private Boolean isAllDataCorrect(){
-        if (getQueryTerm().length() <= 0){
+        if (queryTerm.length() <= 0){
             this.showAlertDialog(ErrorSelection.TERM);
             return false;
-        } else if (getQuerySections().isEmpty()){
+        } else if (querySections.isEmpty()){
             this.showAlertDialog(ErrorSelection.SECTION);
             return false;
         } else if (beginDateUser.getText().length() <= 0){
@@ -104,12 +121,12 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     }
 
     private void sentDataToActivity(){
-        SearchActivity activity = (SearchActivity) getActivity();
-        activity.setQueryTerm(this.getQueryTerm());
-        activity.setQuerySection(this.getQuerySections());
-        activity.setQueryBeginDate(convertCalendarForAPI(beginDate));
-        activity.setQueryEndDate(convertCalendarForAPI(endDate));
-        mCallback.onButtonClicked();
+        String beginDateApi = convertCalendarForAPI(beginDate);
+        String endDateApi = null;
+        if(endDate != null) {
+            endDateApi = convertCalendarForAPI(endDate);
+        }
+        mCallback.onButtonSearchClicked(this.queryTerm, beginDateApi, endDateApi, querySections);
 
     }
 
@@ -132,6 +149,19 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
 
     private String convertCalendarForAPI(Calendar calendar){
         return DATE_FORMAT_API.format(calendar.getTime());
+    }
+
+    // --------------
+    // FRAGMENT SUPPORT
+    // --------------
+
+    @Override
+    protected void createCallbackToParentActivity(){
+        try{
+            mCallback = (OnButtonClickedListener) getActivity();
+        } catch (ClassCastException e){
+            throw new ClassCastException(e.toString()+"must implement OnButtonClickedListener");
+        }
     }
 
 }

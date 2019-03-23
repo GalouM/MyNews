@@ -42,5 +42,9 @@
     <string name="missing_section_message">Please select at least one section</string>
     <string name="missing_date_message">Please enter a begin date</string>
     <string name="missing_term_message">Please enter a query term</string>
+    <string name="end_date">End Date</string>
+    <string name="begin_date">Begin Date</string>
+    <string name="incorrect_date_title">Incorrect Date</string>
+    <string name="incorrect_date_message">Please select an end date after the begin date</string>
 
 </resources>
