@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.fragments.SearchFragment;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SearchActivity extends BaseActivity implements SearchFragment.OnButtonClickedListener {
@@ -51,9 +52,9 @@ public class SearchActivity extends BaseActivity implements SearchFragment.OnBut
     // --------------
 
     @Override
-    public void onButtonSearchClicked(String queryTerm, @Nullable String queryBeginDate,
+    public void onButtonSearchClicked(String[] queryTerm, @Nullable String queryBeginDate,
                                       @Nullable String queryEndDate, List<String> querySections) {
-        String value = "Query Term: " + queryTerm + "\n"
+        String value = "Query Term: " + Arrays.toString(queryTerm) + "\n"
                 + "Begin Date: " + queryBeginDate + "\n"
                 + "End Date: " + queryEndDate + "\n"
                 + "Section: " + querySections;

@@ -46,5 +46,7 @@
     <string name="begin_date">Begin Date</string>
     <string name="incorrect_date_title">Incorrect Date</string>
     <string name="incorrect_date_message">Please select an end date after the begin date</string>
+    <string name="incorrect_term">No Special Character</string>
+    <string name="incorrect_term_message">Please use only letters for your query terms</string>
 
 </resources>

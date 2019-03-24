@@ -21,7 +21,8 @@ public class NotificationsFragment extends BaseFragmentSearch {
     protected OnButtonClickedListener mCallback;
 
     public interface OnButtonClickedListener{
-        void onButtonNotificationClicked(String queryTerm, List<String> querySections, Boolean isNotificationEnabled);
+        void onButtonNotificationClicked(Boolean isNotificationEnabled);
+        void onNotificationActivated(String[] queryTerm, List<String> querySections);
     }
 
     // --------------
@@ -45,15 +46,21 @@ public class NotificationsFragment extends BaseFragmentSearch {
         if(switchNotification.isChecked()) {
             if (!isAllDataCorrect()) {
                 switchNotification.setChecked(false);
+            } else {
+                separateQueryTerms();
+                mCallback.onNotificationActivated(listQueryTerms, querySections);
             }
         }
         Boolean isNotificationOn = switchNotification.isChecked();
-        mCallback.onButtonNotificationClicked(queryTerm, querySections, isNotificationOn);
+        mCallback.onButtonNotificationClicked(isNotificationOn);
     }
 
     private Boolean isAllDataCorrect() {
-        if (queryTerm.length() <= 0) {
+        if (queryTerms.length() <=0) {
             this.showAlertDialog(ErrorSelection.TERM);
+            return false;
+        } else if(isQueryTermIncorrect()){
+            this.showAlertDialog(ErrorSelection.INCORRECT_TERM);
             return false;
         } else if (querySections.isEmpty()) {
             this.showAlertDialog(ErrorSelection.SECTION);

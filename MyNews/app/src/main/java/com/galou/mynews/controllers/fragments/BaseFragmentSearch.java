@@ -16,6 +16,8 @@ import com.galou.mynews.models.ErrorSelection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +40,8 @@ public abstract class BaseFragmentSearch extends Fragment {
     @BindView(R.id.search_item_travel) CheckBox boxTravel;
 
     //data
-    protected String queryTerm;
+    protected String queryTerms;
+    protected String[] listQueryTerms;
     protected List<String> querySections;
 
     protected BaseFragmentSearch(){}
@@ -58,7 +61,20 @@ public abstract class BaseFragmentSearch extends Fragment {
     }
 
     protected void setQueryTerm(){
-        this.queryTerm = userTerm.getText().toString();
+        queryTerms = userTerm.getText().toString();
+
+
+    }
+
+    protected boolean isQueryTermIncorrect(){
+        Pattern pattern = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(queryTerms);
+        return matcher.find();
+
+    }
+
+    protected void separateQueryTerms(){
+        listQueryTerms = queryTerms.split("\\s+");
     }
 
     protected void setQuerySections(){
@@ -102,6 +118,9 @@ public abstract class BaseFragmentSearch extends Fragment {
             case INCORRECT_DATE:
                 alertDialog.setTitle(getString(R.string.incorrect_date_title));
                 alertDialog.setMessage(getString(R.string.incorrect_date_message));
+            case INCORRECT_TERM:
+                alertDialog.setTitle(getString(R.string.incorrect_term));
+                alertDialog.setMessage(getString(R.string.incorrect_term_message));
         }
 
         alertDialog.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {

@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.fragments.NotificationsFragment;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class NotificationsActivity extends BaseActivity implements NotificationsFragment.OnButtonClickedListener {
@@ -49,11 +50,9 @@ public class NotificationsActivity extends BaseActivity implements Notifications
 
 
     @Override
-    public void onButtonNotificationClicked(String queryTerm, List<String> querySections, Boolean isNotificationEnabled) {
+    public void onButtonNotificationClicked(Boolean isNotificationEnabled) {
         if(isNotificationEnabled){
-            String text = "Notifications enabled" + "\n"
-                    + "Query Term: " + queryTerm + "\n"
-                    + "Sections: " + querySections;
+            String text = "Notifications enabled";
             Toast.makeText(this, text, Toast.LENGTH_LONG).show();
         } else {
             String text = "Notifications disabled";
@@ -62,4 +61,12 @@ public class NotificationsActivity extends BaseActivity implements Notifications
 
     }
 
+    @Override
+    public void onNotificationActivated(String[] queryTerm, List<String> querySections) {
+        String text = "Notifications enabled" + "\n"
+                + "Query Term: " + Arrays.toString(queryTerm) + "\n"
+                + "Sections: " + querySections;
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+
+    }
 }

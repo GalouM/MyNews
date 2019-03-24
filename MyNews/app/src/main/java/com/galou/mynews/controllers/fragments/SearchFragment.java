@@ -27,7 +27,7 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     protected OnButtonClickedListener mCallback;
 
     public interface OnButtonClickedListener{
-        void onButtonSearchClicked(String queryTerm, @Nullable String queryBeginDate,
+        void onButtonSearchClicked(String queryTerm[], @Nullable String queryBeginDate,
                                    @Nullable String queryEndDate, List<String> querySections);
     }
 
@@ -56,6 +56,7 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
         this.setQueryTerm();
         this.setQuerySections();
         if (isAllDataCorrect()){
+            separateQueryTerms();
             sentDataToActivity();
         }
     }
@@ -97,8 +98,11 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     }
 
     private Boolean isAllDataCorrect(){
-        if (queryTerm.length() <= 0){
+        if (queryTerms.length() <= 0){
             this.showAlertDialog(ErrorSelection.TERM);
+            return false;
+        } else if(isQueryTermIncorrect()){
+            this.showAlertDialog(ErrorSelection.INCORRECT_TERM);
             return false;
         } else if (querySections.isEmpty()){
             this.showAlertDialog(ErrorSelection.SECTION);
@@ -121,7 +125,7 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
         if(endDate != null) {
             endDateApi = convertCalendarForAPI(endDate);
         }
-        mCallback.onButtonSearchClicked(this.queryTerm, beginDateApi, endDateApi, querySections);
+        mCallback.onButtonSearchClicked(listQueryTerms, beginDateApi, endDateApi, querySections);
 
     }
 
