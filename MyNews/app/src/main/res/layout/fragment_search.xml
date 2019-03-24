@@ -33,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:inputType="date"
                 android:focusable="false"
-                android:textSize="@dimen/text_sate_size"
+                android:textSize="@dimen/text_date_size"
                 android:labelFor="@string/begin_date"/>
         </LinearLayout>
 
@@ -55,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:inputType="date"
                 android:focusable="false"
-                android:textSize="@dimen/text_sate_size"
+                android:textSize="@dimen/text_date_size"
                 android:labelFor="@string/end_date" />
         </LinearLayout>
 

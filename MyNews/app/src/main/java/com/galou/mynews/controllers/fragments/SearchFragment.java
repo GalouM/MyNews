@@ -1,17 +1,12 @@
 package com.galou.mynews.controllers.fragments;
 
 
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatSpinner;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.activities.SearchActivity;
 import com.galou.mynews.controllers.dialogs.PickDateDialog;
 import com.galou.mynews.models.ErrorSelection;
 
@@ -32,7 +27,7 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     protected OnButtonClickedListener mCallback;
 
     public interface OnButtonClickedListener{
-        void onButtonSearchClicked(String queryTerm, String queryBeginDate,
+        void onButtonSearchClicked(String queryTerm, @Nullable String queryBeginDate,
                                    @Nullable String queryEndDate, List<String> querySections);
     }
 
@@ -108,9 +103,6 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
         } else if (querySections.isEmpty()){
             this.showAlertDialog(ErrorSelection.SECTION);
             return false;
-        } else if (beginDateUser.getText().length() <= 0){
-            this.showAlertDialog(ErrorSelection.START_DATE);
-            return false;
         } else if(isIncorrectEndDate()) {
             this.showAlertDialog(ErrorSelection.INCORRECT_DATE);
             return false;
@@ -121,7 +113,10 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     }
 
     private void sentDataToActivity(){
-        String beginDateApi = convertCalendarForAPI(beginDate);
+        String beginDateApi = null;
+        if (beginDate != null){
+            beginDateApi = convertCalendarForAPI(beginDate);
+        }
         String endDateApi = null;
         if(endDate != null) {
             endDateApi = convertCalendarForAPI(endDate);
@@ -136,7 +131,7 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     // --------------
 
     private Boolean isIncorrectEndDate(){
-        if(endDateUser.getText().length() > 0) {
+        if(endDateUser.getText().length() > 0 && beginDateUser.getText().length() > 0) {
             return (endDate.getTime().before(beginDate.getTime()));
         } else {
             return false;

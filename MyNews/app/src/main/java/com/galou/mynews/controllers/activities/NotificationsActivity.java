@@ -1,11 +1,9 @@
 package com.galou.mynews.controllers.activities;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.fragments.BaseFragmentSearch;
 import com.galou.mynews.controllers.fragments.NotificationsFragment;
 
 import java.util.List;

@@ -3,10 +3,8 @@ package com.galou.mynews.controllers.fragments;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
-import android.view.View;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.activities.NotificationsActivity;
 import com.galou.mynews.models.ErrorSelection;
 
 import java.util.List;
