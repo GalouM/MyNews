@@ -67,7 +67,7 @@ public abstract class BaseFragmentSearch extends Fragment {
     }
 
     protected boolean isQueryTermIncorrect(){
-        Pattern pattern = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(queryTerms);
         return matcher.find();
 
@@ -118,9 +118,11 @@ public abstract class BaseFragmentSearch extends Fragment {
             case INCORRECT_DATE:
                 alertDialog.setTitle(getString(R.string.incorrect_date_title));
                 alertDialog.setMessage(getString(R.string.incorrect_date_message));
+                break;
             case INCORRECT_TERM:
                 alertDialog.setTitle(getString(R.string.incorrect_term));
                 alertDialog.setMessage(getString(R.string.incorrect_term_message));
+                break;
         }
 
         alertDialog.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {
