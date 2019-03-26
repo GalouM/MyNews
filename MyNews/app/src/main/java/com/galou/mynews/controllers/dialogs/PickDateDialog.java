@@ -1,6 +1,7 @@
 package com.galou.mynews.controllers.dialogs;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -49,7 +50,7 @@ public class PickDateDialog extends DialogFragment implements DialogInterface.On
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        final AlertDialog.Builder datePickerDialog = new AlertDialog.Builder(getActivity());
+        final DatePickerDialog.Builder datePickerDialog = new DatePickerDialog.Builder(getActivity());
         datePicker = new DatePicker(getActivity());
         datePickerDialog.setView(datePicker);
         if (existingDate != null){
@@ -106,7 +107,7 @@ public class PickDateDialog extends DialogFragment implements DialogInterface.On
     // CALLBACK SUPPORT
     // --------------
 
-    protected void createCallbackToParent(){
+    private void createCallbackToParent(){
         try{
             mCallback = (OnOKButtonListener) getTargetFragment();
 

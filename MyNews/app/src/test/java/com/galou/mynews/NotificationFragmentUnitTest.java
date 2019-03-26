@@ -1,17 +1,15 @@
 package com.galou.mynews;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.SwitchCompat;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.controllers.activities.NotificationsActivity;
-import com.galou.mynews.controllers.activities.SearchActivity;
 import com.galou.mynews.controllers.dialogs.PickDateDialog;
-import com.galou.mynews.controllers.fragments.SearchFragment;
+import com.galou.mynews.controllers.fragments.NotificationsFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,52 +17,48 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowDatePickerDialog;
-import org.robolectric.shadows.ShadowDialog;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.robolectric.Shadows.shadowOf;
 
 /**
- * Created by galou on 2019-03-22
+ * Created by galou on 2019-03-25
  */
 @RunWith(RobolectricTestRunner.class)
-public class SearchFragmentUnitTest {
-
-    private SearchActivity activity;
-    private Button searchButton;
+public class NotificationFragmentUnitTest {
+    private NotificationsActivity activity;
+    private SwitchCompat notificationEnabled;
     private EditText queryTerm;
 
 
     @Before
     public void setUp() throws Exception {
-        activity = Robolectric.buildActivity(SearchActivity.class).create().resume().get();
-        searchButton = activity.findViewById(R.id.search_fragment_search_button);
+        activity = Robolectric.buildActivity(NotificationsActivity.class).create().resume().get();
+        notificationEnabled = activity.findViewById(R.id.notification_fragment_switch);
         queryTerm = activity.findViewById(R.id.query_term);
     }
 
     @Test
     public void noQueryTermEnterShowDialog() throws Exception {
         queryTerm.setText("");
-        searchButton.performClick();
+        notificationEnabled.performClick();
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
         assertEquals(activity.getString(R.string.missing_term_message), shadowAlertDialog.getMessage().toString());
+        assertFalse(notificationEnabled.isChecked());
     }
 
     @Test
     public void queryTermIncorrectEnterShowDialog() throws Exception {
         queryTerm.setText("$!@");
-        searchButton.performClick();
+        notificationEnabled.performClick();
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
         assertEquals(activity.getString(R.string.incorrect_term_message), shadowAlertDialog.getMessage().toString());
+        assertFalse(notificationEnabled.isChecked());
     }
 
     @Test
@@ -82,43 +76,11 @@ public class SearchFragmentUnitTest {
         sportCheck.setChecked(false);
         CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
         travelCheck.setChecked(false);
-        searchButton.performClick();
+        notificationEnabled.performClick();
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
         assertEquals(activity.getString(R.string.missing_section_message), shadowAlertDialog.getMessage().toString());
+        assertFalse(notificationEnabled.isChecked());
     }
-    /*
-
-    @Test
-    public void beginDateClickOkSetText() throws Exception {
-        EditText beginDate = activity.findViewById(R.id.search_fragment_start_begin_date);
-        beginDate.performClick();
-        DatePickerDialog dialog = (DatePickerDialog) ShadowDatePickerDialog.getLatestDialog();
-        dialog.updateDate(2013, 10, 23);
-        assertEquals("10/23/2013", beginDate.getText().toString());
-    }
-
-    @Test
-    public void endDateClickOkSetText() throws Exception {
-        EditText endDate = activity.findViewById(R.id.search_fragment_search_end_date);
-        endDate.performClick();
-        DatePickerDialog dialog = (DatePickerDialog) ShadowDatePickerDialog.getLatestDialog();
-        dialog.updateDate(2013, 10, 23);
-        assertEquals("10/23/2013", endDate.getText().toString());
-    }
-
-    /*
-    @Test
-    public void endDateBeforeStartDateAlert() throws Exception {
-        EditText endDate = activity.findViewById(R.id.search_fragment_search_end_date);
-        endDate.performClick();
-        DatePickerDialog dialog = (DatePickerDialog) ShadowDatePickerDialog.getLatestDialog();
-        dialog.updateDate(2013, 10, 23);
-        assertEquals("10/23/2013", endDate.getText().toString());
-    }
-    */
-
-
-
 }
