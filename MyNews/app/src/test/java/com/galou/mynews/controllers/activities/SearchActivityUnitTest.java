@@ -1,5 +1,6 @@
-package com.galou.mynews;
+package com.galou.mynews.controllers.activities;
 
+import com.galou.mynews.R;
 import com.galou.mynews.controllers.activities.SearchActivity;
 import com.galou.mynews.controllers.fragments.SearchFragment;
 

@@ -1,9 +1,10 @@
-package com.galou.mynews;
+package com.galou.mynews.controllers.activities;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 
+import com.galou.mynews.R;
 import com.galou.mynews.controllers.activities.MainActivity;
 import com.galou.mynews.controllers.activities.NotificationsActivity;
 import com.galou.mynews.controllers.activities.SearchActivity;

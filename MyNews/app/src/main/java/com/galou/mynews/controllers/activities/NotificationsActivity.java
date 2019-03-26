@@ -51,10 +51,8 @@ public class NotificationsActivity extends BaseActivity implements Notifications
 
     @Override
     public void onButtonNotificationClicked(Boolean isNotificationEnabled) {
-        if(isNotificationEnabled){
-            String text = "Notifications enabled";
-            Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-        } else {
+
+        if(!isNotificationEnabled){
             String text = "Notifications disabled";
             Toast.makeText(this, text, Toast.LENGTH_LONG).show();
         }

@@ -1,5 +1,6 @@
-package com.galou.mynews;
+package com.galou.mynews.controllers.activities;
 
+import com.galou.mynews.R;
 import com.galou.mynews.controllers.activities.NotificationsActivity;
 import com.galou.mynews.controllers.fragments.NotificationsFragment;
 
@@ -38,13 +39,6 @@ public class NotificationsActivityUnitTest {
     @Test
     public void notificationsFragmentShouldBeVisible() throws Exception {
         assertEquals(activity.getSupportFragmentManager().findFragmentById(R.id.notifications_activity_frame_layout).getClass().getName(), NotificationsFragment.class.getName());
-    }
-
-    @Test
-    public void notificationEnabledShowToast() throws  Exception {
-        activity.onButtonNotificationClicked(true);
-
-        assertEquals(ShadowToast.getTextOfLatestToast(), "Notifications enabled");
     }
 
     @Test
