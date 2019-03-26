@@ -88,37 +88,5 @@ public class SearchFragmentUnitTest {
 
         assertEquals(activity.getString(R.string.missing_section_message), shadowAlertDialog.getMessage().toString());
     }
-    /*
-
-    @Test
-    public void beginDateClickOkSetText() throws Exception {
-        EditText beginDate = activity.findViewById(R.id.search_fragment_start_begin_date);
-        beginDate.performClick();
-        DatePickerDialog dialog = (DatePickerDialog) ShadowDatePickerDialog.getLatestDialog();
-        dialog.updateDate(2013, 10, 23);
-        assertEquals("10/23/2013", beginDate.getText().toString());
-    }
-
-    @Test
-    public void endDateClickOkSetText() throws Exception {
-        EditText endDate = activity.findViewById(R.id.search_fragment_search_end_date);
-        endDate.performClick();
-        DatePickerDialog dialog = (DatePickerDialog) ShadowDatePickerDialog.getLatestDialog();
-        dialog.updateDate(2013, 10, 23);
-        assertEquals("10/23/2013", endDate.getText().toString());
-    }
-
-    /*
-    @Test
-    public void endDateBeforeStartDateAlert() throws Exception {
-        EditText endDate = activity.findViewById(R.id.search_fragment_search_end_date);
-        endDate.performClick();
-        DatePickerDialog dialog = (DatePickerDialog) ShadowDatePickerDialog.getLatestDialog();
-        dialog.updateDate(2013, 10, 23);
-        assertEquals("10/23/2013", endDate.getText().toString());
-    }
-    */
-
-
 
 }
