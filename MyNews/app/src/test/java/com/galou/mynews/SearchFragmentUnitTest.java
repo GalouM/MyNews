@@ -24,10 +24,12 @@ import org.robolectric.shadows.ShadowDatePickerDialog;
 import org.robolectric.shadows.ShadowDialog;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 /**
@@ -55,7 +57,9 @@ public class SearchFragmentUnitTest {
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
+        assertTrue(dialog.isShowing());
         assertEquals(activity.getString(R.string.missing_term_message), shadowAlertDialog.getMessage().toString());
+        assertEquals(activity.getString(R.string.missing_query_term_title), shadowAlertDialog.getTitle());
     }
 
     @Test
@@ -65,7 +69,9 @@ public class SearchFragmentUnitTest {
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
+        assertTrue(dialog.isShowing());
         assertEquals(activity.getString(R.string.incorrect_term_message), shadowAlertDialog.getMessage().toString());
+        assertEquals(activity.getString(R.string.incorrect_term), shadowAlertDialog.getTitle());
     }
 
     @Test
@@ -87,15 +93,18 @@ public class SearchFragmentUnitTest {
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
+        assertTrue(dialog.isShowing());
         assertEquals(activity.getString(R.string.missing_section_message), shadowAlertDialog.getMessage().toString());
+        assertEquals(activity.getString(R.string.missing_section_title), shadowAlertDialog.getTitle());
     }
 
     @Test
-    public void testOkButtonAlertDialogCancelDialog() throws Exception {
+    public void clickOkButtonCancelDialog() throws Exception {
         searchButton.performClick();
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
+        assertTrue(dialog.isShowing());
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
-        assertNull(dialog);
+        assertFalse(dialog.isShowing());
 
     }
 

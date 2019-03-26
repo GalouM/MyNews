@@ -65,6 +65,7 @@ public class MainActivityUnitTest {
     @Test
     public void clickNavDrawerTopStory()throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_top));
+
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "TOP STORIES");
         assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), TopStoriesFragment.class.getName());
     }
@@ -72,6 +73,7 @@ public class MainActivityUnitTest {
     @Test
     public void clickNavDrawerMostPop()throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_pop));
+
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "MOST POPULAR");
         assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), MostPopFragment.class.getName());
     }
@@ -79,6 +81,7 @@ public class MainActivityUnitTest {
     @Test
     public void clickNavDrawerSport()throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_sport));
+
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "SPORT");
         assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), SportFragment.class.getName());
     }
@@ -86,6 +89,7 @@ public class MainActivityUnitTest {
     @Test
     public void viewPagerFalseId()throws Exception {
         int id = 50;
+
         assertNull(pageAdapter.getPageTitle(id));
         assertNull(pageAdapter.getItem(id));
     }
@@ -94,6 +98,7 @@ public class MainActivityUnitTest {
     public void clickNavDrawerSearch() throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_search));
         Intent intent = shadowOf(activity).getNextStartedActivity();
+
         assertEquals(SearchActivity.class.getName(), intent.getComponent().getClassName());
     }
 
@@ -101,6 +106,7 @@ public class MainActivityUnitTest {
     public void clickNavDrawerNotifications() throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_notification));
         Intent intent = shadowOf(activity).getNextStartedActivity();
+
         assertEquals(NotificationsActivity.class.getName(), intent.getComponent().getClassName());
     }
 
@@ -108,6 +114,7 @@ public class MainActivityUnitTest {
     public void clickToolbarSearch() throws Exception {
         activity.onOptionsItemSelected(new RoboMenuItem(R.id.menu_main_activity_search));
         Intent intent = shadowOf(activity).getNextStartedActivity();
+
         assertEquals(SearchActivity.class.getName(), intent.getComponent().getClassName());
     }
 
@@ -115,12 +122,14 @@ public class MainActivityUnitTest {
     public void clickToolbarNotifications() throws Exception {
         activity.onOptionsItemSelected(new RoboMenuItem(R.id.menu_main_activity_notifications));
         Intent intent = shadowOf(activity).getNextStartedActivity();
+
         assertEquals(NotificationsActivity.class.getName(), intent.getComponent().getClassName());
     }
 
     @Test
     public void onPressBack() throws Exception{
         activity.onBackPressed();
+
         assertTrue(activity.isFinishing());
 
     }

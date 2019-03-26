@@ -8,6 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowToast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,5 +38,34 @@ public class NotificationsActivityUnitTest {
     @Test
     public void notificationsFragmentShouldBeVisible() throws Exception {
         assertEquals(activity.getSupportFragmentManager().findFragmentById(R.id.notifications_activity_frame_layout).getClass().getName(), NotificationsFragment.class.getName());
+    }
+
+    @Test
+    public void notificationEnabledShowToast() throws  Exception {
+        activity.onButtonNotificationClicked(true);
+
+        assertEquals(ShadowToast.getTextOfLatestToast(), "Notifications enabled");
+    }
+
+    @Test
+    public void notificationDisabledShowToast() throws  Exception {
+        activity.onButtonNotificationClicked(false);
+
+        assertEquals(ShadowToast.getTextOfLatestToast(), "Notifications disabled");
+    }
+
+    @Test
+    public void notificationActivatedShowToast() throws  Exception {
+        String[] queryTerm = {"test","test2"};
+        List<String> querySections = new ArrayList<>();
+        querySections.add("test");
+        querySections.add("test2");
+        String messageToast = "Notifications enabled" + "\n"
+                + "Query Term: " + Arrays.toString(queryTerm) + "\n"
+                + "Sections: " + querySections;
+        activity.onNotificationActivated(queryTerm, querySections);
+
+        assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
+
     }
 }

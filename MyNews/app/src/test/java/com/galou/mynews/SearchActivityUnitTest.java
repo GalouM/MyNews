@@ -8,6 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowToast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,5 +38,23 @@ public class SearchActivityUnitTest {
     @Test
     public void searchFragmentShouldBeVisible() throws Exception {
         assertEquals(activity.getSupportFragmentManager().findFragmentById(R.id.search_activity_frame_layout).getClass().getName(), SearchFragment.class.getName());
+    }
+
+    @Test
+    public void onSearchLaunchShowToast() throws  Exception {
+        String[] queryTerm = {"test","test2"};
+        List<String> querySections = new ArrayList<>();
+        querySections.add("test");
+        querySections.add("test2");
+        String beginDate = "20190303";
+        String endate = "20190304";
+        String messageToast = "Query Term: " + Arrays.toString(queryTerm) + "\n"
+                + "Begin Date: " + beginDate + "\n"
+                + "End Date: " + endate + "\n"
+                + "Section: " + querySections;
+        activity.onButtonSearchClicked(queryTerm, beginDate, endate, querySections);
+
+        assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
+
     }
 }

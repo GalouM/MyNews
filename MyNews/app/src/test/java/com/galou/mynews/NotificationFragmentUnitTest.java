@@ -1,15 +1,12 @@
 package com.galou.mynews;
 
 import android.app.AlertDialog;
-import android.support.v4.app.FragmentManager;
+import android.content.DialogInterface;
 import android.support.v7.widget.SwitchCompat;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.controllers.activities.NotificationsActivity;
-import com.galou.mynews.controllers.dialogs.PickDateDialog;
-import com.galou.mynews.controllers.fragments.NotificationsFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +17,7 @@ import org.robolectric.shadows.ShadowAlertDialog;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 /**
@@ -37,6 +35,7 @@ public class NotificationFragmentUnitTest {
         activity = Robolectric.buildActivity(NotificationsActivity.class).create().resume().get();
         notificationEnabled = activity.findViewById(R.id.notification_fragment_switch);
         queryTerm = activity.findViewById(R.id.query_term);
+        notificationEnabled.setChecked(false);
     }
 
     @Test
@@ -46,7 +45,9 @@ public class NotificationFragmentUnitTest {
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
+        assertTrue(dialog.isShowing());
         assertEquals(activity.getString(R.string.missing_term_message), shadowAlertDialog.getMessage().toString());
+        assertEquals(activity.getString(R.string.missing_query_term_title), shadowAlertDialog.getTitle());
         assertFalse(notificationEnabled.isChecked());
     }
 
@@ -57,7 +58,9 @@ public class NotificationFragmentUnitTest {
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
+        assertTrue(dialog.isShowing());
         assertEquals(activity.getString(R.string.incorrect_term_message), shadowAlertDialog.getMessage().toString());
+        assertEquals(activity.getString(R.string.incorrect_term), shadowAlertDialog.getTitle());
         assertFalse(notificationEnabled.isChecked());
     }
 
@@ -80,7 +83,21 @@ public class NotificationFragmentUnitTest {
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
+        assertTrue(dialog.isShowing());
         assertEquals(activity.getString(R.string.missing_section_message), shadowAlertDialog.getMessage().toString());
+        assertEquals(activity.getString(R.string.missing_section_title), shadowAlertDialog.getTitle());
         assertFalse(notificationEnabled.isChecked());
     }
+
+    @Test
+    public void clickOkButtonCancelDialog() throws Exception {
+        notificationEnabled.performClick();
+        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
+        assertTrue(dialog.isShowing());
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+
+        assertFalse(dialog.isShowing());
+
+    }
+
 }
