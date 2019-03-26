@@ -107,10 +107,6 @@ public abstract class BaseFragmentSearch extends Fragment {
                 alertDialog.setTitle(getString(R.string.missing_query_term_title));
                 alertDialog.setMessage(getString(R.string.missing_term_message));
                 break;
-            case START_DATE:
-                alertDialog.setTitle(getString(R.string.mising_begin_date_title));
-                alertDialog.setMessage(getString(R.string.missing_date_message));
-                break;
             case SECTION:
                 alertDialog.setTitle(getString(R.string.missing_section_title));
                 alertDialog.setMessage(getString(R.string.missing_section_message));

@@ -22,31 +22,39 @@
     <!-- Animation -->
     <string name="animation_main_to_search_zoom" translatable="false">AnimationMainToSearch</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Activities Names -->
     <string name="search_articles_name_activity">Search Articles</string>
     <string name="notifications_articles_name_activity">Notifications</string>
-    <string name="search_query_term">Search query term</string>
+
+    <!-- CheckBoxes Names -->
     <string name="search_item_arts">Arts</string>
     <string name="search_item_business">Business</string>
     <string name="search_item_entrepreneurs">Entrepreneurs</string>
     <string name="search_item_politics">Politics</string>
     <string name="search_item_travel">Travel</string>
     <string name="search_button">SEARCH</string>
+
+    <!-- Notification Fragment text -->
     <string name="enable_notifications_once_per_day">Enable notifications (once per day)</string>
+
+    <!-- Pick Date Buttons -->
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
-    <string name="missing_query_term_title">Missing Query Term</string>
-    <string name="mising_begin_date_title">Missing Begin Date</string>
-    <string name="missing_section_title">Missing Section</string>
-    <string name="missing_section_message">Please select at least one section</string>
-    <string name="missing_date_message">Please enter a begin date</string>
-    <string name="missing_term_message">Please enter a query term</string>
+
+    <!-- Search Fragment text -->
     <string name="end_date">End Date</string>
     <string name="begin_date">Begin Date</string>
+    <string name="search_query_term">Search query term</string>
+
+    <!-- Alert Dialog Messages and Titles -->
     <string name="incorrect_date_title">Incorrect Date</string>
     <string name="incorrect_date_message">Please select an end date after the begin date</string>
     <string name="incorrect_term">No Special Character</string>
     <string name="incorrect_term_message">Please use only letters for your query terms</string>
+    <string name="missing_query_term_title">Missing Query Term</string>
+    <string name="missing_term_message">Please enter a query term</string>
+    <string name="missing_section_title">Missing Section</string>
+    <string name="missing_section_message">Please select at least one section</string>
+
 
 </resources>

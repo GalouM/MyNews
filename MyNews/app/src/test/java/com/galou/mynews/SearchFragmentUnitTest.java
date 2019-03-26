@@ -2,6 +2,7 @@ package com.galou.mynews;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.widget.Button;
@@ -87,6 +88,15 @@ public class SearchFragmentUnitTest {
         ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
         assertEquals(activity.getString(R.string.missing_section_message), shadowAlertDialog.getMessage().toString());
+    }
+
+    @Test
+    public void testOkButtonAlertDialogCancelDialog() throws Exception {
+        searchButton.performClick();
+        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+        assertNull(dialog);
+
     }
 
 }
