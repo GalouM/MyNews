@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
 
 import com.galou.mynews.R;
-import com.galou.mynews.models.ErrorSelection;
+import com.galou.mynews.utils.ErrorSelection;
 
 import java.util.List;
 

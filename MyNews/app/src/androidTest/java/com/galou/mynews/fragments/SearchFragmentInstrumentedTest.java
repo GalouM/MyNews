@@ -1,0 +1,35 @@
+package com.galou.mynews.fragments;
+
+import android.support.test.runner.AndroidJUnit4;
+
+import com.galou.mynews.models.Section;
+import com.galou.mynews.utils.ApiStreams;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
+
+import static org.junit.Assert.assertFalse;
+
+/**
+ * Created by galou on 2019-03-30
+ */
+@RunWith(AndroidJUnit4.class)
+public class SearchFragmentInstrumentedTest {
+    @Test
+    public void fetchAPIGetListArticles() throws Exception {
+        Observable<Section> observable = ApiStreams.streamFetchTopStories("sports");
+        TestObserver<Section> testObserver = new TestObserver<>();
+        observable.subscribeWith(testObserver)
+                .assertNoErrors()
+                .assertNoTimeout()
+                .awaitTerminalEvent();
+
+        Section sectionFetched = testObserver.values().get(0);
+
+        assertFalse(sectionFetched.getResults().isEmpty());
+
+    }
+}

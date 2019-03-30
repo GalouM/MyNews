@@ -1,4 +1,4 @@
-package com.galou.mynews;
+package com.galou.mynews.activities;
 
 import android.app.Activity;
 import android.content.Context;

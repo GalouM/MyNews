@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.models.ErrorSelection;
+import com.galou.mynews.utils.ErrorSelection;
 
 import java.util.ArrayList;
 import java.util.List;

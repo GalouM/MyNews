@@ -1,4 +1,4 @@
-package com.galou.mynews;
+package com.galou.mynews.activities;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -12,12 +12,18 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.v4.view.GravityCompat;
 import android.view.Gravity;
 
+import com.galou.mynews.R;
 import com.galou.mynews.controllers.activities.MainActivity;
+import com.galou.mynews.models.Section;
+import com.galou.mynews.utils.ApiStreams;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -54,8 +60,6 @@ public class MainActivityInstrumentedTest {
         onView(isRoot()).perform(ViewActions.pressBack());
         //onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)));
     }
-
-
 
 
 }

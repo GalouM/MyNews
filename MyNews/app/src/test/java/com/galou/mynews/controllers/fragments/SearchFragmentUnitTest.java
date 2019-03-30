@@ -1,19 +1,13 @@
 package com.galou.mynews.controllers.fragments;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.activities.NotificationsActivity;
 import com.galou.mynews.controllers.activities.SearchActivity;
-import com.galou.mynews.controllers.dialogs.PickDateDialog;
-import com.galou.mynews.controllers.fragments.SearchFragment;
 
 import junit.framework.TestCase;
 
@@ -23,8 +17,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowDatePickerDialog;
-import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -33,10 +25,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -128,7 +116,7 @@ public class SearchFragmentUnitTest {
         CheckBox politicsCheck = activity.findViewById(R.id.search_item_politics);
         politicsCheck.setChecked(false);
         CheckBox sportCheck = activity.findViewById(R.id.search_item_sport);
-        sportCheck.setChecked(false);
+        sportCheck.setChecked(true);
         CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
         travelCheck.setChecked(false);
         searchButton.performClick();
@@ -137,6 +125,8 @@ public class SearchFragmentUnitTest {
         querySections.add(artCheck.getText().toString());
         querySections.add(businessCheck.getText().toString());
         querySections.add(entrepreneurCheck.getText().toString());
+        querySections.add(sportCheck.getText().toString());
+
 
         String[] queryTermList = {"test", "test2"};
 

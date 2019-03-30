@@ -61,4 +61,22 @@ dependencies {
     // ROBOELECTRIC
     testImplementation 'org.robolectric:robolectric:4.2'
 
+    // MOCK WEB SERVER FOR TESTING
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.0'
+
+    //GSON
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    // RETROFIT
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    // RxJAVA
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    //MOCKITO
+    testImplementation 'org.mockito:mockito-core:2.20.0'
+
 }

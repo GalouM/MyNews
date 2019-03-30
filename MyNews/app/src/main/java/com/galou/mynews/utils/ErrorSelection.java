@@ -1,4 +1,4 @@
-package com.galou.mynews.models;
+package com.galou.mynews.utils;
 
 /**
  * Created by galou on 2019-03-21

@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.dialogs.PickDateDialog;
-import com.galou.mynews.models.ErrorSelection;
+import com.galou.mynews.utils.ErrorSelection;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

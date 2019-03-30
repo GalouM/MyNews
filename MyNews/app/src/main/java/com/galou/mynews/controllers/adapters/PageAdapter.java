@@ -52,7 +52,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return "MOST POPULAR";
             case 2:
-                return "SPORT";
+                return "SPORTS";
             default:
                 return null;
         }
