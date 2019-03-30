@@ -55,6 +55,10 @@
     <string name="missing_term_message">Please enter a query term</string>
     <string name="missing_section_title">Missing Section</string>
     <string name="missing_section_message">Please select at least one section</string>
+    <string name="error_message_end_date">End date incorrect</string>
+    <string name="error_message_query_empty">Field can\'t be empty</string>
+    <string name="error_message_query_incorrect">Cannot contains any special characters</string>
+    <string name="error_message_no_section_selected">Select at least one section</string>
 
 
 </resources>

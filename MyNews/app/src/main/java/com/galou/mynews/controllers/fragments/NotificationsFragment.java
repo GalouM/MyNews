@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
 
 import com.galou.mynews.R;
-import com.galou.mynews.utils.ErrorSelection;
 
 import java.util.List;
 
@@ -55,15 +54,9 @@ public class NotificationsFragment extends BaseFragmentSearch {
         mCallback.onButtonNotificationClicked(isNotificationOn);
     }
 
-    private Boolean isAllDataCorrect() {
-        if (queryTerms.length() <=0) {
-            this.showAlertDialog(ErrorSelection.TERM);
-            return false;
-        } else if(isQueryTermIncorrect()){
-            this.showAlertDialog(ErrorSelection.INCORRECT_TERM);
-            return false;
-        } else if (querySections.isEmpty()) {
-            this.showAlertDialog(ErrorSelection.SECTION);
+    @Override
+    protected Boolean isAllDataCorrect() {
+        if (!isQueryTermCorrect() | !isQueryTermEnter() | !isOneSectionSelected()){
             return false;
         } else {
             return true;

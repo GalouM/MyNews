@@ -2,6 +2,7 @@ package com.galou.mynews.controllers.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
 import android.widget.CheckBox;
@@ -40,6 +41,8 @@ public class NotificationFragmentUnitTest {
     private EditText queryTerm;
     private NotificationsFragment fragment;
     private FragmentManager fragmentManager;
+    private TextInputLayout queryTermInputLayout;
+    private TextInputLayout querySectionInputLayout;
 
 
     @Before
@@ -50,36 +53,29 @@ public class NotificationFragmentUnitTest {
         fragment = new NotificationsFragment();
         queryTerm = activity.findViewById(R.id.query_term);
         notificationEnabled.setChecked(false);
+        queryTermInputLayout = (TextInputLayout) activity.findViewById(R.id.query_sections_input_layout);
+        querySectionInputLayout = (TextInputLayout) activity.findViewById(R.id.query_sections_input_layout);
     }
 
+
     @Test
-    public void noQueryTermEnterShowDialog() throws Exception {
+    public void noQueryTermShowErrorMessage() throws Exception {
         queryTerm.setText("");
         notificationEnabled.performClick();
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
-        ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
-        assertTrue(dialog.isShowing());
-        assertEquals(activity.getString(R.string.missing_term_message), shadowAlertDialog.getMessage().toString());
-        assertEquals(activity.getString(R.string.missing_query_term_title), shadowAlertDialog.getTitle());
-        assertFalse(notificationEnabled.isChecked());
+        assertTrue(queryTermInputLayout.isErrorEnabled());
     }
 
     @Test
-    public void queryTermIncorrectEnterShowDialog() throws Exception {
+    public void queryTermIncorrectShowErrorMessage() throws Exception {
         queryTerm.setText("$!@");
         notificationEnabled.performClick();
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
-        ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
-        assertTrue(dialog.isShowing());
-        assertEquals(activity.getString(R.string.incorrect_term_message), shadowAlertDialog.getMessage().toString());
-        assertEquals(activity.getString(R.string.incorrect_term), shadowAlertDialog.getTitle());
-        assertFalse(notificationEnabled.isChecked());
+        assertTrue(queryTermInputLayout.isErrorEnabled());
     }
 
     @Test
-    public void noSectionSelectedShowDialog() throws Exception {
+    public void noSectionSelectedShowErrorMessage() throws Exception {
         queryTerm.setText("test");
         CheckBox artCheck = activity.findViewById(R.id.search_item_art);
         artCheck.setChecked(false);
@@ -94,25 +90,8 @@ public class NotificationFragmentUnitTest {
         CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
         travelCheck.setChecked(false);
         notificationEnabled.performClick();
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
-        ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
-        assertTrue(dialog.isShowing());
-        assertEquals(activity.getString(R.string.missing_section_message), shadowAlertDialog.getMessage().toString());
-        assertEquals(activity.getString(R.string.missing_section_title), shadowAlertDialog.getTitle());
-        assertFalse(notificationEnabled.isChecked());
-    }
-
-    @Test
-    public void clickOkButtonCancelDialog() throws Exception {
-        notificationEnabled.performClick();
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
-
-        assertTrue(dialog.isShowing());
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
-
-        assertFalse(dialog.isShowing());
-
+        assertTrue(querySectionInputLayout.isErrorEnabled());
     }
 
     @Test

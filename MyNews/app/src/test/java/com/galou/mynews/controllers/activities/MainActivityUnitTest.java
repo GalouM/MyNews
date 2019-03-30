@@ -83,7 +83,7 @@ public class MainActivityUnitTest {
     public void clickNavDrawerSport()throws Exception {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_sport));
 
-        assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "SPORT");
+        assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "SPORTS");
         assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), SportFragment.class.getName());
     }
 

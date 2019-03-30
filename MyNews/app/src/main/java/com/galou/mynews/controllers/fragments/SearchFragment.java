@@ -2,13 +2,13 @@ package com.galou.mynews.controllers.fragments;
 
 
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.dialogs.PickDateDialog;
-import com.galou.mynews.utils.ErrorSelection;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,6 +36,9 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     // views
     @BindView(R.id.search_fragment_start_begin_date) EditText beginDateUser;
     @BindView(R.id.search_fragment_search_end_date) EditText endDateUser;
+    @BindView(R.id.begin_date_input_layout) TextInputLayout beginDateInputLayout;
+    @BindView(R.id.end_date_input_layout) TextInputLayout endDateInputLayout;
+
 
     //for data
     private Calendar beginDate;
@@ -97,20 +100,23 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
         return (R.layout.fragment_search);
     }
 
-    private Boolean isAllDataCorrect(){
-        if (queryTerms.length() <= 0){
-            this.showAlertDialog(ErrorSelection.TERM);
-            return false;
-        } else if(isQueryTermIncorrect()){
-            this.showAlertDialog(ErrorSelection.INCORRECT_TERM);
-            return false;
-        } else if (querySections.isEmpty()){
-            this.showAlertDialog(ErrorSelection.SECTION);
-            return false;
-        } else if(isIncorrectEndDate()) {
-            this.showAlertDialog(ErrorSelection.INCORRECT_DATE);
+    @Override
+    protected Boolean isAllDataCorrect(){
+        if (!isQueryTermCorrect() | !isQueryTermEnter() | !isOneSectionSelected() | !isDateCorrect()){
             return false;
         } else {
+            return true;
+        }
+
+    }
+
+    private Boolean isDateCorrect(){
+        if(isIncorrectEndDate()) {
+            endDateInputLayout.setError(getString(R.string.error_message_end_date));
+            return false;
+        } else{
+            endDateInputLayout.setError(null);
+            endDateInputLayout.setErrorEnabled(false);
             return true;
         }
 

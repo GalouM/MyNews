@@ -2,6 +2,7 @@ package com.galou.mynews.controllers.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.design.widget.TextInputLayout;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -37,6 +38,10 @@ public class SearchFragmentUnitTest {
     private SearchActivity activity;
     private Button searchButton;
     private EditText queryTerm;
+    private TextInputLayout queryTermInputLayout;
+    private TextInputLayout querySectionInputLayout;
+    private TextInputLayout beginDateInputLayout;
+    private TextInputLayout endDateInputLayout;
 
 
     @Before
@@ -44,35 +49,30 @@ public class SearchFragmentUnitTest {
         activity = Robolectric.buildActivity(SearchActivity.class).create().resume().get();
         searchButton = activity.findViewById(R.id.search_fragment_search_button);
         queryTerm = activity.findViewById(R.id.query_term);
+        queryTermInputLayout = (TextInputLayout) activity.findViewById(R.id.query_sections_input_layout);
+        querySectionInputLayout = (TextInputLayout) activity.findViewById(R.id.query_sections_input_layout);
+        beginDateInputLayout = (TextInputLayout) activity.findViewById(R.id.begin_date_input_layout);
+        endDateInputLayout = (TextInputLayout) activity.findViewById(R.id.end_date_input_layout);
     }
 
     @Test
-    public void noQueryTermEnterShowDialog() throws Exception {
+    public void noQueryTermShowErrorMessage() throws Exception {
         queryTerm.setText("");
         searchButton.performClick();
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
-        ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
-        assertTrue(dialog.isShowing());
-        assertEquals(activity.getString(R.string.missing_term_message), shadowAlertDialog.getMessage().toString());
-        assertEquals(activity.getString(R.string.missing_query_term_title), shadowAlertDialog.getTitle());
+        assertTrue(queryTermInputLayout.isErrorEnabled());
     }
 
     @Test
-    public void queryTermIncorrectEnterShowDialog() throws Exception {
+    public void queryTermIncorrectShowErrorMessage() throws Exception {
         queryTerm.setText("$!@");
         searchButton.performClick();
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
-        ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
-        assertTrue(dialog.isShowing());
-        assertEquals(activity.getString(R.string.incorrect_term_message), shadowAlertDialog.getMessage().toString());
-        assertEquals(activity.getString(R.string.incorrect_term), shadowAlertDialog.getTitle());
+        assertTrue(queryTermInputLayout.isErrorEnabled());
     }
 
     @Test
-    public void noSectionSelectedShowDialog() throws Exception {
-        queryTerm.setText("test");
+    public void noSectionSelectedShowError() throws Exception {
         CheckBox artCheck = activity.findViewById(R.id.search_item_art);
         artCheck.setChecked(false);
         CheckBox businessCheck = activity.findViewById(R.id.search_item_business);
@@ -86,22 +86,8 @@ public class SearchFragmentUnitTest {
         CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
         travelCheck.setChecked(false);
         searchButton.performClick();
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
-        ShadowAlertDialog shadowAlertDialog = shadowOf(dialog);
 
-        assertTrue(dialog.isShowing());
-        assertEquals(activity.getString(R.string.missing_section_message), shadowAlertDialog.getMessage().toString());
-        assertEquals(activity.getString(R.string.missing_section_title), shadowAlertDialog.getTitle());
-    }
-
-    @Test
-    public void clickOkButtonCancelDialog() throws Exception {
-        searchButton.performClick();
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
-        assertTrue(dialog.isShowing());
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
-        assertFalse(dialog.isShowing());
-
+        assertTrue(querySectionInputLayout.isErrorEnabled());
     }
 
     @Test

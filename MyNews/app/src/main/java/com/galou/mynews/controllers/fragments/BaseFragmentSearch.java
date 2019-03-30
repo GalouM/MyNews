@@ -1,9 +1,8 @@
 package com.galou.mynews.controllers.fragments;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.utils.ErrorSelection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +27,7 @@ public abstract class BaseFragmentSearch extends Fragment {
 
     protected abstract int getFragmentLayout();
     protected abstract void createCallbackToParentActivity();
+    protected abstract Boolean isAllDataCorrect();
 
     // views
     @BindView(R.id.query_term) EditText userTerm;
@@ -38,6 +37,9 @@ public abstract class BaseFragmentSearch extends Fragment {
     @BindView(R.id.search_item_politics) CheckBox boxPolitics;
     @BindView(R.id.search_item_sport) CheckBox boxSport;
     @BindView(R.id.search_item_travel) CheckBox boxTravel;
+    @BindView(R.id.query_term_input_layout) TextInputLayout queryTermInputLayout;
+    @BindView(R.id.query_sections_input_layout) TextInputLayout querySectionInputLayout;
+
 
     //data
     protected String queryTerms;
@@ -100,34 +102,38 @@ public abstract class BaseFragmentSearch extends Fragment {
 
     }
 
-    protected void showAlertDialog(ErrorSelection errorSelection){
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        switch (errorSelection){
-            case TERM:
-                alertDialog.setTitle(getString(R.string.missing_query_term_title));
-                alertDialog.setMessage(getString(R.string.missing_term_message));
-                break;
-            case SECTION:
-                alertDialog.setTitle(getString(R.string.missing_section_title));
-                alertDialog.setMessage(getString(R.string.missing_section_message));
-                break;
-            case INCORRECT_DATE:
-                alertDialog.setTitle(getString(R.string.incorrect_date_title));
-                alertDialog.setMessage(getString(R.string.incorrect_date_message));
-                break;
-            case INCORRECT_TERM:
-                alertDialog.setTitle(getString(R.string.incorrect_term));
-                alertDialog.setMessage(getString(R.string.incorrect_term_message));
-                break;
+    protected Boolean isQueryTermEnter(){
+        if (queryTerms.length() <= 0) {
+            queryTermInputLayout.setError(getString(R.string.error_message_query_empty));
+            queryTermInputLayout.setErrorEnabled(true);
+            return false;
+        } else {
+            queryTermInputLayout.setError(null);
+            queryTermInputLayout.setErrorEnabled(false);
+            return true;
         }
+    }
 
-        alertDialog.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        alertDialog.show();
+    protected Boolean isQueryTermCorrect(){
+        if (isQueryTermIncorrect()){
+            queryTermInputLayout.setError(getString(R.string.error_message_query_incorrect));
+            return false;
+        } else {
+            queryTermInputLayout.setError(null);
+            queryTermInputLayout.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    protected Boolean isOneSectionSelected(){
+        if (querySections.isEmpty()){
+            querySectionInputLayout.setError(getString(R.string.error_message_no_section_selected));
+            return false;
+        } else {
+            querySectionInputLayout.setError(null);
+            queryTermInputLayout.setErrorEnabled(false);
+            return true;
+        }
     }
 
 }
