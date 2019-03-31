@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
+import com.galou.mynews.utils.TextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,21 +63,12 @@ public abstract class BaseFragmentSearch extends Fragment {
         this.createCallbackToParentActivity();
     }
 
+    // --------------
+    // SET DATA
+    // --------------
+
     protected void setQueryTerm(){
         queryTerms = userTerm.getText().toString();
-
-
-    }
-
-    protected boolean isQueryTermIncorrect(){
-        Pattern pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(queryTerms);
-        return matcher.find();
-
-    }
-
-    protected void separateQueryTerms(){
-        listQueryTerms = queryTerms.split("\\s+");
     }
 
     protected void setQuerySections(){
@@ -102,20 +94,16 @@ public abstract class BaseFragmentSearch extends Fragment {
 
     }
 
-    protected Boolean isQueryTermEnter(){
+    // --------------
+    // TEST FOR ERROR MESSAGE
+    // --------------
+
+    protected Boolean isQueryTermCorrect(){
         if (queryTerms.length() <= 0) {
             queryTermInputLayout.setError(getString(R.string.error_message_query_empty));
             queryTermInputLayout.setErrorEnabled(true);
             return false;
-        } else {
-            queryTermInputLayout.setError(null);
-            queryTermInputLayout.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    protected Boolean isQueryTermCorrect(){
-        if (isQueryTermIncorrect()){
+        } else if (TextUtil.isTextContainsSpecialCharacter(queryTerms)){
             queryTermInputLayout.setError(getString(R.string.error_message_query_incorrect));
             return false;
         } else {
@@ -131,9 +119,10 @@ public abstract class BaseFragmentSearch extends Fragment {
             return false;
         } else {
             querySectionInputLayout.setError(null);
-            queryTermInputLayout.setErrorEnabled(false);
+            querySectionInputLayout.setErrorEnabled(false);
             return true;
         }
     }
+
 
 }

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
 
 import com.galou.mynews.R;
+import com.galou.mynews.utils.TextUtil;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class NotificationsFragment extends BaseFragmentSearch {
             if (!isAllDataCorrect()) {
                 switchNotification.setChecked(false);
             } else {
-                separateQueryTerms();
+                listQueryTerms = TextUtil.separateTextBySpace(queryTerms);
                 mCallback.onNotificationActivated(listQueryTerms, querySections);
             }
         }
@@ -56,11 +57,7 @@ public class NotificationsFragment extends BaseFragmentSearch {
 
     @Override
     protected Boolean isAllDataCorrect() {
-        if (!isQueryTermCorrect() | !isQueryTermEnter() | !isOneSectionSelected()){
-            return false;
-        } else {
-            return true;
-        }
+        return  !(!isQueryTermCorrect() | !isOneSectionSelected());
     }
 
     // --------------

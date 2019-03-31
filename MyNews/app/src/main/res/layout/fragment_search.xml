@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="@dimen/big_margin"
     tools:context="com.galou.mynews.controllers.fragments.SearchFragment">
 
     <include
@@ -16,22 +15,12 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/small_margin">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/begin_date"/>
-
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/begin_date_input_layout"
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 app:errorEnabled="true">
 
@@ -41,28 +30,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="date"
-                    android:focusable="false"
-                    android:textSize="@dimen/text_date_size"
-                    android:labelFor="@string/begin_date"/>
+                    android:hint="@string/begin_date"
+                    android:textSize="@dimen/text_date_size"/>
             </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/end_date"/>
 
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/end_date_input_layout"
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 app:errorEnabled="true">
 
@@ -72,11 +50,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="date"
-                    android:focusable="false"
-                    android:textSize="@dimen/text_date_size"
-                    android:labelFor="@string/end_date" />
+                    android:hint="@string/end_date"
+                    android:textSize="@dimen/text_date_size" />
             </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
+
 
 
 

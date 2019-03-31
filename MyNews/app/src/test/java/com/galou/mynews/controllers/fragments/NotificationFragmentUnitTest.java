@@ -53,7 +53,7 @@ public class NotificationFragmentUnitTest {
         fragment = new NotificationsFragment();
         queryTerm = activity.findViewById(R.id.query_term);
         notificationEnabled.setChecked(false);
-        queryTermInputLayout = (TextInputLayout) activity.findViewById(R.id.query_sections_input_layout);
+        queryTermInputLayout = (TextInputLayout) activity.findViewById(R.id.query_term_input_layout);
         querySectionInputLayout = (TextInputLayout) activity.findViewById(R.id.query_sections_input_layout);
     }
 

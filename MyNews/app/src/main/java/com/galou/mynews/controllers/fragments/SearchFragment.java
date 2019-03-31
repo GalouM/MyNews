@@ -9,14 +9,20 @@ import android.widget.EditText;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.dialogs.PickDateDialog;
+import com.galou.mynews.utils.DateUtil;
+import com.galou.mynews.utils.TextUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.galou.mynews.utils.DateUtil.convertCalendarForAPI;
+import static com.galou.mynews.utils.DateUtil.convertCalendarForDisplay;
+import static com.galou.mynews.utils.DateUtil.convertUserDateToCalendar;
+import static com.galou.mynews.utils.DateUtil.isDateAfterToday;
+import static com.galou.mynews.utils.DateUtil.isEndDateBeforeBeginDate;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,10 +50,6 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     private Calendar beginDate;
     private Calendar endDate;
 
-    public static final SimpleDateFormat DATE_FORMAT_API =
-            new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
-    public static final SimpleDateFormat DATE_FORMAT_DISPLAY =
-            new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
     public static final int DIALOG_CODE = 12345;
 
     // --------------
@@ -59,13 +61,15 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
         this.setQueryTerm();
         this.setQuerySections();
         if (isAllDataCorrect()){
-            separateQueryTerms();
+            listQueryTerms = TextUtil.separateTextBySpace(queryTerms);
             sentDataToActivity();
         }
     }
 
     @OnClick({R.id.search_fragment_start_begin_date, R.id.search_fragment_search_end_date})
     public void onClickDate(final View view){
+        beginDate = convertUserDateToCalendar(beginDateUser.getText().toString());
+        endDate = convertUserDateToCalendar(endDateUser.getText().toString());
         PickDateDialog datePickerDialog = new PickDateDialog();
         datePickerDialog.setTargetFragment(this, DIALOG_CODE);
         datePickerDialog.setViewId(view);
@@ -82,11 +86,9 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
     public void onOkButtonListener(Calendar calendar, View view) {
         if(view == beginDateUser){
             beginDateUser.setText(convertCalendarForDisplay(calendar));
-            this.beginDate = calendar;
         }
         if(view == endDateUser){
             endDateUser.setText(convertCalendarForDisplay(calendar));
-            this.endDate = calendar;
         }
 
     }
@@ -100,25 +102,56 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
         return (R.layout.fragment_search);
     }
 
-    @Override
-    protected Boolean isAllDataCorrect(){
-        if (!isQueryTermCorrect() | !isQueryTermEnter() | !isOneSectionSelected() | !isDateCorrect()){
-            return false;
-        } else {
-            return true;
-        }
+    // --------------
+    // TEST FOR ERROR MESSAGE
+    // --------------
 
+
+    private Boolean isBeginDateCorrect(){
+        beginDate = convertUserDateToCalendar(beginDateUser.getText().toString());
+        if (beginDateUser.getText().length() > 0) {
+            if (beginDate == null) {
+                beginDateInputLayout.setError(getString(R.string.error_message_format_date));
+                return false;
+            } else if (isDateAfterToday(beginDate)) {
+                beginDateInputLayout.setError(getString(R.string.error_message_date_in_future));
+            } else {
+                beginDateInputLayout.setError(null);
+                beginDateInputLayout.setErrorEnabled(false);
+                return true;
+            }
+        }
+        return true;
     }
 
-    private Boolean isDateCorrect(){
-        if(isIncorrectEndDate()) {
-            endDateInputLayout.setError(getString(R.string.error_message_end_date));
-            return false;
-        } else{
-            endDateInputLayout.setError(null);
-            endDateInputLayout.setErrorEnabled(false);
-            return true;
+    private Boolean isEndDateCorrect(){
+        endDate = convertUserDateToCalendar(endDateUser.getText().toString());
+        if (endDateUser.getText().length() > 0) {
+            if (endDate == null) {
+                endDateInputLayout.setError(getString(R.string.error_message_format_date));
+                return false;
+            } else if (isEndDateBeforeBeginDate(beginDate, endDate)) {
+                endDateInputLayout.setError(getString(R.string.error_message_end_date_before_begin));
+                return false;
+            } else if (isDateAfterToday(endDate)) {
+                endDateInputLayout.setError(getString(R.string.error_message_date_in_future));
+                return false;
+            } else {
+                endDateInputLayout.setError(null);
+                endDateInputLayout.setErrorEnabled(false);
+                return true;
+            }
         }
+        return true;
+    }
+
+    // --------------
+    // UTILS
+    // --------------
+
+    @Override
+    protected Boolean isAllDataCorrect(){
+        return !(!isQueryTermCorrect() | !isOneSectionSelected() | !isBeginDateCorrect() | !isEndDateCorrect());
 
     }
 
@@ -135,26 +168,6 @@ public class SearchFragment extends BaseFragmentSearch implements PickDateDialog
 
     }
 
-
-    // --------------
-    // UTILS
-    // --------------
-
-    private Boolean isIncorrectEndDate(){
-        if(endDateUser.getText().length() > 0 && beginDateUser.getText().length() > 0) {
-            return (endDate.getTime().before(beginDate.getTime()));
-        } else {
-            return false;
-        }
-    }
-
-    private String convertCalendarForDisplay(Calendar calendar){
-        return DATE_FORMAT_DISPLAY.format(calendar.getTime());
-    }
-
-    private String convertCalendarForAPI(Calendar calendar){
-        return DATE_FORMAT_API.format(calendar.getTime());
-    }
 
     // --------------
     // FRAGMENT SUPPORT

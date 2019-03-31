@@ -46,19 +46,13 @@
     <string name="begin_date">Begin Date</string>
     <string name="search_query_term">Search query term</string>
 
-    <!-- Alert Dialog Messages and Titles -->
-    <string name="incorrect_date_title">Incorrect Date</string>
-    <string name="incorrect_date_message">Please select an end date after the begin date</string>
-    <string name="incorrect_term">No Special Character</string>
-    <string name="incorrect_term_message">Please use only letters for your query terms</string>
-    <string name="missing_query_term_title">Missing Query Term</string>
-    <string name="missing_term_message">Please enter a query term</string>
-    <string name="missing_section_title">Missing Section</string>
-    <string name="missing_section_message">Please select at least one section</string>
-    <string name="error_message_end_date">End date incorrect</string>
+    <!-- Error Message -->
+    <string name="error_message_end_date_before_begin">Has to be after begin date</string>
     <string name="error_message_query_empty">Field can\'t be empty</string>
-    <string name="error_message_query_incorrect">Cannot contains any special characters</string>
+    <string name="error_message_query_incorrect">Cannot contains special characters</string>
     <string name="error_message_no_section_selected">Select at least one section</string>
+    <string name="error_message_format_date">Format has to be MM/DD/YYYY</string>
+    <string name="error_message_date_in_future">Cannot be in the future</string>
 
 
 </resources>
