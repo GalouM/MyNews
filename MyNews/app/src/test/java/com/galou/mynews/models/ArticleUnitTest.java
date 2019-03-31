@@ -66,4 +66,18 @@ public class ArticleUnitTest {
 
         assertEquals(article.getMedia(), listMedia);
     }
+
+    @Test
+    public void testFacetIsCorrect() throws Exception {
+        String facet = "test";
+        String facet1 = "test";
+
+        List<String> listFacet = new ArrayList<>();
+        listFacet.add(facet);
+        listFacet.add(facet1);
+        article.setDesFacet(listFacet);
+
+        assertEquals(article.getDesFacet(), listFacet);
+
+    }
 }

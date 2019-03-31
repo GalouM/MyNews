@@ -361,5 +361,31 @@ public class SearchFragmentUnitTest {
 
     }
 
+    @Test
+    public void existingBeginDateSetDatePicker() throws Exception{
+        String date = "03/03/2019";
+        beginDate.setText(date);
+        beginDate.performClick();
+        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
+        Button buttonOK = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        buttonOK.performClick();
+
+        assertEquals(date, beginDate.getText().toString());
+
+    }
+
+    @Test
+    public void existingEndDateSetDatePicker() throws Exception{
+        String date = "03/03/2019";
+        endDate.setText(date);
+        endDate.performClick();
+        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
+        Button buttonOK = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        buttonOK.performClick();
+
+        assertEquals(date, endDate.getText().toString());
+
+    }
+
 
 }
