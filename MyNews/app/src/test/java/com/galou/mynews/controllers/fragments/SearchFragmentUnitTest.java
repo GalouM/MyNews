@@ -1,6 +1,7 @@
 package com.galou.mynews.controllers.fragments;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.support.design.widget.TextInputLayout;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 
 import com.galou.mynews.R;
 import com.galou.mynews.controllers.activities.SearchActivity;
+import com.galou.mynews.controllers.dialogs.PickDateDialog;
 
 import junit.framework.TestCase;
 
@@ -18,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlertDialog;
+import org.robolectric.shadows.ShadowDatePickerDialog;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ import java.util.List;
 import static com.galou.mynews.utils.DateUtil.convertCalendarForDisplay;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
@@ -305,5 +309,57 @@ public class SearchFragmentUnitTest {
         assertFalse(beginDateInputLayout.isErrorEnabled());
         assertNull(endDateInputLayout.getError());
     }
+
+    @Test
+    public void clickBeginDateOpenDialog() throws Exception{
+        beginDate.performClick();
+        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
+
+        assertNotNull(alertDialog);
+
+    }
+
+    @Test
+    public void clickEndDateOpenDialog() throws Exception{
+        endDate.performClick();
+        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
+
+        assertNotNull(alertDialog);
+
+    }
+
+    @Test
+    public void clickCancelDialogCloseDialog() throws Exception{
+        endDate.performClick();
+        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
+        Button buttonCancel = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        buttonCancel.performClick();
+
+        assertFalse(alertDialog.isShowing());
+
+    }
+
+    @Test
+    public void clickOkDialogEndDateFillEnDate() throws Exception{
+        endDate.performClick();
+        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
+        Button buttonOK = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        buttonOK.performClick();
+
+        assertTrue(endDate.getText().length() > 0);
+
+    }
+
+    @Test
+    public void clickOkDialogBeginDateFillEnDate() throws Exception{
+        beginDate.performClick();
+        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
+        Button buttonOK = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        buttonOK.performClick();
+
+        assertTrue(beginDate.getText().length() > 0);
+
+    }
+
 
 }
