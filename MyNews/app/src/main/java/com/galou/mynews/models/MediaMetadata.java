@@ -26,14 +26,6 @@ public class MediaMetadata {
         this.url = url;
     }
 
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
     public long getHeight() {
         return height;
     }

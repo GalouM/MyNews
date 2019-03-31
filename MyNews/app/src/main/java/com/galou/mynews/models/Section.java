@@ -19,21 +19,6 @@ public class Section {
     @Expose
     private List<Article> results = null;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getCopyright() {
-        return copyright;
-    }
-
-    public void setCopyright(String copyright) {
-        this.copyright = copyright;
-    }
 
     public long getNumResults() {
         return numResults;

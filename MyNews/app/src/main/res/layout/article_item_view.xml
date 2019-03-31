@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="@dimen/small_margin">
+
+    <ImageView
+        android:id="@+id/recycler_view_image_article"
+        android:layout_width="80dip"
+        android:layout_height="80dip" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/small_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/recycler_view_section_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Europe > France"
+                android:layout_weight="1"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/recycler_view_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09/09/19" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:text="Hackers came but the French were prepared"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+</LinearLayout>

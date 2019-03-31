@@ -72,21 +72,6 @@ public class Article {
         this.url = url;
     }
 
-    public String getAdxKeywords() {
-        return adxKeywords;
-    }
-
-    public void setAdxKeywords(String adxKeywords) {
-        this.adxKeywords = adxKeywords;
-    }
-
-    public Object getColumn() {
-        return column;
-    }
-
-    public void setColumn(Object column) {
-        this.column = column;
-    }
 
     public String getSection() {
         return section;
@@ -94,22 +79,6 @@ public class Article {
 
     public void setSection(String section) {
         this.section = section;
-    }
-
-    public String getByline() {
-        return byline;
-    }
-
-    public void setByline(String byline) {
-        this.byline = byline;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getTitle() {
@@ -120,9 +89,6 @@ public class Article {
         this.title = title;
     }
 
-    public String getAbstract() {
-        return _abstract;
-    }
 
     public List<String> getDesFacet() {
         return desFacet;
@@ -130,10 +96,6 @@ public class Article {
 
     public void setDesFacet(List<String> desFacet) {
         this.desFacet = desFacet;
-    }
-
-    public void setAbstract(String _abstract) {
-        this._abstract = _abstract;
     }
 
     public String getPublishedDate() {
@@ -144,37 +106,6 @@ public class Article {
         this.publishedDate = publishedDate;
     }
 
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getAssetId() {
-        return assetId;
-    }
-
-    public void setAssetId(long assetId) {
-        this.assetId = assetId;
-    }
-
-    public long getViews() {
-        return views;
-    }
-
-    public void setViews(long views) {
-        this.views = views;
-    }
 
     public List<Media> getMedia() {
         return media;
@@ -184,12 +115,5 @@ public class Article {
         this.media = media;
     }
 
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
 
 }

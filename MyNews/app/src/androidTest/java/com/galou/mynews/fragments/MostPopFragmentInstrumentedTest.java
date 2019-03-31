@@ -2,15 +2,22 @@ package com.galou.mynews.fragments;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import com.galou.mynews.controllers.adapters.ArticleAdapter;
+import com.galou.mynews.models.Article;
 import com.galou.mynews.models.Section;
 import com.galou.mynews.utils.ApiStreams;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 /**
@@ -18,6 +25,14 @@ import static org.junit.Assert.assertFalse;
  */
 @RunWith(AndroidJUnit4.class)
 public class MostPopFragmentInstrumentedTest {
+    private ArticleAdapter adapter;
+    private List<Article> listArticle;
+
+    @Before
+    public void setup(){
+        listArticle = new ArrayList<>();
+    }
+
     @Test
     public void fetchAPIGetListArticles() throws Exception {
         Observable<Section> observable = ApiStreams.streamsFetchMostPopSection();
@@ -30,6 +45,25 @@ public class MostPopFragmentInstrumentedTest {
         Section sectionFetched = testObserver.values().get(0);
 
         assertFalse(sectionFetched.getResults().isEmpty());
+
+    }
+
+    @Test
+    public void numberItemInRecyclerViewIEqualToNumberArticleFromAPI(){
+        Observable<Section> observable = ApiStreams.streamsFetchMostPopSection();
+        TestObserver<Section> testObserver = new TestObserver<>();
+        observable.subscribeWith(testObserver)
+                .assertNoErrors()
+                .assertNoTimeout()
+                .awaitTerminalEvent();
+
+        Section sectionFetched = testObserver.values().get(0);
+
+        listArticle.addAll(sectionFetched.getResults());
+
+        adapter = new ArticleAdapter(listArticle);
+
+        assertEquals(sectionFetched.getResults().size(), adapter.getItemCount());
 
     }
 }
