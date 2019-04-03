@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.activities;
+package com.galou.mynews.consultArticles;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,38 +9,47 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.adapters.PageAdapter;
+import com.galou.mynews.searchNotification.NotificationsActivity;
+import com.galou.mynews.searchNotification.SearchActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     // Views
     @BindView(R.id.main_activity_viewpager) ViewPager viewpager;
     @BindView(R.id.main_activity_tabs) TabLayout tabLayout;
     @BindView(R.id.main_activity_drawer) DrawerLayout drawerLayout;
     @BindView(R.id.main_activity_nav_view) NavigationView navigationView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        this.configureToolbar();
         this.configureViewPagerAndTabs();
         this.configureDrawerLayout();
         this.configureNavigationView();
     }
 
-    @Override
-    protected int getActivityLayout() {
-        return R.layout.activity_main;
-    }
-
     // -------------------
     // CONFIGURATION
     // -------------------
+
+    protected void configureToolbar(){
+        setSupportActionBar(toolbar);
+
+    }
     private void configureViewPagerAndTabs(){
         viewpager.setAdapter(new PageAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewpager);

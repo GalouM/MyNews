@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.fragments;
+package com.galou.mynews.consultArticles;
 
 
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.adapters.ArticleAdapter;
+import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.Article;
+import com.galou.mynews.models.ArticleAdapter;
 import com.galou.mynews.models.Section;
-import com.galou.mynews.utils.ApiStreams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import io.reactivex.observers.DisposableObserver;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MostPopFragment extends Fragment {
+public class MostPopularView extends Fragment {
 
     private List<Article> articles;
     private ArticleAdapter adapter;
@@ -35,10 +35,10 @@ public class MostPopFragment extends Fragment {
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
 
-    public MostPopFragment() {}
+    public MostPopularView() {}
 
-    public static MostPopFragment newInstance(){
-        return (new MostPopFragment());
+    public static MostPopularView newInstance(){
+        return (new MostPopularView());
     }
 
 

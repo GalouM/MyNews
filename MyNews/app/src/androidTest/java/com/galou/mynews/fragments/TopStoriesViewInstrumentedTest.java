@@ -3,7 +3,7 @@ package com.galou.mynews.fragments;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.galou.mynews.models.Section;
-import com.galou.mynews.utils.ApiStreams;
+import com.galou.mynews.models.ApiStreams;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +17,10 @@ import static org.junit.Assert.assertFalse;
  * Created by galou on 2019-03-30
  */
 @RunWith(AndroidJUnit4.class)
-public class SearchFragmentInstrumentedTest {
+public class TopStoriesViewInstrumentedTest {
     @Test
     public void fetchAPIGetListArticles() throws Exception {
-        Observable<Section> observable = ApiStreams.streamFetchTopStories("sports");
+        Observable<Section> observable = ApiStreams.streamFetchTopStories("home");
         TestObserver<Section> testObserver = new TestObserver<>();
         observable.subscribeWith(testObserver)
                 .assertNoErrors()

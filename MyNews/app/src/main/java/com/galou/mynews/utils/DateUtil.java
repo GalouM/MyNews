@@ -1,7 +1,5 @@
 package com.galou.mynews.utils;
 
-import android.widget.EditText;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

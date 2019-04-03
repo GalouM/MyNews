@@ -2,10 +2,10 @@ package com.galou.mynews.fragments;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import com.galou.mynews.controllers.adapters.ArticleAdapter;
+import com.galou.mynews.models.ArticleAdapter;
 import com.galou.mynews.models.Article;
 import com.galou.mynews.models.Section;
-import com.galou.mynews.utils.ApiStreams;
+import com.galou.mynews.models.ApiStreams;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertFalse;
  * Created by galou on 2019-03-30
  */
 @RunWith(AndroidJUnit4.class)
-public class MostPopFragmentInstrumentedTest {
+public class MostPopularViewInstrumentedTest {
     private ArticleAdapter adapter;
     private List<Article> listArticle;
 

@@ -1,8 +1,8 @@
 package com.galou.mynews.controllers.activities;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.activities.SearchActivity;
-import com.galou.mynews.controllers.fragments.SearchFragment;
+import com.galou.mynews.searchNotification.SearchActivity;
+import com.galou.mynews.searchNotification.SearchView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class SearchActivityUnitTest {
 
     @Test
     public void searchFragmentShouldBeVisible() throws Exception {
-        assertEquals(activity.getSupportFragmentManager().findFragmentById(R.id.search_activity_frame_layout).getClass().getName(), SearchFragment.class.getName());
+        assertEquals(activity.getSupportFragmentManager().findFragmentById(R.id.search_activity_frame_layout).getClass().getName(), SearchView.class.getName());
     }
 
     @Test

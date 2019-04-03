@@ -1,17 +1,16 @@
 package com.galou.mynews.controllers.activities;
 
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.activities.MainActivity;
-import com.galou.mynews.controllers.activities.NotificationsActivity;
-import com.galou.mynews.controllers.activities.SearchActivity;
-import com.galou.mynews.controllers.adapters.PageAdapter;
-import com.galou.mynews.controllers.fragments.MostPopFragment;
-import com.galou.mynews.controllers.fragments.SportFragment;
-import com.galou.mynews.controllers.fragments.TopStoriesFragment;
+import com.galou.mynews.consultArticles.MainActivity;
+import com.galou.mynews.consultArticles.MostPopularView;
+import com.galou.mynews.consultArticles.PageAdapter;
+import com.galou.mynews.consultArticles.SportsView;
+import com.galou.mynews.consultArticles.TopStoriesView;
+import com.galou.mynews.searchNotification.NotificationsActivity;
+import com.galou.mynews.searchNotification.SearchActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,8 +18,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.fakes.RoboMenuItem;
-
-import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -68,7 +65,7 @@ public class MainActivityUnitTest {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_top));
 
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "TOP STORIES");
-        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), TopStoriesFragment.class.getName());
+        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), TopStoriesView.class.getName());
     }
 
     @Test
@@ -76,7 +73,7 @@ public class MainActivityUnitTest {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_pop));
 
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "MOST POPULAR");
-        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), MostPopFragment.class.getName());
+        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), MostPopularView.class.getName());
     }
 
     @Test
@@ -84,7 +81,7 @@ public class MainActivityUnitTest {
         activity.onNavigationItemSelected(new RoboMenuItem(R.id.main_activity_drawer_sport));
 
         assertEquals(pageAdapter.getPageTitle(viewPager.getCurrentItem()), "SPORTS");
-        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), SportFragment.class.getName());
+        assertEquals(pageAdapter.getItem(viewPager.getCurrentItem()).getClass().getName(), SportsView.class.getName());
     }
 
     @Test

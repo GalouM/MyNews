@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.fragments;
+package com.galou.mynews.consultArticles;
 
 
 import android.os.Bundle;
@@ -12,13 +12,13 @@ import com.galou.mynews.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SportFragment extends Fragment {
+public class SportsView extends Fragment {
 
 
-    public SportFragment() {}
+    public SportsView() {}
 
-    public static SportFragment newInstance(){
-        return (new SportFragment());
+    public static SportsView newInstance(){
+        return (new SportsView());
     }
 
 

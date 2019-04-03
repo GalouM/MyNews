@@ -3,7 +3,7 @@ package com.galou.mynews.fragments;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.galou.mynews.models.Section;
-import com.galou.mynews.utils.ApiStreams;
+import com.galou.mynews.models.ApiStreams;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

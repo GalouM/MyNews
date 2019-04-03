@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.activities;
+package com.galou.mynews.searchNotification;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -18,6 +18,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
 
     protected abstract int getActivityLayout();
+    protected abstract void setPresenter();
+    protected abstract void configureAndShowFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getActivityLayout());
         ButterKnife.bind(this);
         this.configureToolbar();
+        this.configureAndShowFragment();
+        this.setPresenter();
     }
 
     // -------------------
@@ -33,9 +37,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void configureToolbar(){
         setSupportActionBar(toolbar);
-        if (getActivityLayout() != R.layout.activity_main) {
-            ActionBar ab = getSupportActionBar();
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
     }
+
 }

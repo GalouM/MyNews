@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.galou.mynews.controllers.fragments.SearchFragment">
+    tools:context="com.galou.mynews.searchNotification.SearchView">
 
     <include
         layout="@layout/search_query_term"/>

@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.fragments;
+package com.galou.mynews.searchNotification;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,12 +11,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.utils.TextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,11 +21,9 @@ import butterknife.ButterKnife;
 /**
  * Created by galou on 2019-03-21
  */
-public abstract class BaseFragmentSearch extends Fragment {
+public abstract class BaseView extends Fragment{
 
     protected abstract int getFragmentLayout();
-    protected abstract void createCallbackToParentActivity();
-    protected abstract Boolean isAllDataCorrect();
 
     // views
     @BindView(R.id.query_term) EditText userTerm;
@@ -44,10 +39,9 @@ public abstract class BaseFragmentSearch extends Fragment {
 
     //data
     protected String queryTerms;
-    protected String[] listQueryTerms;
     protected List<String> querySections;
 
-    protected BaseFragmentSearch(){}
+    protected BaseView(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +54,6 @@ public abstract class BaseFragmentSearch extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.createCallbackToParentActivity();
     }
 
     // --------------
@@ -94,35 +87,6 @@ public abstract class BaseFragmentSearch extends Fragment {
 
     }
 
-    // --------------
-    // TEST FOR ERROR MESSAGE
-    // --------------
-
-    protected Boolean isQueryTermCorrect(){
-        if (queryTerms.length() <= 0) {
-            queryTermInputLayout.setError(getString(R.string.error_message_query_empty));
-            queryTermInputLayout.setErrorEnabled(true);
-            return false;
-        } else if (TextUtil.isTextContainsSpecialCharacter(queryTerms)){
-            queryTermInputLayout.setError(getString(R.string.error_message_query_incorrect));
-            return false;
-        } else {
-            queryTermInputLayout.setError(null);
-            queryTermInputLayout.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    protected Boolean isOneSectionSelected(){
-        if (querySections.isEmpty()){
-            querySectionInputLayout.setError(getString(R.string.error_message_no_section_selected));
-            return false;
-        } else {
-            querySectionInputLayout.setError(null);
-            querySectionInputLayout.setErrorEnabled(false);
-            return true;
-        }
-    }
 
 
 }

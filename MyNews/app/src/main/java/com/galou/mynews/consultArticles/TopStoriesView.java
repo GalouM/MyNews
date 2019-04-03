@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.fragments;
+package com.galou.mynews.consultArticles;
 
 
 import android.os.Bundle;
@@ -12,15 +12,15 @@ import com.galou.mynews.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopStoriesFragment extends Fragment {
+public class TopStoriesView extends Fragment {
 
 
-    public TopStoriesFragment() {
+    public TopStoriesView() {
         // Required empty public constructor
     }
 
-    public static TopStoriesFragment newInstance(){
-        return (new TopStoriesFragment());
+    public static TopStoriesView newInstance(){
+        return (new TopStoriesView());
     }
 
 

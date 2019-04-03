@@ -1,7 +1,6 @@
 package com.galou.mynews.controllers.fragments;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.support.design.widget.TextInputLayout;
 import android.widget.Button;
@@ -9,8 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.activities.SearchActivity;
-import com.galou.mynews.controllers.dialogs.PickDateDialog;
+import com.galou.mynews.searchNotification.SearchActivity;
 
 import junit.framework.TestCase;
 
@@ -20,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowDatePickerDialog;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -40,7 +37,7 @@ import static org.robolectric.Shadows.shadowOf;
  * Created by galou on 2019-03-22
  */
 @RunWith(RobolectricTestRunner.class)
-public class SearchFragmentUnitTest {
+public class SearchViewUnitTest {
 
     private SearchActivity activity;
     private Button searchButton;

@@ -2,37 +2,26 @@ package com.galou.mynews.activities;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
-import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.view.GravityCompat;
 import android.view.Gravity;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.activities.MainActivity;
-import com.galou.mynews.models.Section;
-import com.galou.mynews.utils.ApiStreams;
+import com.galou.mynews.consultArticles.MainActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import io.reactivex.Observable;
-import io.reactivex.observers.TestObserver;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
-import static org.junit.Assert.*;
 
 /**
  * Instrumented test, which will execute on an Android device.

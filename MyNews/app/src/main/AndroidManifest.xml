@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!-- MAIN ACTIVITY -->
-        <activity android:name=".controllers.activities.MainActivity">
+        <activity android:name=".consultArticles.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,15 +22,15 @@
 
         <!-- SEARCH ACTIVITY -->
         <activity
-            android:name=".controllers.activities.SearchActivity"
+            android:name=".searchNotification.SearchActivity"
             android:label="@string/search_articles_name_activity"
-            android:parentActivityName=".controllers.activities.MainActivity" />
+            android:parentActivityName=".consultArticles.MainActivity" />
 
         <!-- NOTIFICATIONS ACTIVITY -->
         <activity
-            android:name=".controllers.activities.NotificationsActivity"
+            android:name=".searchNotification.NotificationsActivity"
             android:label="@string/notifications_articles_name_activity"
-            android:parentActivityName=".controllers.activities.MainActivity" />
+            android:parentActivityName=".consultArticles.MainActivity" />
 
     </application>
 

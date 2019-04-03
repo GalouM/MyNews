@@ -1,9 +1,4 @@
-package com.galou.mynews.utils;
-
-import com.galou.mynews.models.Article;
-import com.galou.mynews.models.Section;
-
-import java.util.List;
+package com.galou.mynews.models;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;

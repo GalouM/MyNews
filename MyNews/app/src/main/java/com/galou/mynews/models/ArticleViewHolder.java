@@ -1,4 +1,4 @@
-package com.galou.mynews.views;
+package com.galou.mynews.models;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

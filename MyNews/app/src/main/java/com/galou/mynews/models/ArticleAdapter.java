@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.adapters;
+package com.galou.mynews.models;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galou.mynews.R;
-import com.galou.mynews.models.Article;
-import com.galou.mynews.views.ArticleViewHolder;
 
 import java.util.List;
 

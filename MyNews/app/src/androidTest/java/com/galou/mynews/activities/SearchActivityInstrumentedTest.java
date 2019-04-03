@@ -6,7 +6,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.galou.mynews.controllers.activities.SearchActivity;
+import com.galou.mynews.searchNotification.SearchActivity;
 
 import org.junit.Before;
 import org.junit.Rule;

@@ -1,6 +1,5 @@
-package com.galou.mynews.controllers.dialogs;
+package com.galou.mynews.searchNotification;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -21,7 +20,7 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 /**
  * Created by galou on 2019-03-23
  */
-public class PickDateDialog extends DialogFragment implements DialogInterface.OnClickListener {
+public class PickDateView extends DialogFragment implements DialogInterface.OnClickListener {
 
     public interface OnOKButtonListener{
         void onOkButtonListener (Calendar calendar, View view);
@@ -29,7 +28,7 @@ public class PickDateDialog extends DialogFragment implements DialogInterface.On
 
     private OnOKButtonListener mCallback;
 
-    public static final String TAG = "PickDateDialog";
+    public static final String TAG = "PickDateView";
 
     //views
     private DatePicker datePicker;
@@ -39,7 +38,7 @@ public class PickDateDialog extends DialogFragment implements DialogInterface.On
     private View viewId;
     private Calendar existingDate;
 
-    public PickDateDialog() {}
+    public PickDateView() {}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

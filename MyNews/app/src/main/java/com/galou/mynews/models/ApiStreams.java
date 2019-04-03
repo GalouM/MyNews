@@ -1,13 +1,8 @@
-package com.galou.mynews.utils;
+package com.galou.mynews.models;
 
-import com.galou.mynews.models.Article;
-import com.galou.mynews.models.Section;
-
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

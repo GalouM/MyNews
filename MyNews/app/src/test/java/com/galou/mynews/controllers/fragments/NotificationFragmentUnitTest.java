@@ -1,7 +1,5 @@
 package com.galou.mynews.controllers.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
@@ -9,7 +7,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.controllers.activities.NotificationsActivity;
+import com.galou.mynews.searchNotification.NotificationsActivity;
+import com.galou.mynews.searchNotification.NotificationsView;
 
 import junit.framework.TestCase;
 
@@ -18,7 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class NotificationFragmentUnitTest {
     private NotificationsActivity activity;
     private SwitchCompat notificationEnabled;
     private EditText queryTerm;
-    private NotificationsFragment fragment;
+    private NotificationsView fragment;
     private FragmentManager fragmentManager;
     private TextInputLayout queryTermInputLayout;
     private TextInputLayout querySectionInputLayout;
@@ -50,7 +48,7 @@ public class NotificationFragmentUnitTest {
         activity = Robolectric.buildActivity(NotificationsActivity.class).create().resume().get();
         notificationEnabled = activity.findViewById(R.id.notification_fragment_switch);
         fragmentManager = (FragmentManager) activity.getSupportFragmentManager();
-        fragment = new NotificationsFragment();
+        fragment = new NotificationsView();
         queryTerm = activity.findViewById(R.id.query_term);
         notificationEnabled.setChecked(false);
         queryTermInputLayout = (TextInputLayout) activity.findViewById(R.id.query_term_input_layout);
