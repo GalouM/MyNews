@@ -23,7 +23,7 @@ import static com.galou.mynews.utils.TextUtil.isTextContainsSpecialCharacter;
  */
 public class SearchPresenter implements SearchContract.Presenter {
 
-    private SearchContract.ContractView searchView;
+    private SearchContract.View searchView;
     private Calendar beginDateCalendar;
     private Calendar endDateCalendar;
     private String beginDateApi;
@@ -35,7 +35,7 @@ public class SearchPresenter implements SearchContract.Presenter {
     private List<String> sections;
 
 
-    public SearchPresenter(@NonNull SearchContract.ContractView searchView) {
+    public SearchPresenter(@NonNull SearchContract.View searchView) {
         this.searchView = searchView;
         searchView.setPresenter(this);
 

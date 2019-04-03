@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.fragments;
+package com.galou.mynews.searchNotification;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -48,11 +48,18 @@ public class SearchViewUnitTest {
     private TextInputLayout querySectionInputLayout;
     private TextInputLayout beginDateInputLayout;
     private TextInputLayout endDateInputLayout;
+    private CheckBox artCheck;
+    private CheckBox businessCheck;
+    private CheckBox entrepreneurCheck;
+    private CheckBox politicsCheck;
+    private CheckBox sportCheck;
+    private CheckBox travelCheck;
 
 
     @Before
     public void setUp() throws Exception {
         activity = Robolectric.buildActivity(SearchActivity.class).create().resume().get();
+        //set views
         searchButton = activity.findViewById(R.id.search_fragment_search_button);
         queryTerm = (EditText) activity.findViewById(R.id.query_term);
         beginDate = (EditText) activity.findViewById(R.id.search_fragment_start_begin_date);
@@ -61,6 +68,21 @@ public class SearchViewUnitTest {
         querySectionInputLayout = (TextInputLayout) activity.findViewById(R.id.query_sections_input_layout);
         beginDateInputLayout = (TextInputLayout) activity.findViewById(R.id.begin_date_input_layout);
         endDateInputLayout = (TextInputLayout) activity.findViewById(R.id.end_date_input_layout);
+        artCheck = activity.findViewById(R.id.search_item_art);
+        businessCheck = activity.findViewById(R.id.search_item_business);
+        entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
+        politicsCheck = activity.findViewById(R.id.search_item_politics);
+        sportCheck = activity.findViewById(R.id.search_item_sport);
+        travelCheck = activity.findViewById(R.id.search_item_travel);
+
+        // set data correct
+        queryTerm.setText("test test2");
+        artCheck.setChecked(true);
+        businessCheck.setChecked(true);
+        entrepreneurCheck.setChecked(true);
+        politicsCheck.setChecked(false);
+        sportCheck.setChecked(true);
+        travelCheck.setChecked(false);
     }
 
     @Test
@@ -81,18 +103,11 @@ public class SearchViewUnitTest {
 
     @Test
     public void noSectionSelectedShowError() throws Exception {
-        CheckBox artCheck = activity.findViewById(R.id.search_item_art);
         artCheck.setChecked(false);
-        CheckBox businessCheck = activity.findViewById(R.id.search_item_business);
         businessCheck.setChecked(false);
-        CheckBox entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
         entrepreneurCheck.setChecked(false);
-        CheckBox politicsCheck = activity.findViewById(R.id.search_item_politics);
-        politicsCheck.setChecked(false);
-        CheckBox sportCheck = activity.findViewById(R.id.search_item_sport);
         sportCheck.setChecked(false);
-        CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
-        travelCheck.setChecked(false);
+
         searchButton.performClick();
 
         assertTrue(querySectionInputLayout.isErrorEnabled());
@@ -147,19 +162,6 @@ public class SearchViewUnitTest {
 
     @Test
     public void clickSearchAllDataCorrectWithNoDateStartSearch() throws Exception {
-        queryTerm.setText("test test2");
-        CheckBox artCheck = activity.findViewById(R.id.search_item_art);
-        artCheck.setChecked(true);
-        CheckBox businessCheck = activity.findViewById(R.id.search_item_business);
-        businessCheck.setChecked(true);
-        CheckBox entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
-        entrepreneurCheck.setChecked(true);
-        CheckBox politicsCheck = activity.findViewById(R.id.search_item_politics);
-        politicsCheck.setChecked(false);
-        CheckBox sportCheck = activity.findViewById(R.id.search_item_sport);
-        sportCheck.setChecked(true);
-        CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
-        travelCheck.setChecked(false);
         searchButton.performClick();
 
         List<String> querySections = new ArrayList<>();
@@ -186,19 +188,6 @@ public class SearchViewUnitTest {
 
     @Test
     public void clickSearchAllDataCorrectWithDateStartSearch() throws Exception {
-        queryTerm.setText("test test2");
-        CheckBox artCheck = activity.findViewById(R.id.search_item_art);
-        artCheck.setChecked(true);
-        CheckBox businessCheck = activity.findViewById(R.id.search_item_business);
-        businessCheck.setChecked(true);
-        CheckBox entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
-        entrepreneurCheck.setChecked(true);
-        CheckBox politicsCheck = activity.findViewById(R.id.search_item_politics);
-        politicsCheck.setChecked(false);
-        CheckBox sportCheck = activity.findViewById(R.id.search_item_sport);
-        sportCheck.setChecked(true);
-        CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
-        travelCheck.setChecked(false);
         beginDate.setText("03/03/2019");
         endDate.setText("03/04/2019");
         searchButton.performClick();
@@ -227,21 +216,7 @@ public class SearchViewUnitTest {
 
     @Test
     public void clickSearchAllDataCorrectWithNoBeginDateStartSearch() throws Exception {
-        queryTerm.setText("test test2");
-        CheckBox artCheck = activity.findViewById(R.id.search_item_art);
-        artCheck.setChecked(true);
-        CheckBox businessCheck = activity.findViewById(R.id.search_item_business);
-        businessCheck.setChecked(true);
-        CheckBox entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
-        entrepreneurCheck.setChecked(true);
-        CheckBox politicsCheck = activity.findViewById(R.id.search_item_politics);
-        politicsCheck.setChecked(false);
-        CheckBox sportCheck = activity.findViewById(R.id.search_item_sport);
-        sportCheck.setChecked(true);
-        CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
-        travelCheck.setChecked(false);
         endDate.setText("03/04/2019");
-        beginDate.setText("");
         searchButton.performClick();
 
         List<String> querySections = new ArrayList<>();
@@ -268,21 +243,7 @@ public class SearchViewUnitTest {
 
     @Test
     public void clickSearchAllDataCorrectWithEndStartSearch() throws Exception {
-        queryTerm.setText("test test2");
-        CheckBox artCheck = activity.findViewById(R.id.search_item_art);
-        artCheck.setChecked(true);
-        CheckBox businessCheck = activity.findViewById(R.id.search_item_business);
-        businessCheck.setChecked(true);
-        CheckBox entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
-        entrepreneurCheck.setChecked(true);
-        CheckBox politicsCheck = activity.findViewById(R.id.search_item_politics);
-        politicsCheck.setChecked(false);
-        CheckBox sportCheck = activity.findViewById(R.id.search_item_sport);
-        sportCheck.setChecked(true);
-        CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
-        travelCheck.setChecked(false);
         beginDate.setText("03/03/2019");
-        endDate.setText("");
         searchButton.performClick();
 
         List<String> querySections = new ArrayList<>();
@@ -306,6 +267,8 @@ public class SearchViewUnitTest {
         assertFalse(beginDateInputLayout.isErrorEnabled());
         assertNull(endDateInputLayout.getError());
     }
+
+    // test date dialogs
 
     @Test
     public void clickBeginDateOpenDialog() throws Exception{

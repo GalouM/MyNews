@@ -4,7 +4,6 @@ package com.galou.mynews.searchNotification;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,7 +20,7 @@ import static com.galou.mynews.utils.DateUtil.convertUserDateToCalendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchView extends BaseView implements PickDateView.OnOKButtonListener, SearchContract.ContractView {
+public class SearchView extends BaseView implements PickDateView.OnOKButtonListener, SearchContract.View {
 
     private SearchContract.Presenter presenter;
 
@@ -61,7 +60,7 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
     }
 
     @OnClick({R.id.search_fragment_start_begin_date, R.id.search_fragment_search_end_date})
-    public void onClickDate(final View view){
+    public void onClickDate(final android.view.View view){
         Calendar beginDate = convertUserDateToCalendar(beginDateUser.getText().toString());
         Calendar endDate = convertUserDateToCalendar(endDateUser.getText().toString());
         PickDateView datePickerDialog = new PickDateView();
@@ -77,7 +76,7 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
     }
 
     @Override
-    public void onOkButtonListener(Calendar calendar, View view) {
+    public void onOkButtonListener(Calendar calendar, android.view.View view) {
         if(view == beginDateUser){
             beginDateUser.setText(convertCalendarForDisplay(calendar));
         }

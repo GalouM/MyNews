@@ -19,9 +19,9 @@ public class NotificationPresenter implements NotificationContract.Presenter {
     private String queryTerm;
     private List<String> sections;
 
-    private NotificationContract.ContractView notificationView;
+    private NotificationContract.View notificationView;
 
-    public NotificationPresenter(@NonNull NotificationContract.ContractView notificationView) {
+    public NotificationPresenter(@NonNull NotificationContract.View notificationView) {
         this.notificationView = notificationView;
         this.notificationView.setPresenter(this);
     }

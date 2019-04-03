@@ -41,25 +41,4 @@ public class NotificationsActivityUnitTest {
         assertEquals(activity.getSupportFragmentManager().findFragmentById(R.id.notifications_activity_frame_layout).getClass().getName(), NotificationsView.class.getName());
     }
 
-    @Test
-    public void notificationDisabledShowToast() throws  Exception {
-        activity.onButtonNotificationClicked(false);
-
-        assertEquals(ShadowToast.getTextOfLatestToast(), "Notifications disabled");
-    }
-
-    @Test
-    public void notificationActivatedShowToast() throws  Exception {
-        String[] queryTerm = {"test","test2"};
-        List<String> querySections = new ArrayList<>();
-        querySections.add("test");
-        querySections.add("test2");
-        String messageToast = "Notifications enabled" + "\n"
-                + "Query Term: " + Arrays.toString(queryTerm) + "\n"
-                + "Sections: " + querySections;
-        activity.onNotificationActivated(queryTerm, querySections);
-
-        assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
-
-    }
 }

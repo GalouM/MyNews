@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.fragments;
+package com.galou.mynews.searchNotification;
 
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
@@ -32,27 +32,47 @@ import static org.robolectric.Shadows.shadowOf;
  * Created by galou on 2019-03-25
  */
 @RunWith(RobolectricTestRunner.class)
-public class NotificationFragmentUnitTest {
+public class NotificationViewUnitTest {
 
     private NotificationsActivity activity;
     private SwitchCompat notificationEnabled;
     private EditText queryTerm;
-    private NotificationsView fragment;
-    private FragmentManager fragmentManager;
     private TextInputLayout queryTermInputLayout;
     private TextInputLayout querySectionInputLayout;
+    private CheckBox artCheck;
+    private CheckBox businessCheck;
+    private CheckBox entrepreneurCheck;
+    private CheckBox politicsCheck;
+    private CheckBox sportCheck;
+    private CheckBox travelCheck;
 
 
     @Before
     public void setUp() throws Exception {
         activity = Robolectric.buildActivity(NotificationsActivity.class).create().resume().get();
         notificationEnabled = activity.findViewById(R.id.notification_fragment_switch);
-        fragmentManager = (FragmentManager) activity.getSupportFragmentManager();
-        fragment = new NotificationsView();
+
+        //find views
         queryTerm = activity.findViewById(R.id.query_term);
         notificationEnabled.setChecked(false);
         queryTermInputLayout = (TextInputLayout) activity.findViewById(R.id.query_term_input_layout);
         querySectionInputLayout = (TextInputLayout) activity.findViewById(R.id.query_sections_input_layout);
+        artCheck = activity.findViewById(R.id.search_item_art);
+        businessCheck = activity.findViewById(R.id.search_item_business);
+        entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
+        politicsCheck = activity.findViewById(R.id.search_item_politics);
+        sportCheck = activity.findViewById(R.id.search_item_sport);
+        travelCheck = activity.findViewById(R.id.search_item_travel);
+
+        // set data correct
+        queryTerm.setText("test test2");
+        artCheck.setChecked(true);
+        businessCheck.setChecked(true);
+        entrepreneurCheck.setChecked(true);
+        politicsCheck.setChecked(false);
+        sportCheck.setChecked(true);
+        travelCheck.setChecked(false);
+
     }
 
 
@@ -74,19 +94,10 @@ public class NotificationFragmentUnitTest {
 
     @Test
     public void noSectionSelectedShowErrorMessage() throws Exception {
-        queryTerm.setText("test");
-        CheckBox artCheck = activity.findViewById(R.id.search_item_art);
         artCheck.setChecked(false);
-        CheckBox businessCheck = activity.findViewById(R.id.search_item_business);
         businessCheck.setChecked(false);
-        CheckBox entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
         entrepreneurCheck.setChecked(false);
-        CheckBox politicsCheck = activity.findViewById(R.id.search_item_politics);
-        politicsCheck.setChecked(false);
-        CheckBox sportCheck = activity.findViewById(R.id.search_item_sport);
         sportCheck.setChecked(false);
-        CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
-        travelCheck.setChecked(false);
         notificationEnabled.performClick();
 
         assertTrue(querySectionInputLayout.isErrorEnabled());
@@ -94,32 +105,19 @@ public class NotificationFragmentUnitTest {
 
     @Test
     public void enableNotificationAllDataCorrect() throws Exception {
-        queryTerm.setText("test test2");
-        CheckBox artCheck = activity.findViewById(R.id.search_item_art);
-        artCheck.setChecked(true);
-        CheckBox businessCheck = activity.findViewById(R.id.search_item_business);
-        businessCheck.setChecked(true);
-        CheckBox entrepreneurCheck = activity.findViewById(R.id.search_item_entrepreneurs);
-        entrepreneurCheck.setChecked(true);
-        CheckBox politicsCheck = activity.findViewById(R.id.search_item_politics);
-        politicsCheck.setChecked(false);
-        CheckBox sportCheck = activity.findViewById(R.id.search_item_sport);
-        sportCheck.setChecked(false);
-        CheckBox travelCheck = activity.findViewById(R.id.search_item_travel);
-        travelCheck.setChecked(false);
         notificationEnabled.performClick();
 
         List<String> querySections = new ArrayList<>();
         querySections.add(artCheck.getText().toString());
         querySections.add(businessCheck.getText().toString());
         querySections.add(entrepreneurCheck.getText().toString());
+        querySections.add(sportCheck.getText().toString());
 
         String[] queryTermList = {"test", "test2"};
 
 
-        String messageToast = "Notifications enabled" + "\n"
-                + "Query Term: " + Arrays.toString(queryTermList) + "\n"
-                + "Sections: " + querySections;
+        String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
+                + "Section: " + querySections;
 
         TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
     }

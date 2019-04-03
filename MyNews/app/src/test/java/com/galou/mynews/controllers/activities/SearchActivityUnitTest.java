@@ -41,21 +41,4 @@ public class SearchActivityUnitTest {
         assertEquals(activity.getSupportFragmentManager().findFragmentById(R.id.search_activity_frame_layout).getClass().getName(), SearchView.class.getName());
     }
 
-    @Test
-    public void onSearchLaunchShowToast() throws  Exception {
-        String[] queryTerm = {"test","test2"};
-        List<String> querySections = new ArrayList<>();
-        querySections.add("test");
-        querySections.add("test2");
-        String beginDate = "20190303";
-        String endate = "20190304";
-        String messageToast = "Query Term: " + Arrays.toString(queryTerm) + "\n"
-                + "Begin Date: " + beginDate + "\n"
-                + "End Date: " + endate + "\n"
-                + "Section: " + querySections;
-        activity.onButtonSearchClicked(queryTerm, beginDate, endate, querySections);
-
-        assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
-
-    }
 }

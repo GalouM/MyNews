@@ -10,7 +10,7 @@ import java.util.List;
  * Created by galou on 2019-04-02
  */
 public interface SearchContract {
-    interface ContractView extends BaseContractView<Presenter> {
+    interface View extends BaseContractView<Presenter> {
         void showResultResearch(String searchTerms);
         void displayErrorQueryTerm(ErrorMessage errorMessage);
         void displayErrorSections(ErrorMessage errorMessage);

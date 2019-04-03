@@ -13,7 +13,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotificationsView extends BaseView implements NotificationContract.ContractView {
+public class NotificationsView extends BaseView implements NotificationContract.View {
 
     // --------------
 
