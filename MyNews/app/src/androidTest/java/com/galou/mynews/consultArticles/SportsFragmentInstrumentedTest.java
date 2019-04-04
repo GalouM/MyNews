@@ -1,4 +1,4 @@
-package com.galou.mynews.fragments;
+package com.galou.mynews.consultArticles;
 
 import android.support.test.runner.AndroidJUnit4;
 

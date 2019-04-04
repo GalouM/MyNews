@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.activities;
+package com.galou.mynews.consultArticles;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;

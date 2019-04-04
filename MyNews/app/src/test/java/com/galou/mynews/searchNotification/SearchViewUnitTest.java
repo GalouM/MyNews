@@ -15,6 +15,8 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlertDialog;
@@ -31,6 +33,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
 /**
@@ -40,6 +43,7 @@ import static org.robolectric.Shadows.shadowOf;
 public class SearchViewUnitTest {
 
     private SearchActivity activity;
+
     private Button searchButton;
     private EditText queryTerm;
     private EditText beginDate;
@@ -55,10 +59,14 @@ public class SearchViewUnitTest {
     private CheckBox sportCheck;
     private CheckBox travelCheck;
 
+    private  List<String> querySections;
+
 
     @Before
     public void setUp() throws Exception {
-        activity = Robolectric.buildActivity(SearchActivity.class).create().resume().get();
+        MockitoAnnotations.initMocks(this);
+        activity = Robolectric.buildActivity(SearchActivity.class).create().resume().get();;
+
         //set views
         searchButton = activity.findViewById(R.id.search_fragment_search_button);
         queryTerm = (EditText) activity.findViewById(R.id.query_term);
@@ -83,6 +91,12 @@ public class SearchViewUnitTest {
         politicsCheck.setChecked(false);
         sportCheck.setChecked(true);
         travelCheck.setChecked(false);
+
+        querySections = new ArrayList<>();
+        querySections.add(artCheck.getText().toString());
+        querySections.add(businessCheck.getText().toString());
+        querySections.add(entrepreneurCheck.getText().toString());
+        querySections.add(sportCheck.getText().toString());
     }
 
     @Test
@@ -107,10 +121,15 @@ public class SearchViewUnitTest {
         businessCheck.setChecked(false);
         entrepreneurCheck.setChecked(false);
         sportCheck.setChecked(false);
+        querySections.remove(3);
+        querySections.remove(2);
+        querySections.remove(1);
+        querySections.remove(0);
 
         searchButton.performClick();
 
         assertTrue(querySectionInputLayout.isErrorEnabled());
+
     }
 
     @Test
@@ -122,6 +141,7 @@ public class SearchViewUnitTest {
         searchButton.performClick();
 
         assertTrue(beginDateInputLayout.isErrorEnabled());
+
     }
 
     @Test
@@ -133,6 +153,7 @@ public class SearchViewUnitTest {
         searchButton.performClick();
 
         assertTrue(endDateInputLayout.isErrorEnabled());
+
     }
 
     @Test
@@ -141,6 +162,7 @@ public class SearchViewUnitTest {
         searchButton.performClick();
 
         assertTrue(beginDateInputLayout.isErrorEnabled());
+
     }
 
     @Test
@@ -149,6 +171,7 @@ public class SearchViewUnitTest {
         searchButton.performClick();
 
         assertTrue(endDateInputLayout.isErrorEnabled());
+
     }
 
     @Test
@@ -158,18 +181,12 @@ public class SearchViewUnitTest {
         searchButton.performClick();
 
         assertTrue(endDateInputLayout.isErrorEnabled());
+
     }
 
     @Test
     public void clickSearchAllDataCorrectWithNoDateStartSearch() throws Exception {
         searchButton.performClick();
-
-        List<String> querySections = new ArrayList<>();
-        querySections.add(artCheck.getText().toString());
-        querySections.add(businessCheck.getText().toString());
-        querySections.add(entrepreneurCheck.getText().toString());
-        querySections.add(sportCheck.getText().toString());
-
 
         String[] queryTermList = {"test", "test2"};
 
@@ -184,6 +201,7 @@ public class SearchViewUnitTest {
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertNull(beginDateInputLayout.getError());
         assertNull(endDateInputLayout.getError());
+
     }
 
     @Test
@@ -191,13 +209,6 @@ public class SearchViewUnitTest {
         beginDate.setText("03/03/2019");
         endDate.setText("03/04/2019");
         searchButton.performClick();
-
-        List<String> querySections = new ArrayList<>();
-        querySections.add(artCheck.getText().toString());
-        querySections.add(businessCheck.getText().toString());
-        querySections.add(entrepreneurCheck.getText().toString());
-        querySections.add(sportCheck.getText().toString());
-
 
         String[] queryTermList = {"test", "test2"};
 
@@ -212,19 +223,13 @@ public class SearchViewUnitTest {
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertFalse(beginDateInputLayout.isErrorEnabled());
         assertFalse(endDateInputLayout.isErrorEnabled());
+
     }
 
     @Test
     public void clickSearchAllDataCorrectWithNoBeginDateStartSearch() throws Exception {
         endDate.setText("03/04/2019");
         searchButton.performClick();
-
-        List<String> querySections = new ArrayList<>();
-        querySections.add(artCheck.getText().toString());
-        querySections.add(businessCheck.getText().toString());
-        querySections.add(entrepreneurCheck.getText().toString());
-        querySections.add(sportCheck.getText().toString());
-
 
         String[] queryTermList = {"test", "test2"};
 
@@ -239,19 +244,14 @@ public class SearchViewUnitTest {
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertNull(beginDateInputLayout.getError());
         assertFalse(endDateInputLayout.isErrorEnabled());
+
+
     }
 
     @Test
     public void clickSearchAllDataCorrectWithEndStartSearch() throws Exception {
         beginDate.setText("03/03/2019");
         searchButton.performClick();
-
-        List<String> querySections = new ArrayList<>();
-        querySections.add(artCheck.getText().toString());
-        querySections.add(businessCheck.getText().toString());
-        querySections.add(entrepreneurCheck.getText().toString());
-        querySections.add(sportCheck.getText().toString());
-
 
         String[] queryTermList = {"test", "test2"};
 
@@ -266,6 +266,7 @@ public class SearchViewUnitTest {
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertFalse(beginDateInputLayout.isErrorEnabled());
         assertNull(endDateInputLayout.getError());
+
     }
 
     // test date dialogs

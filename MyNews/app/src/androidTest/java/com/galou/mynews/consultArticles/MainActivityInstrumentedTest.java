@@ -1,4 +1,4 @@
-package com.galou.mynews.activities;
+package com.galou.mynews.consultArticles;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

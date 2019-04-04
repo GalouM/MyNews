@@ -1,4 +1,4 @@
-package com.galou.mynews.controllers.activities;
+package com.galou.mynews.searchNotification;
 
 import com.galou.mynews.R;
 import com.galou.mynews.searchNotification.SearchActivity;
