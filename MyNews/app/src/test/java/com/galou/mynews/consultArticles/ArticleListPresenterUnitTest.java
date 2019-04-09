@@ -1,6 +1,8 @@
 package com.galou.mynews.consultArticles;
 
 import com.galou.mynews.models.ApiStreams;
+import com.galou.mynews.models.ArticleMostPopular;
+import com.galou.mynews.models.ArticleTopStories;
 import com.galou.mynews.models.SectionMostPopular;
 import com.galou.mynews.models.SectionTopStories;
 
@@ -23,6 +25,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by galou on 2019-04-03
@@ -35,6 +38,11 @@ public class ArticleListPresenterUnitTest {
 
     @Mock
     private ArticleListContract.View articleListView;
+
+    @Mock
+    private ArticleTopStories articleTopStories;
+    @Mock
+    private ArticleMostPopular articleMostPopular;
 
     private ArticleListPresenter presenter;
 
@@ -111,9 +119,42 @@ public class ArticleListPresenterUnitTest {
 
     }
 
+    @Test
+    public void fetchAPISports_getListArticles() {
+        Observable<SectionTopStories> observable = ApiStreams.streamFetchTopStories("sports");
+        TestObserver<SectionTopStories> testObserver = new TestObserver<>();
+        observable.subscribeWith(testObserver)
+                .assertNoErrors()
+                .assertNoTimeout()
+                .awaitTerminalEvent();
+
+        SectionTopStories sectionFetched = testObserver.values().get(0);
+
+        assertFalse(sectionFetched.getResults().isEmpty());
+
+    }
+
     @AfterClass
     public static void after(){
         RxAndroidPlugins.reset();
         RxJavaPlugins.reset();
+    }
+
+    @Test
+    public void getUrlArticleTopStories_sentToView(){
+        String url = "http://test";
+        when(articleTopStories.getUrl()).thenReturn(url);
+        presenter.getUrlArticleTopStories(articleTopStories);
+
+        verify(articleListView).startWebViewArticle(url);
+    }
+
+    @Test
+    public void getUrlArticleMostPopular_sentToView(){
+        String url = "http://test";
+        when(articleMostPopular.getUrl()).thenReturn(url);
+        presenter.getUrlArticleMostPopular(articleMostPopular);
+
+        verify(articleListView).startWebViewArticle(url);
     }
 }

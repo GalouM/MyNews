@@ -87,15 +87,17 @@ public class SearchViewUnitTest {
         artCheck.setChecked(true);
         businessCheck.setChecked(true);
         entrepreneurCheck.setChecked(true);
-        politicsCheck.setChecked(false);
+        politicsCheck.setChecked(true);
         sportCheck.setChecked(true);
-        travelCheck.setChecked(false);
+        travelCheck.setChecked(true);
 
         querySections = new ArrayList<>();
         querySections.add(artCheck.getText().toString());
         querySections.add(businessCheck.getText().toString());
         querySections.add(entrepreneurCheck.getText().toString());
+        querySections.add(politicsCheck.getText().toString());
         querySections.add(sportCheck.getText().toString());
+        querySections.add(travelCheck.getText().toString());
     }
 
     @Test
@@ -120,6 +122,10 @@ public class SearchViewUnitTest {
         businessCheck.setChecked(false);
         entrepreneurCheck.setChecked(false);
         sportCheck.setChecked(false);
+        politicsCheck.setChecked(false);
+        travelCheck.setChecked(false);
+        querySections.remove(5);
+        querySections.remove(4);
         querySections.remove(3);
         querySections.remove(2);
         querySections.remove(1);
@@ -176,7 +182,7 @@ public class SearchViewUnitTest {
     @Test
     public void endDateBeforeBeginDateShowErrorMessage() throws Exception {
         beginDate.setText("03/03/2019");
-        endDate.setText("03/02/2019");
+        endDate.setText("02/03/2019");
         searchButton.performClick();
 
         assertTrue(endDateInputLayout.isErrorEnabled());
