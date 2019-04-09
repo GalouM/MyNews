@@ -26,6 +26,7 @@ public class Media {
     @Expose
     private List<MediaMetadata> mediaMetadata = null;
 
+
     public String getType() {
         return type;
     }

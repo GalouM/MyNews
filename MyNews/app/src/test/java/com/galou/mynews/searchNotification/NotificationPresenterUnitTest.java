@@ -18,6 +18,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class NotificationPresenterUnitTest {
 
+
     @Mock
     private NotificationContract.View notificationView;
 
@@ -27,7 +28,7 @@ public class NotificationPresenterUnitTest {
     private List<String> mockedSectionQuery;
 
     @Before
-    public void setupTasksPresenter() {
+    public void setupPresenter() {
         MockitoAnnotations.initMocks(this);
         presenter = new NotificationPresenter(notificationView);
 
@@ -42,7 +43,7 @@ public class NotificationPresenterUnitTest {
     @Test
     public void enableNotificationWithCorrectData_onNotification(){
         String termsSearch = "Query Term: [term1, term2]" + "\n"
-                + "Section: [Arts, Travel]";
+                + "SectionMostPopular: [Arts, Travel]";
 
         presenter.enableNotification(mockedQueryTerm, mockedSectionQuery);
         verify(notificationView).disableAllErrors();

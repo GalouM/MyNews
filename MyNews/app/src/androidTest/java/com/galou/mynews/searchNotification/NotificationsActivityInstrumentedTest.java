@@ -34,7 +34,7 @@ public class NotificationsActivityInstrumentedTest {
     }
 
     @Test
-    public void pressBackButtonFinishActivity(){
+    public void pressBackButton_finishActivity(){
         onView(withContentDescription("Navigate up")).perform(click());
         assertThat(notificationActivityTestRule.getActivityResult(), hasResultCode(Activity.RESULT_CANCELED));
     }

@@ -3,8 +3,22 @@ package com.galou.mynews.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MediaMetadata {
-
+/**
+ * Created by galou on 2019-04-08
+ */
+public class Multimedia {
+    @SerializedName("type")
+    @Expose
+    private String type;
+    @SerializedName("subtype")
+    @Expose
+    private String subtype;
+    @SerializedName("caption")
+    @Expose
+    private String caption;
+    @SerializedName("copyright")
+    @Expose
+    private String copyright;
     @SerializedName("url")
     @Expose
     private String url;

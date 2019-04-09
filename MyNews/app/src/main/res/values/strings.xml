@@ -51,8 +51,13 @@
     <string name="error_message_query_empty">Field can\'t be empty</string>
     <string name="error_message_query_incorrect">Cannot contains special characters</string>
     <string name="error_message_no_section_selected">Select at least one section</string>
-    <string name="error_message_format_date">Format has to be MM/DD/YYYY</string>
+    <string name="error_message_format_date">Format has to be DD/MM/YYYY</string>
     <string name="error_message_date_in_future">Cannot be in the future</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_published_date">no date</string>
+    <string name="connection_failed">Connection failed, please check your Internet connection</string>
 
 
 </resources>

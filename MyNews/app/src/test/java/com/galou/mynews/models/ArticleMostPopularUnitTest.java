@@ -14,13 +14,13 @@ import static org.junit.Assert.assertEquals;
  * Created by galou on 2019-03-27
  */
 @RunWith(JUnit4.class)
-public class ArticleUnitTest {
+public class ArticleMostPopularUnitTest {
 
-    private Article article;
+    private ArticleMostPopular article;
 
     @Before
     public void setup() throws Exception {
-        article = new Article();
+        article = new ArticleMostPopular();
     }
 
     @Test
@@ -68,16 +68,12 @@ public class ArticleUnitTest {
     }
 
     @Test
-    public void testFacetIsCorrect() throws Exception {
-        String facet = "test";
-        String facet1 = "test";
+    public void testSubSectionIsCorrect() throws Exception {
+        String subsection = "test";
 
-        List<String> listFacet = new ArrayList<>();
-        listFacet.add(facet);
-        listFacet.add(facet1);
-        article.setDesFacet(listFacet);
+        article.setSubsection(subsection);
 
-        assertEquals(article.getDesFacet(), listFacet);
+        assertEquals(article.getSubsection(), subsection);
 
     }
 }

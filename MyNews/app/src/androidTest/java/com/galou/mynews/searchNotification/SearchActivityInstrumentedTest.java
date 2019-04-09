@@ -34,7 +34,7 @@ public class SearchActivityInstrumentedTest {
     }
 
     @Test
-    public void pressBackButtonFinishActivity(){
+    public void pressBackButton_finishActivity(){
         onView(withContentDescription("Navigate up")).perform(click());
         assertThat(searchActivityTestRule.getActivityResult(), hasResultCode(Activity.RESULT_CANCELED));
     }

@@ -1,5 +1,8 @@
 package com.galou.mynews.utils;
 
+import com.galou.mynews.R;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,14 +16,16 @@ public abstract class DateUtil {
     private static final SimpleDateFormat DATE_FORMAT_API =
             new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
     private static final SimpleDateFormat DATE_FORMAT_DISPLAY =
-            new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+            new SimpleDateFormat("dd/MM/yy", Locale.CANADA);
+    private static final SimpleDateFormat DATE_FORMAT_FROM_API =
+            new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
 
     private static boolean isDateValidFormat(String date){
         String[] datePart = date.split("/");
-        int month = Integer.valueOf(datePart[0]);
-        int day = Integer.valueOf(datePart[1]);
+        int month = Integer.valueOf(datePart[1]);
+        int day = Integer.valueOf(datePart[0]);
         int year = Integer.valueOf(datePart[2]);
-        return (month > 0 && month <= 12 && day > 0 && day <= 31 && year >= 1000 && year < 3000);
+        return (month > 0 && month <= 12 && day > 0 && day <= 31 && year >= 0 && year < 99);
 
     }
 
@@ -58,6 +63,19 @@ public abstract class DateUtil {
         } else {
             return false;
         }
+    }
+
+    public static String convertDateFromAPIToDisplay(String dateString){
+        String[] arrayDate = dateString.split("T");
+        Date date = new Date();
+        try {
+            date = DATE_FORMAT_FROM_API.parse(arrayDate[0]);
+        } catch (ParseException e) {
+            return null;
+        }
+
+        return DATE_FORMAT_DISPLAY.format(date);
+
     }
 
 }

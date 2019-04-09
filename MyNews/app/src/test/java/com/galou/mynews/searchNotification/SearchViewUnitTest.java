@@ -64,8 +64,7 @@ public class SearchViewUnitTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        activity = Robolectric.buildActivity(SearchActivity.class).create().resume().get();;
+        activity = Robolectric.buildActivity(SearchActivity.class).create().resume().get();
 
         //set views
         searchButton = activity.findViewById(R.id.search_fragment_search_button);
@@ -194,7 +193,7 @@ public class SearchViewUnitTest {
         String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
                 + "Begin Date: null" +  "\n"
                 + "End Date: null" + "\n"
-                + "Section: " + querySections;
+                + "SectionMostPopular: " + querySections;
 
         TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
         assertFalse(queryTermInputLayout.isErrorEnabled());
@@ -206,8 +205,8 @@ public class SearchViewUnitTest {
 
     @Test
     public void clickSearchAllDataCorrectWithDateStartSearch() throws Exception {
-        beginDate.setText("03/03/2019");
-        endDate.setText("03/04/2019");
+        beginDate.setText("03/03/19");
+        endDate.setText("04/03/19");
         searchButton.performClick();
 
         String[] queryTermList = {"test", "test2"};
@@ -216,7 +215,7 @@ public class SearchViewUnitTest {
         String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
                 + "Begin Date: 20190303" +  "\n"
                 + "End Date: 20190304" + "\n"
-                + "Section: " + querySections;
+                + "SectionMostPopular: " + querySections;
 
         TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
         assertFalse(queryTermInputLayout.isErrorEnabled());
@@ -228,7 +227,7 @@ public class SearchViewUnitTest {
 
     @Test
     public void clickSearchAllDataCorrectWithNoBeginDateStartSearch() throws Exception {
-        endDate.setText("03/04/2019");
+        endDate.setText("04/03/19");
         searchButton.performClick();
 
         String[] queryTermList = {"test", "test2"};
@@ -237,7 +236,7 @@ public class SearchViewUnitTest {
         String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
                 + "Begin Date: null" +   "\n"
                 + "End Date: 20190304" + "\n"
-                + "Section: " + querySections;
+                + "SectionMostPopular: " + querySections;
 
         TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
         assertFalse(queryTermInputLayout.isErrorEnabled());
@@ -250,7 +249,7 @@ public class SearchViewUnitTest {
 
     @Test
     public void clickSearchAllDataCorrectWithEndStartSearch() throws Exception {
-        beginDate.setText("03/03/2019");
+        beginDate.setText("03/03/19");
         searchButton.performClick();
 
         String[] queryTermList = {"test", "test2"};
@@ -259,7 +258,7 @@ public class SearchViewUnitTest {
         String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
                 + "Begin Date: 20190303" +  "\n"
                 + "End Date: null" + "\n"
-                + "Section: " + querySections;
+                + "SectionMostPopular: " + querySections;
 
         TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
         assertFalse(queryTermInputLayout.isErrorEnabled());
@@ -324,7 +323,7 @@ public class SearchViewUnitTest {
 
     @Test
     public void existingBeginDateSetDatePicker() throws Exception{
-        String date = "03/03/2019";
+        String date = "03/03/19";
         beginDate.setText(date);
         beginDate.performClick();
         AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
@@ -337,7 +336,7 @@ public class SearchViewUnitTest {
 
     @Test
     public void existingEndDateSetDatePicker() throws Exception{
-        String date = "03/03/2019";
+        String date = "03/03/19";
         endDate.setText(date);
         endDate.performClick();
         AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();

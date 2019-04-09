@@ -43,7 +43,7 @@ public class MainActivityInstrumentedTest {
 
 
     @Test
-    public void checkNavigationDrawerCloseOnPressBack() {
+    public void checkNavigationDrawerClose_onPressBack() {
         onView(ViewMatchers.withId(R.id.main_activity_drawer)).check(matches(isClosed(Gravity.LEFT)))
                 .perform(DrawerActions.open());
         onView(isRoot()).perform(ViewActions.pressBack());

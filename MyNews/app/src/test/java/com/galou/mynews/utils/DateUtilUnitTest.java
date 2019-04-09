@@ -30,7 +30,7 @@ public class DateUtilUnitTest {
         calendar.set(Calendar.YEAR, 2019);
         String calString = convertCalendarForDisplay(calendar);
 
-        assertEquals("02/03/2019", calString);
+        assertEquals("03/02/19", calString);
     }
 
     @Test
@@ -45,13 +45,13 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void badDateFromUserSendNullObject(){
-        String date1 = "45/67/2019";
-        String date2 = "/2019";
+    public void badDateFromUser_sendNullObject(){
+        String date1 = "45/67/19";
+        String date2 = "/19";
         String date3 = "00";
         String date4 = "";
         String date5 = "13/03/2019";
-        String date6 = "05/32/2019";
+        String date6 = "05/32/19";
 
         assertNull(convertUserDateToCalendar(date1));
         assertNull(convertUserDateToCalendar(date2));
@@ -62,8 +62,8 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void goodDateFromUserSendCalendar(){
-        String date = "03/03/2019";
+    public void goodDateFromUser_sendCalendar(){
+        String date = "03/03/19";
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.MONTH, 2);
         calendar.set(Calendar.DAY_OF_MONTH, 3);
@@ -82,7 +82,7 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void dateAfterTodaySendTrue() {
+    public void dateAfterToday_sendTrue() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 1);
 
@@ -90,14 +90,14 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void dateTodaySendFalse() {
+    public void dateToday_sendFalse() {
         Calendar calendar = Calendar.getInstance();
 
         assertFalse(isDateAfterToday(calendar));
     }
 
     @Test
-    public void dateBeforeTodaySendFalse() {
+    public void dateBeforeToday_sendFalse() {
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH) -1;
         calendar.set(Calendar.DAY_OF_MONTH, day);
@@ -106,7 +106,7 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void endDateBeforeSendTrue(){
+    public void endDateBefore_sendTrue(){
         Calendar beginDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         beginDate.add(Calendar.DAY_OF_MONTH, 1);
@@ -115,7 +115,7 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void endDateAfterSendFalse(){
+    public void endDateAfter_sendFalse(){
         Calendar beginDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.DAY_OF_MONTH, 1);
@@ -124,7 +124,7 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void endDateSameDaySendFalse(){
+    public void endDateSameDay_sendFalse(){
         Calendar beginDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
 
@@ -132,7 +132,7 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void noEndDateSendFalse(){
+    public void noEndDate_sendFalse(){
         Calendar beginDate = Calendar.getInstance();
         Calendar endDate = null;
 
@@ -140,10 +140,25 @@ public class DateUtilUnitTest {
     }
 
     @Test
-    public void noBeginDateSendFalse(){
+    public void noBeginDate_sendFalse(){
         Calendar beginDate = null;
         Calendar endDate = Calendar.getInstance();;
 
         assertFalse(isEndDateBeforeBeginDate(beginDate, endDate));
+    }
+
+    @Test
+    public void correctDateFromAPI_sendDateString(){
+        String dateFromAPI = "2019-05-02Tert23343";
+
+        assertEquals("02/05/19", DateUtil.convertDateFromAPIToDisplay(dateFromAPI));
+
+    }
+
+    @Test
+    public void badDateFromAPI_sendNull(){
+        String dateFromAPI = "209/44/03";
+
+        assertNull(DateUtil.convertDateFromAPIToDisplay(dateFromAPI));
     }
 }

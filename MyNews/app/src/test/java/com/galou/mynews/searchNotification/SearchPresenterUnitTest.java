@@ -1,6 +1,9 @@
 package com.galou.mynews.searchNotification;
 
+import com.galou.mynews.RxImmediateSchedulerRule;
+
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -34,14 +37,14 @@ public class SearchPresenterUnitTest {
     private List<String> mockedSectionQuery;
 
     @Before
-    public void setupTasksPresenter() {
+    public void setupPresenter() {
         MockitoAnnotations.initMocks(this);
         presenter = new SearchPresenter(searchView);
 
         // set correct data
         mockedQueryTerm = "term1 term2";
-        mockedBeginDate = "05/23/2017";
-        mockedEndDate = "05/25/2017";
+        mockedBeginDate = "23/05/17";
+        mockedEndDate = "25/05/17";
         mockedSectionQuery = new ArrayList<>();
         mockedSectionQuery.add("Arts");
         mockedSectionQuery.add("Travel");
@@ -60,7 +63,7 @@ public class SearchPresenterUnitTest {
         String termsSearch = "Query Term: [term1, term2]" + "\n"
                 + "Begin Date: 20170523"+ "\n"
                 + "End Date: 20170525" + "\n"
-                + "Section: [Arts, Travel]";
+                + "SectionMostPopular: [Arts, Travel]";
 
         presenter.startSearch(mockedQueryTerm, mockedBeginDate, mockedEndDate, mockedSectionQuery);
         verify(searchView).disableAllErrors();
@@ -75,7 +78,7 @@ public class SearchPresenterUnitTest {
         String termsSearch = "Query Term: [term1, term2]" + "\n"
                 + "Begin Date: null"+ "\n"
                 + "End Date: null" + "\n"
-                + "Section: [Arts, Travel]";
+                + "SectionMostPopular: [Arts, Travel]";
 
         presenter.startSearch(mockedQueryTerm, mockedBeginDate, mockedEndDate, mockedSectionQuery);
         verify(searchView).disableAllErrors();
@@ -148,7 +151,7 @@ public class SearchPresenterUnitTest {
 
     @Test
     public void clickSearchButtonEndDateBeforeBeginDate_showErrorQueryTerm(){
-        mockedEndDate = "05/19/2017";
+        mockedEndDate = "19/05/17";
 
         presenter.startSearch(mockedQueryTerm, mockedBeginDate, mockedEndDate, mockedSectionQuery);
         verify(searchView).disableAllErrors();

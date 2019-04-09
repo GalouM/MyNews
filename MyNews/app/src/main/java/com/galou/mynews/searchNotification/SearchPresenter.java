@@ -37,7 +37,7 @@ public class SearchPresenter implements SearchContract.Presenter {
 
     public SearchPresenter(@NonNull SearchContract.View searchView) {
         this.searchView = searchView;
-        searchView.setPresenter(this);
+        this.searchView.setPresenter(this);
 
     }
 
@@ -59,7 +59,7 @@ public class SearchPresenter implements SearchContract.Presenter {
             String termsSearch = "Query Term: " + Arrays.toString(queryTerms) + "\n"
                     + "Begin Date: " + beginDateApi + "\n"
                     + "End Date: " + endDateApi + "\n"
-                    + "Section: " + sections;
+                    + "SectionMostPopular: " + sections;
 
             searchView.showResultResearch(termsSearch);
 

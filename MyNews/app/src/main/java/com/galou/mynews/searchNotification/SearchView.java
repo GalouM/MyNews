@@ -4,6 +4,7 @@ package com.galou.mynews.searchNotification;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -97,6 +98,7 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
     // SET ERROR MESSAGES
     // --------------
 
+
     @Override
     public void displayErrorQueryTerm(ErrorMessage errorMessage) {
         switch (errorMessage){
@@ -107,7 +109,9 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
                 queryTermInputLayout.setError(getString(R.string.error_message_query_incorrect));
                 break;
         }
+
     }
+
 
     @Override
     public void displayErrorBeginDate(ErrorMessage errorMessage) {

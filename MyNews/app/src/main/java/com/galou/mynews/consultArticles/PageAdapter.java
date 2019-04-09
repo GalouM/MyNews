@@ -19,6 +19,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 public class PageAdapter extends FragmentStatePagerAdapter {
 
+    private ArticleListPresenter presenter;
+    private ArticleListView articleListView;
+
 
     public PageAdapter(FragmentManager mgr){
         super(mgr);
@@ -29,14 +32,18 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return TopStoriesView.newInstance();
+                articleListView = ArticleListView.newInstance("home");
+                break;
             case 1:
-                return MostPopularView.newInstance();
+                articleListView = ArticleListView.newInstance("mostpopular");
+                break;
             case 2:
-                return SportsView.newInstance();
-            default:
-                return null;
+                articleListView = ArticleListView.newInstance("sports");
+                break;
+
         }
+        presenter = new ArticleListPresenter(articleListView);
+        return articleListView;
     }
 
     @Nullable

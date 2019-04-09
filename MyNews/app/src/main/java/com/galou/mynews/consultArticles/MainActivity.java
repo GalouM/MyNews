@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -28,8 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.main_activity_tabs) TabLayout tabLayout;
     @BindView(R.id.main_activity_drawer) DrawerLayout drawerLayout;
     @BindView(R.id.main_activity_nav_view) NavigationView navigationView;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.configureDrawerLayout();
         this.configureNavigationView();
     }
+
 
     // -------------------
     // CONFIGURATION
@@ -139,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
 
     }
+
 
 
 }

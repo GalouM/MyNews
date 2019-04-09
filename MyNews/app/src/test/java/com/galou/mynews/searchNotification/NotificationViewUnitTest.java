@@ -117,7 +117,7 @@ public class NotificationViewUnitTest {
 
 
         String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
-                + "Section: " + querySections;
+                + "SectionMostPopular: " + querySections;
 
         TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
     }

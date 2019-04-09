@@ -5,66 +5,82 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Article {
+/**
+ * Created by galou on 2019-04-08
+ */
+public class ArticleMostPopular{
 
     @SerializedName("url")
     @Expose
-    private String url;
+    protected String url;
     @SerializedName("adx_keywords")
     @Expose
-    private String adxKeywords;
+    protected String adxKeywords;
+    @SerializedName("subsection")
+    @Expose
+    protected String subsection;
     @SerializedName("column")
     @Expose
-    private Object column;
+    protected Object column;
     @SerializedName("section")
     @Expose
-    private String section;
+    protected String section;
     @SerializedName("byline")
     @Expose
-    private String byline;
+    protected String byline;
     @SerializedName("type")
     @Expose
-    private String type;
+    protected String type;
     @SerializedName("title")
     @Expose
-    private String title;
+    protected String title;
     @SerializedName("abstract")
     @Expose
-    private String _abstract;
+    protected String _abstract;
     @SerializedName("published_date")
     @Expose
-    private String publishedDate;
+    protected String publishedDate;
     @SerializedName("source")
     @Expose
-    private String source;
+    protected String source;
     @SerializedName("id")
     @Expose
-    private long id;
+    protected long id;
     @SerializedName("asset_id")
     @Expose
-    private long assetId;
+    protected long assetId;
     @SerializedName("views")
     @Expose
-    private long views;
+    protected long views;
     @SerializedName("des_facet")
     @Expose
-    private List<String> desFacet = null;
+    protected Object desFacet = null;
     @SerializedName("org_facet")
     @Expose
-    private Object orgFacet = null;
+    protected Object orgFacet = null;
     @SerializedName("per_facet")
     @Expose
-    private Object perFacet = null;
+    protected Object perFacet = null;
     @SerializedName("geo_facet")
     @Expose
-    private Object geoFacet = null;
+    protected Object geoFacet = null;
+    @SerializedName("uri")
+    @Expose
+    protected String uri;
+
     @SerializedName("media")
     @Expose
     private List<Media> media = null;
-    @SerializedName("uri")
-    @Expose
-    private String uri;
 
+    public List<Media> getMedia() {
+        return media;
+
+    }
+
+    public void setMedia(List<Media> media) {
+        this.media = media;
+
+    }
     public String getUrl() {
         return url;
     }
@@ -90,15 +106,6 @@ public class Article {
         this.title = title;
     }
 
-
-    public List<String> getDesFacet() {
-        return desFacet;
-    }
-
-    public void setDesFacet(List<String> desFacet) {
-        this.desFacet = desFacet;
-    }
-
     public String getPublishedDate() {
         return publishedDate;
     }
@@ -107,14 +114,14 @@ public class Article {
         this.publishedDate = publishedDate;
     }
 
-
-    public List<Media> getMedia() {
-        return media;
+    public String getSubsection() {
+        return subsection;
     }
 
-    public void setMedia(List<Media> media) {
-        this.media = media;
+    public void setSubsection(String subsection) {
+        this.subsection = subsection;
     }
+
 
 
 }

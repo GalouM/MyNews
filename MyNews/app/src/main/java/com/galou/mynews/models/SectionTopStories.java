@@ -5,8 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Section {
-
+/**
+ * Created by galou on 2019-04-08
+ */
+public class SectionTopStories {
     @SerializedName("status")
     @Expose
     private String status;
@@ -18,7 +20,7 @@ public class Section {
     private long numResults;
     @SerializedName("results")
     @Expose
-    private List<Article> results = null;
+    private List<ArticleTopStories> results = null;
 
 
     public long getNumResults() {
@@ -29,12 +31,11 @@ public class Section {
         this.numResults = numResults;
     }
 
-    public List<Article> getResults() {
+    public List<ArticleTopStories> getResults() {
         return results;
     }
 
-    public void setResults(List<Article> results) {
+    public void setResults(List<ArticleTopStories> results) {
         this.results = results;
     }
-
 }

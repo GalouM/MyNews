@@ -2,8 +2,6 @@ package com.galou.mynews.models;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +9,14 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by galou on 2019-03-27
+ * Created by galou on 2019-04-08
  */
-@RunWith(JUnit4.class)
-public class SectionUnitTest {
-
-    private Section section;
+public class SectionTopStoriesUnitTest {
+    private SectionTopStories section;
 
     @Before
     public void setup(){
-        section = new Section();
+        section = new SectionTopStories();
     }
 
     @Test
@@ -33,9 +29,9 @@ public class SectionUnitTest {
 
     @Test
     public void testListArticleIsCorrect(){
-        Article article = new Article();
-        Article otherArticle = new Article();
-        List<Article> articleList = new ArrayList<>();
+        ArticleTopStories article = new ArticleTopStories();
+        ArticleTopStories otherArticle = new ArticleTopStories();
+        List<ArticleTopStories> articleList = new ArrayList<>();
         articleList.add(article);
         articleList.add(otherArticle);
         section.setResults(articleList);

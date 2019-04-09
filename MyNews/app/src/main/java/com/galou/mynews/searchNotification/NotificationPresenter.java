@@ -35,7 +35,7 @@ public class NotificationPresenter implements NotificationContract.Presenter {
             String[] queryTerms = TextUtil.separateTextBySpace(queryTerm);
 
             String termsSearch = "Query Term: " + Arrays.toString(queryTerms) + "\n"
-                    + "Section: " + sections;
+                    + "SectionMostPopular: " + sections;
 
             notificationView.showNotificationEnabledMessage(termsSearch);
         } else {

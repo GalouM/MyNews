@@ -27,20 +27,4 @@ public class MediaMetadataUnitTest {
 
         assertEquals(mediaMetadata.getUrl(), url);
     }
-
-    @Test
-    public void testWidthIsCorrect(){
-        long width = 5;
-        mediaMetadata.setWidth(width);
-
-        assertEquals(mediaMetadata.getWidth(), width);
-    }
-
-    @Test
-    public void testHeightIsCorrect(){
-        long height = 5;
-        mediaMetadata.setHeight(height);
-
-        assertEquals(mediaMetadata.getHeight(), height);
-    }
 }

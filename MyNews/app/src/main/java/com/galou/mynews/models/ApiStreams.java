@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ApiStreams {
 
-    public static Observable<Section> streamsFetchMostPopSection(){
+    public static Observable<SectionMostPopular> streamsFetchMostPopSection(){
         ApiService apiService = ApiService.retrofit.create(ApiService.class);
         return apiService.getMostPopSection()
                 .subscribeOn(Schedulers.io())
@@ -19,7 +19,7 @@ public class ApiStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    public static Observable<Section> streamFetchTopStories(String section){
+    public static Observable<SectionTopStories> streamFetchTopStories(String section){
         ApiService apiService = ApiService.retrofit.create(ApiService.class);
         return apiService.getTopStoriesSection(section)
                 .subscribeOn(Schedulers.io())

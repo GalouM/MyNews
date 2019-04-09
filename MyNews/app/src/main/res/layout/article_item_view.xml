@@ -37,11 +37,12 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/recycler_view_title_article"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:text="Hackers came but the French were prepared"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
 
     </LinearLayout>
 </LinearLayout>

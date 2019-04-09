@@ -16,10 +16,10 @@ public interface ApiService {
      String API_KEY = "4UGuTENR5tNBtpkR4YxJLYK0VWLhAGAW";
 
      @GET("mostpopular/v2/shared/7.json?api-key="+API_KEY)
-    Observable<Section> getMostPopSection();
+    Observable<SectionMostPopular> getMostPopSection();
 
      @GET("topstories/v2/{section}.json?api-key="+API_KEY)
-     Observable<Section> getTopStoriesSection(@Path("section") String section);
+     Observable<SectionTopStories> getTopStoriesSection(@Path("section") String section);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
