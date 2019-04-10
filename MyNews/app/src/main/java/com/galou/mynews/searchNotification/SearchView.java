@@ -1,7 +1,10 @@
 package com.galou.mynews.searchNotification;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -9,8 +12,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.galou.mynews.R;
+import com.galou.mynews.consultArticles.MainActivity;
+import com.galou.mynews.models.ArticleSearch;
+import com.galou.mynews.models.SectionSearch;
+import com.galou.mynews.resultsSearch.ResultsSearchActivity;
+import com.google.gson.Gson;
 
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -30,8 +39,11 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
     @BindView(R.id.search_fragment_search_end_date) EditText endDateUser;
     @BindView(R.id.begin_date_input_layout) TextInputLayout beginDateInputLayout;
     @BindView(R.id.end_date_input_layout) TextInputLayout endDateInputLayout;
+    @BindView(R.id.search_view_root_view) CoordinatorLayout rootView;
 
     public static final int DIALOG_CODE = 12345;
+
+    public static final String EXTRA_KEY_ARTICLE = "articleSearch";
 
 
     // --------------
@@ -40,6 +52,12 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
     @Override
     public void setPresenter(@NonNull SearchContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.disposeWhenDestroy();
     }
 
     @Override
@@ -84,12 +102,6 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
         if(view == endDateUser){
             endDateUser.setText(convertCalendarForDisplay(calendar));
         }
-
-    }
-
-    @Override
-    public void showResultResearch(String searchTerms) {
-        Toast.makeText(getContext(), searchTerms, Toast.LENGTH_LONG).show();
 
     }
 
@@ -161,4 +173,22 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
         endDateInputLayout.setErrorEnabled(false);
 
     }
+
+    @Override
+    public void showResultResearch(SectionSearch searchQuery) {
+        Gson gson = new Gson();
+        String jsonSearchQuery = gson.toJson(searchQuery);
+        Intent intent = new Intent(getContext(), ResultsSearchActivity.class);
+        intent.putExtra(EXTRA_KEY_ARTICLE, jsonSearchQuery);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void showSnackBar() {
+        Snackbar snackbar = Snackbar.make(rootView, R.string.no_news, Snackbar.LENGTH_LONG);
+        snackbar.show();
+
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.galou.mynews.models;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -22,6 +23,15 @@ public class ApiStreams {
     public static Observable<SectionTopStories> streamFetchTopStories(String section){
         ApiService apiService = ApiService.retrofit.create(ApiService.class);
         return apiService.getTopStoriesSection(section)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(10, TimeUnit.SECONDS);
+    }
+
+    public static Observable<SectionSearch> streamFetchSearch(String beginDate, String endDate,
+                                                              String querySection, String queryTerms){
+        ApiService apiService = ApiService.retrofit.create(ApiService.class);
+        return apiService.getSearchSection(beginDate, endDate, querySection, queryTerms)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);

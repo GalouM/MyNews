@@ -1,5 +1,7 @@
 package com.galou.mynews.utils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +17,15 @@ public abstract class TextUtil {
 
     }
 
-    public static String[] separateTextBySpace(String text){
-        return text.split("\\s+");
+    public static String convertQueryTermForAPI(String text){
+        return text.replaceAll("\\s+", "%20");
+    }
+
+    public static String convertListInStringForAPI(List<String> list){
+        return list.toString()
+                .replaceAll(", ", "\"%20\"")
+                .replace("[", "(\"")
+                .replace("]", "\")");
+
     }
 }

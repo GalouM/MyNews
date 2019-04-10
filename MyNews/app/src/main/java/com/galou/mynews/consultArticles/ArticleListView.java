@@ -19,6 +19,7 @@ import com.galou.mynews.R;
 import com.galou.mynews.models.ArticleMostPopular;
 import com.galou.mynews.models.ArticleTopStories;
 import com.galou.mynews.utils.ItemClickSupport;
+import com.galou.mynews.webViewArticle.WebViewArticleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,15 +133,17 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
     }
 
     @Override
-    public void showSnackBar() {
+    public void showErrorMessage() {
         Snackbar snackbar = Snackbar.make(rootView, R.string.connection_failed, Snackbar.LENGTH_LONG);
         snackbar.show();
 
     }
 
     @Override
-    public void startWebViewArticle(String url) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+    public void showDetailsArticle(String url) {
+        Intent intent = new Intent(getContext(), WebViewArticleActivity.class);
+        intent.putExtra(WebViewArticleActivity.KEY_URL, url);
+        startActivity(intent);
 
     }
 
@@ -162,4 +165,10 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
 
     }
 
+    @Override
+    public void showEmptyNewsMessage() {
+        Snackbar snackbar = Snackbar.make(rootView, R.string.no_news, Snackbar.LENGTH_LONG);
+        snackbar.show();
+
+    }
 }

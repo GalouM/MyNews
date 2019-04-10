@@ -32,12 +32,10 @@ public class NotificationPresenter implements NotificationContract.Presenter {
         this.sections = querySection;
         notificationView.disableAllErrors();
         if (allDataAreCorrect()){
-            String[] queryTerms = TextUtil.separateTextBySpace(queryTerm);
+            String queryTerms = TextUtil.convertQueryTermForAPI(queryTerm);
 
-            String termsSearch = "Query Term: " + Arrays.toString(queryTerms) + "\n"
-                    + "SectionMostPopular: " + sections;
 
-            notificationView.showNotificationEnabledMessage(termsSearch);
+            notificationView.showNotificationEnabledMessage("");
         } else {
             notificationView.disableNotification();
         }

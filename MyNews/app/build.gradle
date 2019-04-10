@@ -79,4 +79,6 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.20.0'
     //GLIDE
     implementation 'com.github.bumptech.glide:glide:4.6.1'
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.2'
 }

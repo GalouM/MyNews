@@ -61,9 +61,13 @@ public class SearchViewUnitTest {
 
     private  List<String> querySections;
 
+    @Mock
+    private SearchContract.Presenter presenter;
+
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
         activity = Robolectric.buildActivity(SearchActivity.class).create().resume().get();
 
         //set views
@@ -193,15 +197,6 @@ public class SearchViewUnitTest {
     public void clickSearchAllDataCorrectWithNoDateStartSearch() throws Exception {
         searchButton.performClick();
 
-        String[] queryTermList = {"test", "test2"};
-
-
-        String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
-                + "Begin Date: null" +  "\n"
-                + "End Date: null" + "\n"
-                + "SectionMostPopular: " + querySections;
-
-        TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
         assertFalse(queryTermInputLayout.isErrorEnabled());
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertNull(beginDateInputLayout.getError());
@@ -215,15 +210,6 @@ public class SearchViewUnitTest {
         endDate.setText("04/03/19");
         searchButton.performClick();
 
-        String[] queryTermList = {"test", "test2"};
-
-
-        String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
-                + "Begin Date: 20190303" +  "\n"
-                + "End Date: 20190304" + "\n"
-                + "SectionMostPopular: " + querySections;
-
-        TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
         assertFalse(queryTermInputLayout.isErrorEnabled());
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertFalse(beginDateInputLayout.isErrorEnabled());
@@ -236,15 +222,6 @@ public class SearchViewUnitTest {
         endDate.setText("04/03/19");
         searchButton.performClick();
 
-        String[] queryTermList = {"test", "test2"};
-
-
-        String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
-                + "Begin Date: null" +   "\n"
-                + "End Date: 20190304" + "\n"
-                + "SectionMostPopular: " + querySections;
-
-        TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
         assertFalse(queryTermInputLayout.isErrorEnabled());
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertNull(beginDateInputLayout.getError());
@@ -258,15 +235,6 @@ public class SearchViewUnitTest {
         beginDate.setText("03/03/19");
         searchButton.performClick();
 
-        String[] queryTermList = {"test", "test2"};
-
-
-        String messageToast = "Query Term: " + Arrays.toString(queryTermList) + "\n"
-                + "Begin Date: 20190303" +  "\n"
-                + "End Date: null" + "\n"
-                + "SectionMostPopular: " + querySections;
-
-        TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
         assertFalse(queryTermInputLayout.isErrorEnabled());
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertFalse(beginDateInputLayout.isErrorEnabled());

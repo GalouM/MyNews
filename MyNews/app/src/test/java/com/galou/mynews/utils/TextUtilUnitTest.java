@@ -4,9 +4,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static com.galou.mynews.utils.DateUtil.isEndDateBeforeBeginDate;
+import static com.galou.mynews.utils.TextUtil.convertListInStringForAPI;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -35,9 +38,19 @@ public class TextUtilUnitTest {
     @Test
     public void splitTextCorrectly(){
         String string = "test test2";
-        String[] listString = {"test", "test2"};
+        String convertedTerm = "test%20test2";
 
-        assertArrayEquals(listString, TextUtil.separateTextBySpace(string));
+        assertEquals(convertedTerm, TextUtil.convertQueryTermForAPI(string));
+    }
+
+    @Test
+    public void convertListCorrectly(){
+        List<String> list = new ArrayList<>();
+        list.add("section1");
+        list.add("section2");
+        String expectedString = "(\"section1\"%20\"section2\")";
+
+        assertEquals(expectedString, convertListInStringForAPI(list));
     }
 
 }

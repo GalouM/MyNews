@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- MAIN ACTIVITY -->
         <activity android:name=".consultArticles.MainActivity">
             <intent-filter>
@@ -18,20 +19,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- SEARCH ACTIVITY -->
+        </activity> <!-- SEARCH ACTIVITY -->
         <activity
             android:name=".searchNotification.SearchActivity"
             android:label="@string/search_articles_name_activity"
-            android:parentActivityName=".consultArticles.MainActivity" />
-
-        <!-- NOTIFICATIONS ACTIVITY -->
+            android:parentActivityName=".consultArticles.MainActivity" /> <!-- NOTIFICATIONS ACTIVITY -->
         <activity
             android:name=".searchNotification.NotificationsActivity"
             android:label="@string/notifications_articles_name_activity"
-            android:parentActivityName=".consultArticles.MainActivity" />
-
+            android:parentActivityName=".consultArticles.MainActivity" /> <!-- RESULTS ACTIVITY -->
+        <activity
+            android:name=".resultsSearch.ResultsSearchActivity"
+            android:label="@string/result_activity_name"
+            android:parentActivityName=".searchNotification.SearchActivity" />
+        <activity android:name=".webViewArticle.WebViewArticleActivity"
+            android:label="@string/webview_activity_name"/>
     </application>
 
 </manifest>

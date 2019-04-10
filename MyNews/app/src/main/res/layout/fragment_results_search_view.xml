@@ -1,0 +1,12 @@
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/result_search_view_root_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/result_search_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</android.support.design.widget.CoordinatorLayout>

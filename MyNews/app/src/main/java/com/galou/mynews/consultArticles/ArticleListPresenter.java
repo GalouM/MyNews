@@ -1,7 +1,6 @@
 package com.galou.mynews.consultArticles;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.ArticleMostPopular;
@@ -44,12 +43,12 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
 
     @Override
     public void getUrlArticleMostPopular(ArticleMostPopular article) {
-        articleListView.startWebViewArticle(article.getUrl());
+        articleListView.showDetailsArticle(article.getUrl());
     }
 
     @Override
     public void getUrlArticleTopStories(ArticleTopStories article) {
-        articleListView.startWebViewArticle(article.getUrl());
+        articleListView.showDetailsArticle(article.getUrl());
 
     }
 
@@ -102,16 +101,25 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
 
     private void sendListArticleMostPopular(List<ArticleMostPopular> articles) {
         this.articlesMostPopular = articles;
-        articleListView.setupRecyclerViewMostPopular(articlesMostPopular);
+        if (articlesMostPopular.size() < 0) {
+            articleListView.showEmptyNewsMessage();
+
+        } else {
+            articleListView.setupRecyclerViewMostPopular(articlesMostPopular);
+        }
     }
 
     private void sendErrorToView(Throwable e){
-        articleListView.showSnackBar();
+        articleListView.showErrorMessage();
     }
 
     private void sendListArticleTopStories(List<ArticleTopStories> articles){
         this.articlesTopStories = articles;
-        articleListView.setupRecyclerViewTopStories(articlesTopStories);
+        if (articlesTopStories.size() < 0) {
+            articleListView.showEmptyNewsMessage();
+        } else {
+            articleListView.setupRecyclerViewTopStories(articlesTopStories);
+        }
     }
 
     protected List<ArticleMostPopular> getArticlesMostPopular(){

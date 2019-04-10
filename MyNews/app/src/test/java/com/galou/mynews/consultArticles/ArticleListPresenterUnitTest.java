@@ -65,7 +65,7 @@ public class ArticleListPresenterUnitTest {
     public void onConnectionFailed_showSnackBar(){
         presenter.getArticlesFromNYT("test");
 
-        verify(articleListView).showSnackBar();
+        verify(articleListView).showErrorMessage();
     }
 
     @Test
@@ -146,7 +146,7 @@ public class ArticleListPresenterUnitTest {
         when(articleTopStories.getUrl()).thenReturn(url);
         presenter.getUrlArticleTopStories(articleTopStories);
 
-        verify(articleListView).startWebViewArticle(url);
+        verify(articleListView).showDetailsArticle(url);
     }
 
     @Test
@@ -155,6 +155,6 @@ public class ArticleListPresenterUnitTest {
         when(articleMostPopular.getUrl()).thenReturn(url);
         presenter.getUrlArticleMostPopular(articleMostPopular);
 
-        verify(articleListView).startWebViewArticle(url);
+        verify(articleListView).showDetailsArticle(url);
     }
 }

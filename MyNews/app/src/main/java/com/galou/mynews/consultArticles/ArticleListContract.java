@@ -11,10 +11,11 @@ import java.util.List;
  */
 public interface ArticleListContract {
     interface View extends BaseContractView<Presenter> {
-        void showSnackBar();
+        void showErrorMessage();
         void setupRecyclerViewMostPopular(List<ArticleMostPopular> articles);
         void setupRecyclerViewTopStories(List<ArticleTopStories> articles);
-        void startWebViewArticle(String url);
+        void showDetailsArticle(String url);
+        void showEmptyNewsMessage();
     }
     interface Presenter {
         void getArticlesFromNYT(String section);

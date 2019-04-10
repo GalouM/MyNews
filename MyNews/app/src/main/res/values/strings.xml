@@ -58,6 +58,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_published_date">no date</string>
     <string name="connection_failed">Connection failed, please check your Internet connection</string>
+    <string name="result_activity_name">Results</string>
+    <string name="no_news">No news to show</string>
+    <string name="incorrect_url">Incorrect URL</string>
+    <string name="webview_activity_name">Details</string>
 
 
 </resources>

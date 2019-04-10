@@ -1,12 +1,20 @@
 package com.galou.mynews.searchNotification;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.galou.mynews.models.ApiStreams;
+import com.galou.mynews.models.ArticleSearch;
+import com.galou.mynews.models.SectionSearch;
+import com.galou.mynews.models.SectionTopStories;
 import com.galou.mynews.utils.TextUtil;
 
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
 import static com.galou.mynews.searchNotification.ErrorMessage.BEFORE_BEGIN_DATE;
 import static com.galou.mynews.searchNotification.ErrorMessage.EMPTY;
@@ -34,6 +42,11 @@ public class SearchPresenter implements SearchContract.Presenter {
     private String endDate;
     private List<String> sections;
 
+    private String querySearch;
+    private SectionSearch searchQuery;
+
+    private Disposable disposable;
+
 
     public SearchPresenter(@NonNull SearchContract.View searchView) {
         this.searchView = searchView;
@@ -53,17 +66,49 @@ public class SearchPresenter implements SearchContract.Presenter {
         endDateCalendar = convertUserDateToCalendar(endDate);
 
         if (allDataAreCorrect()){
-            String[] queryTerms = TextUtil.separateTextBySpace(queryTerm);
+            String queryTermsForAPI = TextUtil.convertQueryTermForAPI(queryTerm);
+            String querySectionForAPI = "news_desk%3A" + TextUtil.convertListInStringForAPI(sections);
             convertCalendarForApi();
-
-            String termsSearch = "Query Term: " + Arrays.toString(queryTerms) + "\n"
-                    + "Begin Date: " + beginDateApi + "\n"
-                    + "End Date: " + endDateApi + "\n"
-                    + "SectionMostPopular: " + sections;
-
-            searchView.showResultResearch(termsSearch);
-
+            this.disposable = ApiStreams.streamFetchSearch(beginDateApi, endDateApi, querySectionForAPI, queryTermsForAPI).subscribeWith(getObserverSearch());
+            Log.e("tag", beginDateApi + endDateApi + querySectionForAPI + queryTermsForAPI);
         }
+
+    }
+
+    private DisposableObserver<SectionSearch> getObserverSearch(){
+        return new DisposableObserver<SectionSearch>() {
+            @Override
+            public void onNext(SectionSearch section) {
+                sendListArticleToView(section);
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                sendErrorToView(e);
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+    }
+
+    private void sendListArticleToView(SectionSearch searchQuery){
+        this.searchQuery = searchQuery;
+        searchView.showResultResearch(this.searchQuery);
+
+    }
+
+    private void sendErrorToView(Throwable e){
+        searchView.showSnackBar();
+    }
+
+    @Override
+    public void disposeWhenDestroy() {
+        if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
 
     }
 

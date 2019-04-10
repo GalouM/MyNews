@@ -45,8 +45,12 @@ public class ArticleMostPopularViewHolder extends RecyclerView.ViewHolder {
         } else {
             sectionNameView.setText(sectionName + " > " + subsection);
         }
-        String urlMedia = article.getMedia().get(0).getMediaMetadata().get(0).getUrl();
-        glide.load(urlMedia).apply(RequestOptions.centerCropTransform()).into(imageView);
+        if (article.getMedia().size() > 0){
+            String urlMedia = article.getMedia().get(0).getMediaMetadata().get(0).getUrl();
+            glide.load(urlMedia).apply(RequestOptions.centerCropTransform()).into(imageView);
+
+        }
+
 
     }
 }
