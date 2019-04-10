@@ -34,6 +34,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
     @BindView(R.id.result_search_recycler_view) RecyclerView recyclerView;
     @BindView(R.id.result_search_view_root_view) CoordinatorLayout rootView;
+    @BindView(R.id.result_search_swipe_refresh) SwipeRefreshLayout refreshLayout;
 
     private List<ArticleSearch> articles;
     private ResultSearchContract.Presenter presenter;
@@ -41,6 +42,10 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
 
     public ResultsSearchView() {}
+
+    // -----------------
+    // CONFIGURATION START
+    // -----------------
 
 
     @Override
@@ -50,8 +55,29 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
         ButterKnife.bind(this, view);
         configureRecyclerView();
         presenter.getArticles();
+        configureSwipeRefreshLayout();
         return view;
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.disposeWhenDestroy();
+    }
+
+    @Override
+    public void setPresenter(ResultSearchContract.Presenter presenter) {
+        this.presenter = presenter;
+
+    }
+
+    private void configureSwipeRefreshLayout(){
+        refreshLayout.setOnRefreshListener(() -> presenter.getArticles());
+    }
+
+    // -----------------
+    // SETUP AND SHOW RECYCLER VIEW
+    // -----------------
 
     private void configureRecyclerView(){
         articles = new ArrayList<>();
@@ -63,24 +89,41 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
     @Override
     public void showArticles(List<ArticleSearch> articles) {
+        refreshLayout.setRefreshing(false);
         this.articles.addAll(articles);
         adapter.update(articles);
         configureOnClickRecyclerView();
 
     }
 
+    private void configureOnClickRecyclerView(){
+        ItemClickSupport.addTo(recyclerView, R.layout.article_item_view)
+                .setOnItemClickListener((recyclerView, position, v)
+                        -> presenter.getUrlArticle(adapter.getArticle(position)));
+
+    }
+
+    // -----------------
+    // ERROR MESSAGE
+    // -----------------
+
     @Override
     public void showErrorMessage() {
-        Snackbar snackbar = Snackbar.make(rootView, R.string.no_news, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(rootView, R.string.connection_failed, Snackbar.LENGTH_LONG);
         snackbar.show();
 
     }
 
     @Override
-    public void setPresenter(ResultSearchContract.Presenter presenter) {
-        this.presenter = presenter;
+    public void showEmptyNewsMessage() {
+        Snackbar snackbar = Snackbar.make(rootView, R.string.no_news, Snackbar.LENGTH_LONG);
+        snackbar.show();
 
     }
+
+    // -----------------
+    // START WEBVIEW
+    // -----------------
 
     @Override
     public void showDetailsArticle(String url) {
@@ -90,14 +133,4 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
     }
 
-    // -----------------
-    // SETUP CLICK RECYCLERVIEW
-    // -----------------
-
-    private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(recyclerView, R.layout.article_item_view)
-                .setOnItemClickListener((recyclerView, position, v)
-                        -> presenter.getUrlArticle(adapter.getArticle(position)));
-
-    }
 }

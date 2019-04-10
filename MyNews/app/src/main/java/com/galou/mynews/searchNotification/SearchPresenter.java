@@ -36,16 +36,13 @@ public class SearchPresenter implements SearchContract.Presenter {
     private Calendar endDateCalendar;
     private String beginDateApi;
     private String endDateApi;
+    private String queryTermsForAPI;
+    private String querySectionForAPI;
 
     private String queryTerm;
     private String beginDate;
     private String endDate;
     private List<String> sections;
-
-    private String querySearch;
-    private SectionSearch searchQuery;
-
-    private Disposable disposable;
 
 
     public SearchPresenter(@NonNull SearchContract.View searchView) {
@@ -53,6 +50,10 @@ public class SearchPresenter implements SearchContract.Presenter {
         this.searchView.setPresenter(this);
 
     }
+
+    // --------------
+    // SETUP SEARCH QUERY
+    // --------------
 
     @Override
     public void startSearch(String queryTerm, String beginDate, String endDate, List<String> sections) {
@@ -66,51 +67,15 @@ public class SearchPresenter implements SearchContract.Presenter {
         endDateCalendar = convertUserDateToCalendar(endDate);
 
         if (allDataAreCorrect()){
-            String queryTermsForAPI = TextUtil.convertQueryTermForAPI(queryTerm);
-            String querySectionForAPI = "news_desk%3A" + TextUtil.convertListInStringForAPI(sections);
-            convertCalendarForApi();
-            this.disposable = ApiStreams.streamFetchSearch(beginDateApi, endDateApi, querySectionForAPI, queryTermsForAPI).subscribeWith(getObserverSearch());
-            Log.e("tag", beginDateApi + endDateApi + querySectionForAPI + queryTermsForAPI);
+            convertDataForApi();
+            searchView.showResultResearch(beginDateApi, endDateApi, querySectionForAPI, queryTermsForAPI);
         }
 
     }
 
-    private DisposableObserver<SectionSearch> getObserverSearch(){
-        return new DisposableObserver<SectionSearch>() {
-            @Override
-            public void onNext(SectionSearch section) {
-                sendListArticleToView(section);
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                sendErrorToView(e);
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-    }
-
-    private void sendListArticleToView(SectionSearch searchQuery){
-        this.searchQuery = searchQuery;
-        searchView.showResultResearch(this.searchQuery);
-
-    }
-
-    private void sendErrorToView(Throwable e){
-        searchView.showSnackBar();
-    }
-
-    @Override
-    public void disposeWhenDestroy() {
-        if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
-
-    }
+    // --------------
+    // CHECK DATA CORRECT
+    // --------------
 
     private boolean allDataAreCorrect(){
         return !(!isQueryTermCorrect() | !isQuerySectionCorrect() |
@@ -175,13 +140,20 @@ public class SearchPresenter implements SearchContract.Presenter {
         return true;
     }
 
-    private void convertCalendarForApi(){
+    // --------------
+    // CONVERT DATA FOR API
+    // --------------
+
+    private void convertDataForApi(){
         if (beginDateCalendar != null){
             beginDateApi = convertCalendarForAPI(beginDateCalendar);
         }
         if (endDateCalendar != null) {
             endDateApi = convertCalendarForAPI(endDateCalendar);
         }
+
+        queryTermsForAPI = TextUtil.convertQueryTermForAPI(queryTerm);
+        querySectionForAPI = "news_desk%3A" + TextUtil.convertListInStringForAPI(sections);
 
     }
 }

@@ -134,12 +134,6 @@ public class ArticleListPresenterUnitTest {
 
     }
 
-    @AfterClass
-    public static void after(){
-        RxAndroidPlugins.reset();
-        RxJavaPlugins.reset();
-    }
-
     @Test
     public void getUrlArticleTopStories_sentToView(){
         String url = "http://test";
@@ -156,5 +150,11 @@ public class ArticleListPresenterUnitTest {
         presenter.getUrlArticleMostPopular(articleMostPopular);
 
         verify(articleListView).showDetailsArticle(url);
+    }
+
+    @AfterClass
+    public static void after(){
+        RxAndroidPlugins.reset();
+        RxJavaPlugins.reset();
     }
 }

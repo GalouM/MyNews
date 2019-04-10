@@ -13,18 +13,16 @@ import java.util.List;
  */
 public interface SearchContract {
     interface View extends BaseContractView<Presenter> {
-        void showResultResearch(SectionSearch searchQuery);
+        void showResultResearch(String beginDate, String endDate, String querySection, String queryTerms);
         void displayErrorQueryTerm(ErrorMessage errorMessage);
         void displayErrorSections(ErrorMessage errorMessage);
         void disableAllErrors();
         void displayErrorBeginDate(ErrorMessage errorMessage);
         void displayErrorEndDate(ErrorMessage errorMessage);
         void onClickSearchButton();
-        void showSnackBar();
     }
 
     interface Presenter {
         void startSearch(String queryTerm, @Nullable String beginDate, @Nullable String endate, List<String> sections);
-        void disposeWhenDestroy();
     }
 }

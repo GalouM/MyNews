@@ -15,9 +15,11 @@ public interface ResultSearchContract {
         void showArticles(List<ArticleSearch> articles);
         void showErrorMessage();
         void showDetailsArticle(String url);
+        void showEmptyNewsMessage();
     }
     interface Presenter {
         void getUrlArticle(ArticleSearch article);
         void getArticles();
+        void disposeWhenDestroy();
     }
 }

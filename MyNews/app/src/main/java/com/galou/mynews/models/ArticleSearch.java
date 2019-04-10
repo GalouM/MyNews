@@ -114,21 +114,5 @@ public class ArticleSearch {
         this.subsectoinName = subsectoinName;
     }
 
-    public String getTypeOfMaterial() {
-        return typeOfMaterial;
-    }
-
-    public void setTypeOfMaterial(String typeOfMaterial) {
-        this.typeOfMaterial = typeOfMaterial;
-    }
-
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
 
 }

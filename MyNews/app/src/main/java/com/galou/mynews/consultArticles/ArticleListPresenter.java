@@ -31,6 +31,10 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
 
     }
 
+    // -----------------
+    // API REQUEST
+    // -----------------
+
     @Override
     public void getArticlesFromNYT(String section) {
         if(section.equals("mostpopular")) {
@@ -38,18 +42,6 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
         } else {
             this.disposable = ApiStreams.streamFetchTopStories(section).subscribeWith(getObserverTopStories());
         }
-    }
-
-
-    @Override
-    public void getUrlArticleMostPopular(ArticleMostPopular article) {
-        articleListView.showDetailsArticle(article.getUrl());
-    }
-
-    @Override
-    public void getUrlArticleTopStories(ArticleTopStories article) {
-        articleListView.showDetailsArticle(article.getUrl());
-
     }
 
     @Override
@@ -99,6 +91,10 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
         };
     }
 
+    // -----------------
+    // SEND INFOS VIEW
+    // -----------------
+
     private void sendListArticleMostPopular(List<ArticleMostPopular> articles) {
         this.articlesMostPopular = articles;
         if (articlesMostPopular.size() < 0) {
@@ -121,6 +117,25 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
             articleListView.setupRecyclerViewTopStories(articlesTopStories);
         }
     }
+
+    // -----------------
+    // GET DETAILS FOR WEBVIEW
+    // -----------------
+
+    @Override
+    public void getUrlArticleMostPopular(ArticleMostPopular article) {
+        articleListView.showDetailsArticle(article.getUrl());
+    }
+
+    @Override
+    public void getUrlArticleTopStories(ArticleTopStories article) {
+        articleListView.showDetailsArticle(article.getUrl());
+
+    }
+
+    // -----------------
+    // FOR TESTING
+    // -----------------
 
     protected List<ArticleMostPopular> getArticlesMostPopular(){
         return articlesMostPopular;

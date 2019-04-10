@@ -17,6 +17,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_BEGIN_DATE;
+import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_END_DATE;
+import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_SECTIONS;
+import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_TERM;
+
 public class ResultsSearchActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -24,6 +29,11 @@ public class ResultsSearchActivity extends AppCompatActivity {
     private ResultsSearchView resultsSearchView;
     private ResultSearchPresenter presenter;
     private SectionSearch searchQuery;
+
+    private String beginDate;
+    private String endDate;
+    private String querySections;
+    private String queryTerms;
 
 
 
@@ -37,6 +47,10 @@ public class ResultsSearchActivity extends AppCompatActivity {
         configureAndShowFragment();
         setPresenter();
     }
+
+    // -----------------
+    // CONFIGURATION
+    // -----------------
 
     private void configureToolbar(){
         setSupportActionBar(toolbar);
@@ -57,17 +71,19 @@ public class ResultsSearchActivity extends AppCompatActivity {
     }
 
     private void setPresenter(){
-        presenter = new ResultSearchPresenter(resultsSearchView, searchQuery);
+        presenter = new ResultSearchPresenter(resultsSearchView, beginDate, endDate, querySections, queryTerms);
     }
 
+    // -----------------
+    // GET DATA FROM INTENT
+    // -----------------
+
     private void getSearchQuery(){
-        String json = getIntent().getStringExtra(SearchView.EXTRA_KEY_ARTICLE);
-        Gson gson = new Gson();
-        if(json != null){
-            searchQuery = gson.fromJson(json, SectionSearch.class);
-        } else {
-            searchQuery = null;
-        }
+        Bundle bundle = getIntent().getExtras();
+        beginDate = bundle.getString(BUNDLE_KEY_BEGIN_DATE);
+        endDate = bundle.getString(BUNDLE_KEY_END_DATE);
+        querySections = bundle.getString(BUNDLE_KEY_QUERY_SECTIONS);
+        queryTerms = bundle.getString(BUNDLE_KEY_QUERY_TERM);
 
     }
 

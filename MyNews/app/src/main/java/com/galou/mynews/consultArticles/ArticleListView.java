@@ -50,6 +50,10 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
 
     public ArticleListView() {}
 
+    // -----------------
+    // CREATE DIFFERENT INSTANCE
+    // -----------------
+
     public static ArticleListView newInstance(String section){
         ArticleListView view = new ArticleListView();
         Bundle args = new Bundle();
@@ -58,6 +62,10 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
         return (view);
 
     }
+
+    // -----------------
+    // CONFIGURATION
+    // -----------------
 
 
     @Override
@@ -90,7 +98,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
     }
 
     // -----------------
-    // CONFIGURATION
+    // SETUP AND SHOW RECYCLER VIEW
     // -----------------
 
     private void configureRecyclerView(){
@@ -105,14 +113,6 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
-
-    private void configureSwipeRefreshLayout(){
-        refreshLayout.setOnRefreshListener(() -> presenter.getArticlesFromNYT(section));
-    }
-
-    // -----------------
-    // ACTION ANSWER API
-    // -----------------
 
     @Override
     public void setupRecyclerViewMostPopular(List<ArticleMostPopular> articles) {
@@ -132,25 +132,6 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
 
     }
 
-    @Override
-    public void showErrorMessage() {
-        Snackbar snackbar = Snackbar.make(rootView, R.string.connection_failed, Snackbar.LENGTH_LONG);
-        snackbar.show();
-
-    }
-
-    @Override
-    public void showDetailsArticle(String url) {
-        Intent intent = new Intent(getContext(), WebViewArticleActivity.class);
-        intent.putExtra(WebViewArticleActivity.KEY_URL, url);
-        startActivity(intent);
-
-    }
-
-    // -----------------
-    // SETUP CLICK RECYCLERVIEW
-    // -----------------
-
     private void configureOnClickRecyclerViewMostPopular(){
         ItemClickSupport.addTo(recyclerView, R.layout.article_item_view)
                 .setOnItemClickListener((recyclerView, position, v)
@@ -165,10 +146,43 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
 
     }
 
+    // -----------------
+    // REFRESH
+    // -----------------
+
+    private void configureSwipeRefreshLayout(){
+        refreshLayout.setOnRefreshListener(() -> presenter.getArticlesFromNYT(section));
+    }
+
+    // -----------------
+    // ERROR MESSAGE
+    // -----------------
+
+
+    @Override
+    public void showErrorMessage() {
+        Snackbar snackbar = Snackbar.make(rootView, R.string.connection_failed, Snackbar.LENGTH_LONG);
+        snackbar.show();
+
+    }
+
     @Override
     public void showEmptyNewsMessage() {
         Snackbar snackbar = Snackbar.make(rootView, R.string.no_news, Snackbar.LENGTH_LONG);
         snackbar.show();
 
     }
+
+    // -----------------
+    // SHOW WEB VIEW
+    // -----------------
+
+    @Override
+    public void showDetailsArticle(String url) {
+        Intent intent = new Intent(getContext(), WebViewArticleActivity.class);
+        intent.putExtra(WebViewArticleActivity.KEY_URL, url);
+        startActivity(intent);
+
+    }
+
 }

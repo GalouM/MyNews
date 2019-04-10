@@ -1,6 +1,7 @@
 package com.galou.mynews.searchNotification;
 
 import com.galou.mynews.RxImmediateSchedulerRule;
+import com.galou.mynews.utils.TextUtil;
 
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -35,6 +36,8 @@ public class SearchPresenterUnitTest {
     private String mockedBeginDate;
     private String mockedEndDate;
     private List<String> mockedSectionQuery;
+    private String sectionForAPI;
+    private String termForAPI;
 
     @Before
     public void setupPresenter() {
@@ -48,6 +51,8 @@ public class SearchPresenterUnitTest {
         mockedSectionQuery = new ArrayList<>();
         mockedSectionQuery.add("Arts");
         mockedSectionQuery.add("Travel");
+        termForAPI = TextUtil.convertQueryTermForAPI(mockedQueryTerm);
+        sectionForAPI = "news_desk%3A" + TextUtil.convertListInStringForAPI(mockedSectionQuery);
 
     }
 
@@ -62,7 +67,7 @@ public class SearchPresenterUnitTest {
     public void clickSearchButtonCorrectWithData_startSearch(){
         presenter.startSearch(mockedQueryTerm, mockedBeginDate, mockedEndDate, mockedSectionQuery);
         verify(searchView).disableAllErrors();
-        //verify(searchView).showResultResearch(termsSearch);
+        verify(searchView).showResultResearch("20170523", "20170525", sectionForAPI, termForAPI);
 
     }
 
@@ -73,7 +78,7 @@ public class SearchPresenterUnitTest {
 
         presenter.startSearch(mockedQueryTerm, mockedBeginDate, mockedEndDate, mockedSectionQuery);
         verify(searchView).disableAllErrors();
-        //verify(searchView).showResultResearch(termsSearch);
+        verify(searchView).showResultResearch(null, null, sectionForAPI, termForAPI);
 
     }
 

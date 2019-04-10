@@ -130,6 +130,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    // -----------------
+    // START ACTIVITIES
+    // -----------------
+
     private void startSearchActivity(){
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);

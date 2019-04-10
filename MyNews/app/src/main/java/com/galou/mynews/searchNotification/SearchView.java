@@ -2,6 +2,7 @@ package com.galou.mynews.searchNotification;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -43,7 +44,10 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
 
     public static final int DIALOG_CODE = 12345;
 
-    public static final String EXTRA_KEY_ARTICLE = "articleSearch";
+    public static final String BUNDLE_KEY_BEGIN_DATE = "beginDate";
+    public static final String BUNDLE_KEY_END_DATE = "endDate";
+    public static final String BUNDLE_KEY_QUERY_SECTIONS = "querySections";
+    public static final String BUNDLE_KEY_QUERY_TERM = "queryTerms";
 
 
     // --------------
@@ -55,18 +59,12 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        presenter.disposeWhenDestroy();
-    }
-
-    @Override
     protected int getFragmentLayout() {
         return (R.layout.fragment_search);
     }
 
     // --------------
-    // ACTIONS
+    // ACTIONS CLICK
     // --------------
 
     @Override
@@ -107,7 +105,7 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
 
 
     // --------------
-    // SET ERROR MESSAGES
+    // SHOW ERROR MESSAGES
     // --------------
 
 
@@ -174,20 +172,20 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
 
     }
 
+    // --------------
+    // START RESULT ACTIVITY
+    // --------------
+
     @Override
-    public void showResultResearch(SectionSearch searchQuery) {
-        Gson gson = new Gson();
-        String jsonSearchQuery = gson.toJson(searchQuery);
+    public void showResultResearch(String beginDate, String endDate, String querySection, String queryTerms) {
         Intent intent = new Intent(getContext(), ResultsSearchActivity.class);
-        intent.putExtra(EXTRA_KEY_ARTICLE, jsonSearchQuery);
+        Bundle bundle = new Bundle();
+        bundle.putString(BUNDLE_KEY_BEGIN_DATE, beginDate);
+        bundle.putString(BUNDLE_KEY_END_DATE, endDate);
+        bundle.putString(BUNDLE_KEY_QUERY_SECTIONS, querySection);
+        bundle.putString(BUNDLE_KEY_QUERY_TERM, queryTerms);
+        intent.putExtras(bundle);
         startActivity(intent);
-
-    }
-
-    @Override
-    public void showSnackBar() {
-        Snackbar snackbar = Snackbar.make(rootView, R.string.no_news, Snackbar.LENGTH_LONG);
-        snackbar.show();
 
     }
 

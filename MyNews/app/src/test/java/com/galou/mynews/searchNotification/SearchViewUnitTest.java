@@ -2,13 +2,16 @@ package com.galou.mynews.searchNotification;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
+import com.galou.mynews.resultsSearch.ResultsSearchActivity;
 import com.galou.mynews.searchNotification.SearchActivity;
+import com.galou.mynews.webViewArticle.WebViewArticleActivity;
 
 import junit.framework.TestCase;
 
@@ -20,6 +23,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlertDialog;
+import org.robolectric.shadows.ShadowIntent;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -32,6 +36,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
@@ -103,6 +108,10 @@ public class SearchViewUnitTest {
         querySections.add(sportCheck.getText().toString());
         querySections.add(travelCheck.getText().toString());
     }
+
+    // --------------
+    // INCORRECT SEARCH
+    // --------------
 
     @Test
     public void noQueryTermShowErrorMessage() throws Exception {
@@ -193,6 +202,10 @@ public class SearchViewUnitTest {
 
     }
 
+    // --------------
+    // CORRECT SEARCH
+    // --------------
+
     @Test
     public void clickSearchAllDataCorrectWithNoDateStartSearch() throws Exception {
         searchButton.performClick();
@@ -201,6 +214,11 @@ public class SearchViewUnitTest {
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertNull(beginDateInputLayout.getError());
         assertNull(endDateInputLayout.getError());
+
+        Intent startedIntent = shadowOf(activity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+
+        assertEquals(ResultsSearchActivity.class, shadowIntent.getIntentClass());
 
     }
 
@@ -215,6 +233,11 @@ public class SearchViewUnitTest {
         assertFalse(beginDateInputLayout.isErrorEnabled());
         assertFalse(endDateInputLayout.isErrorEnabled());
 
+        Intent startedIntent = shadowOf(activity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+
+        assertEquals(ResultsSearchActivity.class, shadowIntent.getIntentClass());
+
     }
 
     @Test
@@ -226,6 +249,11 @@ public class SearchViewUnitTest {
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertNull(beginDateInputLayout.getError());
         assertFalse(endDateInputLayout.isErrorEnabled());
+
+        Intent startedIntent = shadowOf(activity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+
+        assertEquals(ResultsSearchActivity.class, shadowIntent.getIntentClass());
 
 
     }
@@ -240,9 +268,16 @@ public class SearchViewUnitTest {
         assertFalse(beginDateInputLayout.isErrorEnabled());
         assertNull(endDateInputLayout.getError());
 
+        Intent startedIntent = shadowOf(activity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+
+        assertEquals(ResultsSearchActivity.class, shadowIntent.getIntentClass());
+
     }
 
-    // test date dialogs
+    // --------------
+    // DATE DIALOG
+    // --------------
 
     @Test
     public void clickBeginDateOpenDialog() throws Exception{

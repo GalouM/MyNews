@@ -8,23 +8,22 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by galou on 2019-04-08
+ * Created by galou on 2019-04-10
  */
 @RunWith(JUnit4.class)
-public class MultimediaUnitTest {
-
-    private Multimedia multimedia;
+public class MultimediaSearchUnitTest {
+    private MutimediaSearch multimedia;
 
     @Before
-    public void setup(){
-        multimedia = new Multimedia();
+    public void setup() throws Exception {
+        multimedia = new MutimediaSearch();
     }
 
     @Test
-    public void testUrlIsCorrect(){
+    public void testURLIsCorrect() throws Exception {
         String url = "http://url";
         multimedia.setUrl(url);
 
-        assertEquals(multimedia.getUrl(), url);
+        assertEquals(multimedia.getUrl(),url);
     }
 }
