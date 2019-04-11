@@ -131,4 +131,5 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
     }
 
+
 }

@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
+import com.galou.mynews.resultsSearch.ResultsSearchActivity;
 
 import org.junit.Before;
 import org.junit.Test;

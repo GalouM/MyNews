@@ -34,4 +34,12 @@ public class ResponseSearchUnitTest {
 
         assertEquals(responseSearch.getDocs(),list);
     }
+
+    @Test
+    public void testMetaIsCorrect() throws Exception {
+        MetaSearch meta = new MetaSearch();
+        responseSearch.setMeta(meta);
+
+        assertEquals(responseSearch.getMeta(), meta);
+    }
 }

@@ -101,4 +101,12 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     private void sendErrorToView(){
         resultView.showErrorMessage();
     }
+
+    // -----------------
+    // FOR TESTING
+    // -----------------
+
+    protected List<ArticleSearch> getArticlesForTesting(){
+        return this.articles;
+    }
 }

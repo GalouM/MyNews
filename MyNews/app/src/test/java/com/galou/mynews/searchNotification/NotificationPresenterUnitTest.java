@@ -1,5 +1,7 @@
 package com.galou.mynews.searchNotification;
 
+import com.galou.mynews.utils.TextUtil;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +28,8 @@ public class NotificationPresenterUnitTest {
 
     private String mockedQueryTerm;
     private List<String> mockedSectionQuery;
+    private String queryTermsForAPI;
+    private String querySectionForAPI;
 
     @Before
     public void setupPresenter() {
@@ -37,17 +41,19 @@ public class NotificationPresenterUnitTest {
         mockedSectionQuery = new ArrayList<>();
         mockedSectionQuery.add("Arts");
         mockedSectionQuery.add("Travel");
+        queryTermsForAPI = TextUtil.convertQueryTermForAPI(mockedQueryTerm);
+        querySectionForAPI = "news_desk%3A" + TextUtil.convertListInStringForAPI(mockedSectionQuery);
 
     }
 
     @Test
     public void enableNotificationWithCorrectData_onNotification(){
-        String termsSearch = "Query Term: [term1, term2]" + "\n"
-                + "SectionMostPopular: [Arts, Travel]";
-
         presenter.setTermsQuery(mockedQueryTerm, mockedSectionQuery);
+
         verify(notificationView).disableAllErrors();
-        //verify(notificationView).showNotificationEnabledMessage(termsSearch);
+        verify(notificationView).showNotificationEnabledMessage();
+        verify(notificationView).saveSettingsNotification();
+        verify(notificationView).enableNotifications(querySectionForAPI, queryTermsForAPI);
 
     }
 
@@ -56,8 +62,12 @@ public class NotificationPresenterUnitTest {
         mockedQueryTerm = "";
 
         presenter.setTermsQuery(mockedQueryTerm, mockedSectionQuery);
+
         verify(notificationView).disableAllErrors();
         verify(notificationView).displayErrorQueryTerm(ErrorMessage.EMPTY);
+        verify(notificationView).disableNotification();
+        verify(notificationView).showNotificationDisableMessage();
+        verify(notificationView).saveSettingsNotification();
 
     }
 
@@ -66,8 +76,12 @@ public class NotificationPresenterUnitTest {
         mockedQueryTerm = "@@@ 555 geer";
 
         presenter.setTermsQuery(mockedQueryTerm, mockedSectionQuery);
+
         verify(notificationView).disableAllErrors();
         verify(notificationView).displayErrorQueryTerm(ErrorMessage.INCORRECT);
+        verify(notificationView).disableNotification();
+        verify(notificationView).showNotificationDisableMessage();
+        verify(notificationView).saveSettingsNotification();
 
     }
 
@@ -77,8 +91,21 @@ public class NotificationPresenterUnitTest {
         mockedSectionQuery.remove(0);
 
         presenter.setTermsQuery(mockedQueryTerm, mockedSectionQuery);
+
         verify(notificationView).disableAllErrors();
         verify(notificationView).displayErrorSections(ErrorMessage.EMPTY);
+        verify(notificationView).disableNotification();
+        verify(notificationView).showNotificationDisableMessage();
+        verify(notificationView).saveSettingsNotification();
 
+    }
+
+    @Test
+    public void disableNotification_showMessage(){
+        presenter.notifyNotificationDisabled();
+
+        verify(notificationView).showNotificationDisableMessage();
+        verify(notificationView).disableNotification();
+        verify(notificationView).saveSettingsNotification();
     }
 }
