@@ -1,7 +1,5 @@
 package com.galou.mynews.resultsSearch;
 
-import com.galou.mynews.BaseContractView;
-import com.galou.mynews.consultArticles.ArticleListContract;
 import com.galou.mynews.models.ArticleSearch;
 
 import java.util.List;

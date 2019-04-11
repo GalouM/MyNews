@@ -1,7 +1,5 @@
 package com.galou.mynews.utils;
 
-import com.galou.mynews.R;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

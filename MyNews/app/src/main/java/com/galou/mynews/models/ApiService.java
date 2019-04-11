@@ -1,7 +1,5 @@
 package com.galou.mynews.models;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -24,7 +22,7 @@ public interface ApiService {
      @GET("topstories/v2/{section}.json?api-key="+API_KEY)
      Observable<SectionTopStories> getTopStoriesSection(@Path("section") String section);
 
-    @GET("search/v2/articlesearch.json?api-key="+API_KEY)
+    @GET("search/v2/articlesearch.json?sort=relevance&api-key="+API_KEY)
     Observable<SectionSearch> getSearchSection(
             @Query("begin_date") String beginDate,
             @Query("end_date") String endDate,

@@ -1,8 +1,9 @@
 package com.galou.mynews.models;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class ResponseSearch {
 
@@ -11,7 +12,7 @@ public class ResponseSearch {
     private List<ArticleSearch> docs = null;
     @SerializedName("meta")
     @Expose
-    private Object meta;
+    private MetaSearch meta;
 
     public List<ArticleSearch> getDocs() {
         return docs;
@@ -21,4 +22,11 @@ public class ResponseSearch {
         this.docs = docs;
     }
 
+    public MetaSearch getMeta() {
+        return meta;
+    }
+
+    public void setMeta(MetaSearch meta) {
+        this.meta = meta;
+    }
 }

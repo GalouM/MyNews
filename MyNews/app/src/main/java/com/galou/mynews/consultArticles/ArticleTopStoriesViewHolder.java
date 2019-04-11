@@ -9,15 +9,8 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.galou.mynews.R;
-import com.galou.mynews.models.ArticleMostPopular;
 import com.galou.mynews.models.ArticleTopStories;
-import com.galou.mynews.models.Media;
-import com.galou.mynews.models.Multimedia;
 import com.galou.mynews.utils.DateUtil;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

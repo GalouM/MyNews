@@ -1,6 +1,5 @@
 package com.galou.mynews.models;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;

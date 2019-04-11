@@ -9,11 +9,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.resultsSearch.ResultsSearchActivity;
-import com.galou.mynews.searchNotification.SearchActivity;
-import com.galou.mynews.webViewArticle.WebViewArticleActivity;
-
-import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,10 +19,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowIntent;
-import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 

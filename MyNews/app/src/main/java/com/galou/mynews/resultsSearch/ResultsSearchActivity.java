@@ -1,18 +1,12 @@
 package com.galou.mynews.resultsSearch;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.galou.mynews.R;
-import com.galou.mynews.models.ArticleSearch;
 import com.galou.mynews.models.SectionSearch;
-import com.galou.mynews.searchNotification.SearchView;
-import com.google.gson.Gson;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

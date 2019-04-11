@@ -3,8 +3,6 @@ package com.galou.mynews.searchNotification;
 import android.support.annotation.Nullable;
 
 import com.galou.mynews.BaseContractView;
-import com.galou.mynews.models.ArticleSearch;
-import com.galou.mynews.models.SectionSearch;
 
 import java.util.List;
 

@@ -1,12 +1,13 @@
 package com.galou.mynews.consultArticles;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -25,6 +26,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    public static final String CHANNEL_ID = "channelID";
+
     // Views
     @BindView(R.id.main_activity_viewpager) ViewPager viewpager;
     @BindView(R.id.main_activity_tabs) TabLayout tabLayout;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        this.createNotificationChannel();
         this.configureToolbar();
         this.configureViewPagerAndTabs();
         this.configureDrawerLayout();
@@ -144,6 +148,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(this, NotificationsActivity.class);
         startActivity(intent);
 
+    }
+
+    // -----------------
+    // CREATE NOTIFICATION CHANNEL
+    // -----------------
+
+    private void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "My News channel";
+            String description = "Notification channel for My News";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 

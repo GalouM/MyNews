@@ -1,20 +1,11 @@
 package com.galou.mynews.searchNotification;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.galou.mynews.models.ApiStreams;
-import com.galou.mynews.models.ArticleSearch;
-import com.galou.mynews.models.SectionSearch;
-import com.galou.mynews.models.SectionTopStories;
 import com.galou.mynews.utils.TextUtil;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-
-import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
 
 import static com.galou.mynews.searchNotification.ErrorMessage.BEFORE_BEGIN_DATE;
 import static com.galou.mynews.searchNotification.ErrorMessage.EMPTY;

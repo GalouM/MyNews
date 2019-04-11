@@ -18,7 +18,6 @@ import io.reactivex.observers.DisposableObserver;
 public class ResultSearchPresenter implements ResultSearchContract.Presenter {
 
     private ResultSearchContract.View resultView;
-    private SectionSearch searchQuery;
     private String beginDate;
     private String endDate;
     private String querySections;

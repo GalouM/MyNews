@@ -62,6 +62,12 @@
     <string name="no_news">No news to show</string>
     <string name="incorrect_url">Incorrect URL</string>
     <string name="webview_activity_name">Details</string>
+    <string name="content_notification_message">%d new news available</string>
+    <string name="title_notifications">New News</string>
+    <string name="error_notifications">Error Request</string>
+    <string name="error_notification_message">An error happened during your request please reset your notification settings</string>
+    <string name="notification_enabled_message">Notifications are enabled</string>
+    <string name="notification_disabled_message">Notifications are disabled</string>
 
 
 </resources>

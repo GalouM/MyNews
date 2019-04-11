@@ -45,7 +45,7 @@ public class NotificationPresenterUnitTest {
         String termsSearch = "Query Term: [term1, term2]" + "\n"
                 + "SectionMostPopular: [Arts, Travel]";
 
-        presenter.enableNotification(mockedQueryTerm, mockedSectionQuery);
+        presenter.setTermsQuery(mockedQueryTerm, mockedSectionQuery);
         verify(notificationView).disableAllErrors();
         //verify(notificationView).showNotificationEnabledMessage(termsSearch);
 
@@ -55,7 +55,7 @@ public class NotificationPresenterUnitTest {
     public void enableNotificationMissingQueryTerm_showError(){
         mockedQueryTerm = "";
 
-        presenter.enableNotification(mockedQueryTerm, mockedSectionQuery);
+        presenter.setTermsQuery(mockedQueryTerm, mockedSectionQuery);
         verify(notificationView).disableAllErrors();
         verify(notificationView).displayErrorQueryTerm(ErrorMessage.EMPTY);
 
@@ -65,7 +65,7 @@ public class NotificationPresenterUnitTest {
     public void clickSearchButtonWrongQueryTerm_showErrorQueryTerm(){
         mockedQueryTerm = "@@@ 555 geer";
 
-        presenter.enableNotification(mockedQueryTerm, mockedSectionQuery);
+        presenter.setTermsQuery(mockedQueryTerm, mockedSectionQuery);
         verify(notificationView).disableAllErrors();
         verify(notificationView).displayErrorQueryTerm(ErrorMessage.INCORRECT);
 
@@ -76,7 +76,7 @@ public class NotificationPresenterUnitTest {
         mockedSectionQuery.remove(0);
         mockedSectionQuery.remove(0);
 
-        presenter.enableNotification(mockedQueryTerm, mockedSectionQuery);
+        presenter.setTermsQuery(mockedQueryTerm, mockedSectionQuery);
         verify(notificationView).disableAllErrors();
         verify(notificationView).displayErrorSections(ErrorMessage.EMPTY);
 

@@ -34,6 +34,10 @@
             android:parentActivityName=".searchNotification.SearchActivity" />
         <activity android:name=".webViewArticle.WebViewArticleActivity"
             android:label="@string/webview_activity_name"/>
+        
+        <receiver android:name=".utils.NotificationReceiver"
+            android:exported="true"/>
     </application>
+
 
 </manifest>

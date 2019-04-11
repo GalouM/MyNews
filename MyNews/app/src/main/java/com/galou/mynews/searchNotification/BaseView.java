@@ -1,12 +1,8 @@
 package com.galou.mynews.searchNotification;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -16,14 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by galou on 2019-03-21
  */
 public abstract class BaseView extends Fragment{
-
-    protected abstract int getFragmentLayout();
 
     // views
     @BindView(R.id.query_term) EditText userTerm;
@@ -42,14 +35,6 @@ public abstract class BaseView extends Fragment{
     protected List<String> querySections;
 
     protected BaseView(){}
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(getFragmentLayout(), container, false);
-        ButterKnife.bind(this, view);
-        return view;
-    }
 
     @Override
     public void onAttach(Context context) {

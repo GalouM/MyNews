@@ -4,8 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.galou.mynews.utils.TextUtil;
 
-import java.util.Arrays;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 import static com.galou.mynews.searchNotification.ErrorMessage.EMPTY;
 import static com.galou.mynews.searchNotification.ErrorMessage.INCORRECT;
@@ -18,6 +19,10 @@ public class NotificationPresenter implements NotificationContract.Presenter {
 
     private String queryTerm;
     private List<String> sections;
+    private Disposable disposable;
+
+    private String queryTermsForAPI;
+    private String querySectionForAPI;
 
     private NotificationContract.View notificationView;
 
@@ -27,20 +32,32 @@ public class NotificationPresenter implements NotificationContract.Presenter {
     }
 
     @Override
-    public void enableNotification(String queryTerm, List<String> querySection) {
+    public void setTermsQuery(String queryTerm, List<String> querySection) {
         this.queryTerm = queryTerm;
         this.sections = querySection;
         notificationView.disableAllErrors();
         if (allDataAreCorrect()){
-            String queryTerms = TextUtil.convertQueryTermForAPI(queryTerm);
-
-
-            notificationView.showNotificationEnabledMessage("");
+            convertDataForApi();
+            notificationView.enableNotifications(querySectionForAPI, queryTermsForAPI);
+            notificationView.showNotificationEnabledMessage();
+            notificationView.saveSettingsNotification();
         } else {
-            notificationView.disableNotification();
+            notifyNotificationDisabled();
         }
 
     }
+
+    @Override
+    public void notifyNotificationDisabled() {
+        notificationView.disableNotification();
+        notificationView.showNotificationDisableMessage();
+        notificationView.saveSettingsNotification();
+
+    }
+
+    // --------------
+    // CHECK DATA CORRECT
+    // --------------
 
     private boolean allDataAreCorrect(){
         return !(!isQueryTermCorrect() | !isQuerySectionCorrect());
@@ -68,6 +85,15 @@ public class NotificationPresenter implements NotificationContract.Presenter {
         }
 
         return true;
+    }
+
+    // --------------
+    // CONVERT DATA FOR API
+    // --------------
+
+    private void convertDataForApi(){
+        queryTermsForAPI = TextUtil.convertQueryTermForAPI(queryTerm);
+        querySectionForAPI = "news_desk%3A" + TextUtil.convertListInStringForAPI(sections);
 
     }
 }
