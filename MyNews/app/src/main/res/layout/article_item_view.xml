@@ -28,14 +28,18 @@
                 android:id="@+id/recycler_view_section_article"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Europe > France"
                 android:layout_weight="1"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="@dimen/section_article_size"
+                android:ellipsize="end"
+                android:maxLines="2"/>
             <TextView
                 android:id="@+id/recycler_view_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="09/09/19" />
+                android:textSize="@dimen/date_article_size"
+                android:ellipsize="end"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <TextView
@@ -43,8 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
-            android:text="Hackers came but the French were prepared"
-            android:textSize="15sp"/>
+            android:textSize="@dimen/title_article_size"
+            android:ellipsize="end"
+            android:maxLines="3"/>
 
     </LinearLayout>
 </LinearLayout>

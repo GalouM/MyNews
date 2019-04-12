@@ -1,5 +1,7 @@
 package com.galou.mynews.resultsSearch;
 
+import android.net.ConnectivityManager;
+
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.ArticleSearch;
 import com.galou.mynews.models.SectionSearch;
@@ -16,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
+import org.robolectric.shadows.ShadowConnectivityManager;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,6 +15,8 @@ import com.galou.mynews.utils.DateUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.galou.mynews.utils.TextUtil.convertSectionNameForDisplay;
+
 /**
  * Created by galou on 2019-04-09
  */
@@ -30,9 +32,13 @@ public class ArticleSearchViewHolder extends RecyclerView.ViewHolder  {
     }
 
     public void updateWithArticles(ArticleSearch article, RequestManager glide) {
-        title.setText(article.getHeadline().getPrintHeadline());
+        String headline = article.getHeadline().getPrintHeadline();
+        if(headline == null){
+            headline = article.getHeadline().getMain();
+        }
+        title.setText(headline);
         date.setText(DateUtil.convertDateFromAPIToDisplay(article.getPubDate()));
-        String sectionName = article.getSectionName();
+        String sectionName = convertSectionNameForDisplay(article.getSectionName());
         String subsection = article.getSubsectoinName();
         if (subsection == null) {
             sectionNameView.setText(sectionName);

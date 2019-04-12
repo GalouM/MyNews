@@ -15,6 +15,8 @@ import com.galou.mynews.utils.DateUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.galou.mynews.utils.TextUtil.convertSectionNameForDisplay;
+
 /**
  * Created by galou on 2019-03-30
  */
@@ -32,7 +34,7 @@ public class ArticleTopStoriesViewHolder extends RecyclerView.ViewHolder {
     public void updateWithArticles(ArticleTopStories article, RequestManager glide){
         title.setText(article.getTitle());
         date.setText(DateUtil.convertDateFromAPIToDisplay(article.getPublishedDate()));
-        String sectionName = article.getSection();
+        String sectionName = convertSectionNameForDisplay(article.getSection());
         String subsection = article.getSubsection();
         if(subsection.length() <= 0 ){
             sectionNameView.setText(sectionName);

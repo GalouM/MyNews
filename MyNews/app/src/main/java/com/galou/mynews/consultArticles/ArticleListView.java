@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -77,6 +78,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
         View view = inflater.inflate(R.layout.fragment_article_list_view, container, false);
         ButterKnife.bind(this, view);
         this.section = getArguments().getString(KEY_SECTION, "");
+        this.setPresenter(presenter);
         this.configureRecyclerView();
         presenter.getArticlesFromNYT(this.section);
         configureForeground();
@@ -90,6 +92,11 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
         presenter.disposeWhenDestroy();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        setRetainInstance(true);
+    }
 
     public String getSection() {
         return section;
@@ -98,6 +105,11 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
     @Override
     public void setPresenter(ArticleListContract.Presenter presenter) {
         this.presenter = presenter;
+        if(presenter == null){
+            this.presenter = new ArticleListPresenter(this);
+        }
+
+
 
     }
 

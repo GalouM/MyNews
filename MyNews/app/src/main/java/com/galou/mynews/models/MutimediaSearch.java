@@ -42,7 +42,7 @@ public class MutimediaSearch {
     private Object legacy;
 
     public String getUrl() {
-        return url;
+        return "https://www.nytimes.com/" + url;
     }
 
     public void setUrl(String url) {

@@ -98,6 +98,7 @@ public class NotificationsView extends BaseView implements NotificationContract.
             R.id.search_item_entrepreneurs, R.id.search_item_travel, R.id.search_item_sport})
     public void onClickBoxesSection(){
         if(switchNotification.isChecked()) {
+            this.setQueryTerm();
             this.setQuerySections();
             presenter.setTermsQuery(queryTerms, querySections);
         }
@@ -118,6 +119,7 @@ public class NotificationsView extends BaseView implements NotificationContract.
             @Override
             public void afterTextChanged(Editable editable) {
                 setQueryTerm();
+                setQuerySections();
                 presenter.setTermsQuery(queryTerms, querySections);
 
             }

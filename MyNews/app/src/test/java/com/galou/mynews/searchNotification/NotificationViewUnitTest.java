@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
+import com.galou.mynews.ShadowSnackbar;
 import com.galou.mynews.searchNotification.NotificationsActivity;
 import com.galou.mynews.searchNotification.NotificationsView;
 
@@ -17,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -51,7 +53,7 @@ public class NotificationViewUnitTest {
     public void setUp() throws Exception {
         activity = Robolectric.buildActivity(NotificationsActivity.class).create().resume().get();
         notificationEnabled = activity.findViewById(R.id.notification_fragment_switch);
-        /*
+
 
         //find views
         queryTerm = activity.findViewById(R.id.query_term);
@@ -73,23 +75,26 @@ public class NotificationViewUnitTest {
         politicsCheck.setChecked(false);
         sportCheck.setChecked(true);
         travelCheck.setChecked(false);
-        */
+
 
     }
 
 
     @Test
     public void noQueryTermShowErrorMessage() throws Exception {
-        assertTrue(true);
+        queryTerm.setText("");
+        notificationEnabled.performClick();
+
+        assertTrue(queryTermInputLayout.isErrorEnabled());
     }
-    /*
+
 
     @Test
     public void queryTermIncorrectShowErrorMessage() throws Exception {
         queryTerm.setText("$!@");
-        //notificationEnabled.performClick();
+        notificationEnabled.performClick();
 
-        //assertTrue(queryTermInputLayout.isErrorEnabled());
+        assertTrue(queryTermInputLayout.isErrorEnabled());
     }
 
     @Test
@@ -98,14 +103,14 @@ public class NotificationViewUnitTest {
         businessCheck.setChecked(false);
         entrepreneurCheck.setChecked(false);
         sportCheck.setChecked(false);
-        //notificationEnabled.performClick();
+        notificationEnabled.performClick();
 
-        //assertTrue(querySectionInputLayout.isErrorEnabled());
+        assertTrue(querySectionInputLayout.isErrorEnabled());
     }
 
     @Test
     public void enableNotificationAllDataCorrect() throws Exception {
-        //notificationEnabled.performClick();
+        notificationEnabled.performClick();
 
         List<String> querySections = new ArrayList<>();
         querySections.add(artCheck.getText().toString());
@@ -113,9 +118,10 @@ public class NotificationViewUnitTest {
         querySections.add(entrepreneurCheck.getText().toString());
         querySections.add(sportCheck.getText().toString());
 
+        assertFalse(querySectionInputLayout.isErrorEnabled());
+        assertFalse(queryTermInputLayout.isErrorEnabled());
 
-        //TestCase.assertEquals(ShadowToast.getTextOfLatestToast(), messageToast);
     }
-    */
+
 
 }

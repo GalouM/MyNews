@@ -1,5 +1,7 @@
 package com.galou.mynews.utils;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,5 +28,13 @@ public abstract class TextUtil {
                 .replace("[", "(\"")
                 .replace("]", "\")");
 
+    }
+
+    public static String convertSectionNameForDisplay(String name){
+        if (name != null){
+            return name.replaceAll(";", " > ");
+        } else {
+            return "No section";
+        }
     }
 }

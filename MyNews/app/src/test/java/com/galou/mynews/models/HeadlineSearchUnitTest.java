@@ -26,4 +26,12 @@ public class HeadlineSearchUnitTest {
 
         assertEquals(headline.getPrintHeadline(),title);
     }
+
+    @Test
+    public void testMainTitleIsCorrect() throws Exception {
+        String title = "title";
+        headline.setMain(title);
+
+        assertEquals(headline.getMain(),title);
+    }
 }

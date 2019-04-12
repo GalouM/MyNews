@@ -36,5 +36,11 @@ public class HeadlineSearch {
         this.printHeadline = printHeadline;
     }
 
+    public String getMain() {
+        return main;
+    }
 
+    public void setMain(String main) {
+        this.main = main;
+    }
 }

@@ -24,6 +24,6 @@ public class MultimediaSearchUnitTest {
         String url = "http://url";
         multimedia.setUrl(url);
 
-        assertEquals(multimedia.getUrl(),url);
+        assertEquals(multimedia.getUrl(),"https://www.nytimes.com/" + url);
     }
 }
