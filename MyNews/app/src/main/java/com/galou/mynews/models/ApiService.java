@@ -27,7 +27,8 @@ public interface ApiService {
             @Query("begin_date") String beginDate,
             @Query("end_date") String endDate,
             @Query("fq") String querySection,
-            @Query("q") String queryTerms);
+            @Query("q") String queryTerms,
+            @Query("page") int pageNumber);
 
 
 

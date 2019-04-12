@@ -11,13 +11,16 @@ public interface ResultSearchContract {
     interface View {
         void setPresenter(ResultSearchContract.Presenter presenter);
         void showArticles(List<ArticleSearch> articles);
+        void showNextArticles(List<ArticleSearch> articles);
         void showErrorMessage();
         void showDetailsArticle(String url);
         void showEmptyNewsMessage();
+        void showNoMoreNews();
     }
     interface Presenter {
         void getUrlArticle(ArticleSearch article);
         void getArticles();
+        void getNextArticles();
         void disposeWhenDestroy();
     }
 }

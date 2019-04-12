@@ -54,4 +54,9 @@ public class ArticleSearchAdapter extends RecyclerView.Adapter<ArticleSearchView
         this.listArticle = articles;
         this.notifyDataSetChanged();
     }
+
+    public void addArticlesUpdate(List<ArticleSearch> articles){
+        listArticle.addAll(articles);
+        this.notifyDataSetChanged();
+    }
 }

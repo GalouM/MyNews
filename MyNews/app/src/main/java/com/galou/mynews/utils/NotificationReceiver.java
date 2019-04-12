@@ -55,7 +55,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     // -------------------
 
     private void getArticles() {
-        this.disposable = ApiStreams.streamFetchSearch(beginDate, null, querySection, queryTerms).subscribeWith(getObserverSearch());
+        this.disposable = ApiStreams.streamFetchSearch(beginDate, null, querySection, queryTerms, 0).subscribeWith(getObserverSearch());
 
     }
 

@@ -12,6 +12,8 @@ import java.util.List;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
+import static com.galou.mynews.utils.NumberUtil.getNumberPages;
+
 /**
  * Created by galou on 2019-04-09
  */
@@ -23,6 +25,9 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     private String querySections;
     private String queryTerms;
     private List<ArticleSearch> articles;
+
+    private int pageNumber;
+    private int totalNumberPages;
 
     private Disposable disposable;
 
@@ -43,7 +48,19 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
 
     @Override
     public void getArticles() {
-        this.disposable = ApiStreams.streamFetchSearch(beginDate, endDate, querySections, queryTerms).subscribeWith(getObserverSearch());
+        pageNumber = 0;
+        this.disposable = ApiStreams.streamFetchSearch(beginDate, endDate, querySections, queryTerms, 0).subscribeWith(getObserverSearch());
+
+    }
+
+    @Override
+    public void getNextArticles() {
+        if (pageNumber < totalNumberPages) {
+            pageNumber +=1;
+            this.disposable = ApiStreams.streamFetchSearch(beginDate, endDate, querySections, queryTerms, pageNumber).subscribeWith(getObserverSearch());
+        } else {
+            resultView.showNoMoreNews();
+        }
 
     }
 
@@ -51,8 +68,7 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
         return new DisposableObserver<SectionSearch>() {
             @Override
             public void onNext(SectionSearch section) {
-                sendArticlesToView(section.getResponse().getDocs());
-
+                sendArticlesToView(section);
             }
 
             @Override
@@ -74,6 +90,11 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
 
     }
 
+    private void setTotalPageNumber(int numberArticles){
+        totalNumberPages = getNumberPages(numberArticles);
+    }
+
+
     // -----------------
     // GET DETAILS FOR WEBVIEW
     // -----------------
@@ -89,10 +110,15 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     // SEND INFOS VIEW
     // -----------------
 
-    private void sendArticlesToView(List<ArticleSearch> articleSearches){
-        this.articles = articleSearches;
+    private void sendArticlesToView(SectionSearch section){
+        this.articles = section.getResponse().getDocs();
         if(articles.size() > 0) {
-            resultView.showArticles(articles);
+            if(pageNumber == 0) {
+                resultView.showArticles(articles);
+                setTotalPageNumber(section.getResponse().getMeta().getHits());
+            } else {
+                resultView.showNextArticles(articles);
+            }
         } else {
             resultView.showEmptyNewsMessage();
         }

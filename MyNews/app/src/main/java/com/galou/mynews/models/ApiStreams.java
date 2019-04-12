@@ -28,9 +28,9 @@ public class ApiStreams {
     }
 
     public static Observable<SectionSearch> streamFetchSearch(String beginDate, String endDate,
-                                                              String querySection, String queryTerms){
+                                                              String querySection, String queryTerms, int pageNumber){
         ApiService apiService = ApiService.retrofit.create(ApiService.class);
-        return apiService.getSearchSection(beginDate, endDate, querySection, queryTerms)
+        return apiService.getSearchSection(beginDate, endDate, querySection, queryTerms, pageNumber)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);

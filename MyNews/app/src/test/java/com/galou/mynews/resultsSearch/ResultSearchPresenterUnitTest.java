@@ -71,7 +71,7 @@ public class ResultSearchPresenterUnitTest {
 
     @Test
     public void fetchAPI_getListArticles() {
-        Observable<SectionSearch> observable = ApiStreams.streamFetchSearch(beginDate, endDate, terms, sections);
+        Observable<SectionSearch> observable = ApiStreams.streamFetchSearch(beginDate, endDate, terms, sections, 0);
         TestObserver<SectionSearch> testObserver = new TestObserver<>();
         observable.subscribeWith(testObserver)
                 .assertNoErrors()
@@ -89,6 +89,13 @@ public class ResultSearchPresenterUnitTest {
         presenter.getArticles();
 
         verify(resultView).showArticles(presenter.getArticlesForTesting());
+    }
+
+    @Test
+    public void nextArticleFoundNoNew_showMessage(){
+        presenter.getNextArticles();
+
+        verify(resultView).showNoMoreNews();
     }
 
     @Test

@@ -68,6 +68,7 @@
     <string name="error_notification_message">An error happened during your request please reset your notification settings</string>
     <string name="notification_enabled_message">Notifications are enabled</string>
     <string name="notification_disabled_message">Notifications are disabled</string>
+    <string name="no_more_news">No more news to show</string>
 
 
 </resources>

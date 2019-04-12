@@ -2,6 +2,8 @@ package com.galou.mynews.consultArticles;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.bumptech.glide.Glide;
 import com.galou.mynews.R;
@@ -45,6 +48,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.article_list_view_root_view) CoordinatorLayout rootView;
     @BindView(R.id.swipe_refresh) SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.article_list_view_frame_layout) FrameLayout frameLayout;
 
 
     public ArticleListView() {}
@@ -75,6 +79,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
         this.section = getArguments().getString(KEY_SECTION, "");
         this.configureRecyclerView();
         presenter.getArticlesFromNYT(this.section);
+        configureForeground();
         this.configureSwipeRefreshLayout();
         return (view);
     }
@@ -96,6 +101,11 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
 
     }
 
+    private void configureForeground(){
+        frameLayout.setForeground(new ColorDrawable(Color.BLACK));
+        frameLayout.getForeground().setAlpha(0);
+    }
+
     // -----------------
     // SETUP AND SHOW RECYCLER VIEW
     // -----------------
@@ -115,6 +125,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
 
     @Override
     public void setupRecyclerViewMostPopular(List<ArticleMostPopular> articles) {
+        frameLayout.getForeground().setAlpha(0);
         refreshLayout.setRefreshing(false);
         this.articlesMostPopular.addAll(articles);
         adapterMostPopular.update(this.articlesMostPopular);
@@ -124,6 +135,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
 
     @Override
     public void setupRecyclerViewTopStories(List<ArticleTopStories> articles) {
+        frameLayout.getForeground().setAlpha(0);
         refreshLayout.setRefreshing(false);
         this.articleTopStories.addAll(articles);
         adapterTopStories.update(this.articleTopStories);
@@ -150,7 +162,12 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
     // -----------------
 
     private void configureSwipeRefreshLayout(){
-        refreshLayout.setOnRefreshListener(() -> presenter.getArticlesFromNYT(section));
+        refreshLayout.setOnRefreshListener(this::onRefreshLayout);
+    }
+
+    private void onRefreshLayout(){
+        frameLayout.getForeground().setAlpha(50);
+        presenter.getArticlesFromNYT(section);
     }
 
     // -----------------
