@@ -55,7 +55,7 @@ public class ResultSearchPresenterUnitTest {
     @Before
     public void setupPresenter() {
         MockitoAnnotations.initMocks(this);
-        beginDate = "20190101";
+        beginDate = "20100101";
         endDate = "20190110";
         terms = TextUtil.convertQueryTermForAPI("usa canada");
         List<String> list = new ArrayList<>();
@@ -89,6 +89,14 @@ public class ResultSearchPresenterUnitTest {
         presenter.getArticles();
 
         verify(resultView).showArticles(presenter.getArticlesForTesting());
+    }
+
+    @Test
+    public void nextArticle_sendToView(){
+        presenter.getArticles();
+        presenter.getNextArticles();
+
+        verify(resultView).showNextArticles(presenter.getArticlesForTesting());
     }
 
     @Test

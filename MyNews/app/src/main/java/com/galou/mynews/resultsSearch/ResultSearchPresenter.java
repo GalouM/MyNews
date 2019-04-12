@@ -2,6 +2,7 @@ package com.galou.mynews.resultsSearch;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.ArticleSearch;
@@ -132,6 +133,7 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     // FOR TESTING
     // -----------------
 
+    @VisibleForTesting
     protected List<ArticleSearch> getArticlesForTesting(){
         return this.articles;
     }

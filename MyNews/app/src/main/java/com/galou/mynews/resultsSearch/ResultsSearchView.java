@@ -103,8 +103,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
     @Override
     public void showArticles(List<ArticleSearch> articles) {
-        frameLayout.getForeground().setAlpha(0);
-        refreshLayout.setRefreshing(false);
+        turnOffRefreshing();
         this.articles = articles;
         adapter.update(this.articles);
         configureOnClickRecyclerView();
@@ -113,8 +112,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
     @Override
     public void showNextArticles(List<ArticleSearch> articles) {
-        frameLayout.getForeground().setAlpha(0);
-        refreshLayoutBottom.setRefreshing(false);
+        turnOffRefreshing();
         recyclerView.scrollToPosition(adapter.getItemCount());
         this.articles.addAll(articles);
         adapter.addArticlesUpdate(articles);
@@ -135,6 +133,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
     @Override
     public void showErrorMessage() {
+        turnOffRefreshing();
         Snackbar snackbar = Snackbar.make(rootView, R.string.connection_failed, Snackbar.LENGTH_LONG);
         snackbar.show();
 
@@ -149,6 +148,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
 
     @Override
     public void showNoMoreNews() {
+        turnOffRefreshing();
         Snackbar snackbar = Snackbar.make(rootView, R.string.no_more_news, Snackbar.LENGTH_LONG);
         snackbar.show();
 
@@ -171,7 +171,6 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
     // -----------------
 
     private void onRefreshLayoutBottom() {
-        //rootView.setBackgroundColor(Color.LTGRAY);
         frameLayout.getForeground().setAlpha(50);
         refreshLayoutBottom.setRefreshing(true);
         presenter.getNextArticles();
@@ -181,5 +180,11 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
     private void onRefreshLayout(){
         frameLayout.getForeground().setAlpha(50);
         presenter.getArticles();
+    }
+
+    private void turnOffRefreshing(){
+        frameLayout.getForeground().setAlpha(0);
+        refreshLayoutBottom.setRefreshing(false);
+        refreshLayout.setRefreshing(false);
     }
 }
