@@ -13,11 +13,12 @@ public interface NotificationContract {
         void displayErrorSections(ErrorMessage errorMessage);
         void disableAllErrors();
         void onClickNotificationSwitch();
-        void enableNotifications(String querySection, String queryTerm);
+        void enableNotifications();
         void disableNotification();
         void showNotificationEnabledMessage();
         void showNotificationDisableMessage();
-        void saveSettingsNotification();
+        void saveUIState();
+        void saveNotificationSettings(String queryTerms, String querySections);
     }
     interface Presenter {
         void setTermsQuery(String queryTerm, List<String> querySection);

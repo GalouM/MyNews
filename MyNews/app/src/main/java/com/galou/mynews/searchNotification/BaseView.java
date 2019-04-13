@@ -52,22 +52,22 @@ public abstract class BaseView extends Fragment{
     protected void setQuerySections(){
         this.querySections = new ArrayList<>();
         if(this.boxArts.isChecked()){
-            querySections.add(boxArts.getText().toString());
+            querySections.add("Arts");
         }
         if(this.boxBusiness.isChecked()){
-            querySections.add(boxBusiness.getText().toString());
+            querySections.add("Business");
         }
         if(this.boxEntrepreneurs.isChecked()){
-            querySections.add(boxEntrepreneurs.getText().toString());
+            querySections.add("Entrepreneurs");
         }
         if(this.boxPolitics.isChecked()){
-            querySections.add(boxPolitics.getText().toString());
+            querySections.add("Politics");
         }
         if(this.boxSport.isChecked()){
-            querySections.add(boxSport.getText().toString());
+            querySections.add("Sports");
         }
         if(this.boxTravel.isChecked()){
-            querySections.add(boxTravel.getText().toString());
+            querySections.add("Travel");
         }
 
     }

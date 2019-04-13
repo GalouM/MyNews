@@ -38,9 +38,10 @@ public class NotificationPresenter implements NotificationContract.Presenter {
         notificationView.disableAllErrors();
         if (allDataAreCorrect()){
             convertDataForApi();
-            notificationView.enableNotifications(querySectionForAPI, queryTermsForAPI);
+            notificationView.saveNotificationSettings(queryTermsForAPI, querySectionForAPI);
+            notificationView.enableNotifications();
             notificationView.showNotificationEnabledMessage();
-            notificationView.saveSettingsNotification();
+            notificationView.saveUIState();
         } else {
             notifyNotificationDisabled();
         }
@@ -51,7 +52,7 @@ public class NotificationPresenter implements NotificationContract.Presenter {
     public void notifyNotificationDisabled() {
         notificationView.disableNotification();
         notificationView.showNotificationDisableMessage();
-        notificationView.saveSettingsNotification();
+        notificationView.saveUIState();
 
     }
 

@@ -52,8 +52,9 @@ public class NotificationPresenterUnitTest {
 
         verify(notificationView).disableAllErrors();
         verify(notificationView).showNotificationEnabledMessage();
-        verify(notificationView).saveSettingsNotification();
-        verify(notificationView).enableNotifications(querySectionForAPI, queryTermsForAPI);
+        verify(notificationView).saveUIState();
+        verify(notificationView).saveNotificationSettings(queryTermsForAPI, querySectionForAPI);
+        verify(notificationView).enableNotifications();
 
     }
 
@@ -67,7 +68,7 @@ public class NotificationPresenterUnitTest {
         verify(notificationView).displayErrorQueryTerm(ErrorMessage.EMPTY);
         verify(notificationView).disableNotification();
         verify(notificationView).showNotificationDisableMessage();
-        verify(notificationView).saveSettingsNotification();
+        verify(notificationView).saveUIState();
 
     }
 
@@ -81,7 +82,7 @@ public class NotificationPresenterUnitTest {
         verify(notificationView).displayErrorQueryTerm(ErrorMessage.INCORRECT);
         verify(notificationView).disableNotification();
         verify(notificationView).showNotificationDisableMessage();
-        verify(notificationView).saveSettingsNotification();
+        verify(notificationView).saveUIState();
 
     }
 
@@ -96,7 +97,7 @@ public class NotificationPresenterUnitTest {
         verify(notificationView).displayErrorSections(ErrorMessage.EMPTY);
         verify(notificationView).disableNotification();
         verify(notificationView).showNotificationDisableMessage();
-        verify(notificationView).saveSettingsNotification();
+        verify(notificationView).saveUIState();
 
     }
 
@@ -106,6 +107,6 @@ public class NotificationPresenterUnitTest {
 
         verify(notificationView).showNotificationDisableMessage();
         verify(notificationView).disableNotification();
-        verify(notificationView).saveSettingsNotification();
+        verify(notificationView).saveUIState();
     }
 }

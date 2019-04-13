@@ -39,7 +39,6 @@ public class NotificationsView extends BaseView implements NotificationContract.
     public static final int NOTIFICATION_ID = 333;
 
     private PendingIntent pendingIntent;
-    private Intent notificationIntent;
     private SharedPreferences preferences;
     private boolean ignoreNextTextChange;
 
@@ -52,6 +51,8 @@ public class NotificationsView extends BaseView implements NotificationContract.
     public static final String KEY_PREF_TERM = "terms";
     public static final String KEY_PREF_NOTIFICATION_ENABLE = "notificationEnabled";
     public static final String KEY_PREF = "prefNotification";
+    public static final String KEY_PREF_TERM_FOR_API = "termsForAPI";
+    public static final String KEY_PREF_SECTION_FOR_API = "sectionForAPI";
 
     //views
     @BindView(R.id.notification_fragment_switch) SwitchCompat switchNotification;
@@ -75,7 +76,7 @@ public class NotificationsView extends BaseView implements NotificationContract.
     }
 
     private void configureNotificationIntent(){
-        notificationIntent = new Intent(getContext(), NotificationReceiver.class);
+        Intent notificationIntent = new Intent(getContext(), NotificationReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getContext(), 0,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -134,11 +135,11 @@ public class NotificationsView extends BaseView implements NotificationContract.
     }
 
     // --------------
-    // SAVE UI STATE
+    // SAVE / GET UI STATE
     // --------------
 
     @Override
-    public void saveSettingsNotification(){
+    public void saveUIState(){
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(KEY_PREF_TERM, queryTerms);
         editor.putBoolean(KEY_PREF_NOTIFICATION_ENABLE, switchNotification.isChecked());
@@ -200,17 +201,18 @@ public class NotificationsView extends BaseView implements NotificationContract.
     // --------------
 
     @Override
-    public void enableNotifications(String querySection, String queryTerm) {
-        Bundle bundle = new Bundle();
-        bundle.putString(BUNDLE_KEY_QUERY_SECTIONS, querySection);
-        bundle.putString(BUNDLE_KEY_QUERY_TERM, queryTerm);
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 0,
-                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        notificationIntent.putExtras(bundle);
+    public void enableNotifications() {
         AlarmManager manager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,0, AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,0, AlarmManager.INTERVAL_DAY, pendingIntent);
 
+    }
 
+    @Override
+    public void saveNotificationSettings(String queryTerms, String querySections) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_PREF_TERM_FOR_API, queryTerms);
+        editor.putString(KEY_PREF_SECTION_FOR_API, querySections);
+        editor.apply();
 
     }
 

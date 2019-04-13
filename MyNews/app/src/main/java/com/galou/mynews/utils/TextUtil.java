@@ -23,7 +23,7 @@ public abstract class TextUtil {
     }
 
     public static String convertQueryTermForDisplay(String text){
-        return text.replaceAll("%20", ",\\s+");
+        return text.replaceAll("%20", ", ");
     }
 
     public static String convertListInStringForAPI(List<String> list){
@@ -36,7 +36,7 @@ public abstract class TextUtil {
 
     public static String convertSectionNameForDisplay(String name){
         if (name != null){
-            return name.replaceAll(";", " > ");
+            return name.replaceAll(";", " >");
         } else {
             return "No section";
         }

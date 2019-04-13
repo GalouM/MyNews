@@ -10,6 +10,8 @@ import java.util.List;
 
 import static com.galou.mynews.utils.DateUtil.isEndDateBeforeBeginDate;
 import static com.galou.mynews.utils.TextUtil.convertListInStringForAPI;
+import static com.galou.mynews.utils.TextUtil.convertQueryTermForDisplay;
+import static com.galou.mynews.utils.TextUtil.convertSectionNameForDisplay;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -51,6 +53,24 @@ public class TextUtilUnitTest {
         String expectedString = "(\"section1\"%20\"section2\")";
 
         assertEquals(expectedString, convertListInStringForAPI(list));
+    }
+
+    @Test
+    public void convertQueryTermDisplayCorrectly(){
+        String convertedTerm = "test, test2";
+        String string = "test%20test2";
+
+        assertEquals(convertedTerm, convertQueryTermForDisplay(string));
+
+    }
+
+    @Test
+    public void convertSectionNameForDisplayCorrectly(){
+        String expectedString = "Section1 > Section2";
+        String section = "Section1; Section2";
+
+        assertEquals(expectedString, convertSectionNameForDisplay(section));
+
     }
 
 }
