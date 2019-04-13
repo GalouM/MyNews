@@ -135,6 +135,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
     public void showErrorMessage() {
         turnOffRefreshing();
         Snackbar snackbar = Snackbar.make(rootView, R.string.connection_failed, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
         snackbar.show();
 
     }
@@ -142,6 +143,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
     @Override
     public void showEmptyNewsMessage() {
         Snackbar snackbar = Snackbar.make(rootView, R.string.no_news, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
         snackbar.show();
 
     }
@@ -150,6 +152,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
     public void showNoMoreNews() {
         turnOffRefreshing();
         Snackbar snackbar = Snackbar.make(rootView, R.string.no_more_news, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
         snackbar.show();
 
     }

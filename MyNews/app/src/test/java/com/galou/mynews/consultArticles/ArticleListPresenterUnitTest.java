@@ -1,10 +1,13 @@
 package com.galou.mynews.consultArticles;
 
+import android.content.Intent;
+
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.ArticleMostPopular;
 import com.galou.mynews.models.ArticleTopStories;
 import com.galou.mynews.models.SectionMostPopular;
 import com.galou.mynews.models.SectionTopStories;
+import com.galou.mynews.resultsSearch.ResultsSearchActivity;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,6 +19,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
+import org.robolectric.Robolectric;
+import org.robolectric.shadows.ShadowIntent;
 
 import io.reactivex.Observable;
 import io.reactivex.android.plugins.RxAndroidPlugins;
@@ -23,9 +28,11 @@ import io.reactivex.observers.TestObserver;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 /**
  * Created by galou on 2019-04-03

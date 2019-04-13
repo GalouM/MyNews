@@ -22,6 +22,10 @@ public abstract class TextUtil {
         return text.replaceAll("\\s+", "%20");
     }
 
+    public static String convertQueryTermForDisplay(String text){
+        return text.replaceAll("%20", ",\\s+");
+    }
+
     public static String convertListInStringForAPI(List<String> list){
         return list.toString()
                 .replaceAll(", ", "\"%20\"")

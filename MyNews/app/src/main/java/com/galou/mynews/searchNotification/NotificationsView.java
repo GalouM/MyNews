@@ -41,6 +41,7 @@ public class NotificationsView extends BaseView implements NotificationContract.
     private PendingIntent pendingIntent;
     private Intent notificationIntent;
     private SharedPreferences preferences;
+    private boolean ignoreNextTextChange;
 
     public static final String KEY_PREF_ART = "artSection";
     public static final String KEY_PREF_SPORT = "sportSection";
@@ -105,6 +106,7 @@ public class NotificationsView extends BaseView implements NotificationContract.
     }
 
     private void setWatcherEditText(){
+        ignoreNextTextChange = true;
         userTerm.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -113,14 +115,19 @@ public class NotificationsView extends BaseView implements NotificationContract.
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(ignoreNextTextChange){
+                    ignoreNextTextChange = false;
+                    return;
+                }
+                setQueryTerm();
+                setQuerySections();
+                presenter.setTermsQuery(queryTerms, querySections);
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                setQueryTerm();
-                setQuerySections();
-                presenter.setTermsQuery(queryTerms, querySections);
+
 
             }
         });
@@ -175,6 +182,7 @@ public class NotificationsView extends BaseView implements NotificationContract.
     @Override
     public void showNotificationEnabledMessage() {
         Snackbar snackbar = Snackbar.make(rootView, R.string.notification_enabled_message, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
         snackbar.show();
 
     }
@@ -182,6 +190,7 @@ public class NotificationsView extends BaseView implements NotificationContract.
     @Override
     public void showNotificationDisableMessage() {
         Snackbar snackbar = Snackbar.make(rootView, R.string.notification_disabled_message, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
         snackbar.show();
 
     }
@@ -199,7 +208,7 @@ public class NotificationsView extends BaseView implements NotificationContract.
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         notificationIntent.putExtras(bundle);
         AlarmManager manager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,0, AlarmManager.INTERVAL_DAY, pendingIntent);
+        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,0, AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
 
 
 

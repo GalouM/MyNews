@@ -52,6 +52,7 @@ public class WebViewArticleActivity extends AppCompatActivity {
 
     private void showSnackBar(){
         Snackbar snackbar = Snackbar.make(rootView, R.string.incorrect_url, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
         snackbar.show();
 
     }

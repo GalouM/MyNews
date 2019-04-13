@@ -54,21 +54,22 @@
     <string name="error_message_format_date">Format has to be DD/MM/YYYY</string>
     <string name="error_message_date_in_future">Cannot be in the future</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="no_published_date">no date</string>
     <string name="connection_failed">Connection failed, please check your Internet connection</string>
     <string name="result_activity_name">Results</string>
     <string name="no_news">No news to show</string>
     <string name="incorrect_url">Incorrect URL</string>
     <string name="webview_activity_name">Details</string>
-    <string name="content_notification_message">%d new news available</string>
-    <string name="title_notifications">New News</string>
+    <string name="content_notification_message">%d new news available today</string>
+    <string name="title_notifications">"New news for %s"</string>
     <string name="error_notifications">Error Request</string>
     <string name="error_notification_message">An error happened during your request please reset your notification settings</string>
     <string name="notification_enabled_message">Notifications are enabled</string>
     <string name="notification_disabled_message">Notifications are disabled</string>
     <string name="no_more_news">No more news to show</string>
+    <string name="search_item_sports">Sports</string>
+    <string name="hide_button_snackbar">Hide</string>
 
 
 </resources>

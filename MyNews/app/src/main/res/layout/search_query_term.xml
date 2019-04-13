@@ -5,14 +5,15 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:errorEnabled="true">
+    app:errorEnabled="true"
+    android:layout_marginLeft="@dimen/small_margin"
+    android:layout_marginRight="@dimen/small_margin">
 
     <EditText
 
         android:id="@+id/query_term"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin"
         android:fadeScrollbars="true"
         android:hint="@string/search_query_term"
         android:inputType="text" />

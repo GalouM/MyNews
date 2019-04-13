@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.galou.mynews.R;
@@ -152,6 +153,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
         this.articleTopStories.addAll(articles);
         adapterTopStories.update(this.articleTopStories);
         configureOnClickRecyclerViewTopStories();
+        recyclerView.setVisibility(View.VISIBLE);
 
     }
 
@@ -190,6 +192,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
     @Override
     public void showErrorMessage() {
         Snackbar snackbar = Snackbar.make(rootView, R.string.connection_failed, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
         snackbar.show();
 
     }
@@ -197,6 +200,7 @@ public class ArticleListView extends Fragment implements ArticleListContract.Vie
     @Override
     public void showEmptyNewsMessage() {
         Snackbar snackbar = Snackbar.make(rootView, R.string.no_news, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
         snackbar.show();
 
     }

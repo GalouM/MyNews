@@ -21,6 +21,7 @@ import static com.galou.mynews.searchNotification.NotificationsView.NOTIFICATION
 import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_SECTIONS;
 import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_TERM;
 import static com.galou.mynews.utils.DateUtil.convertCalendarForAPI;
+import static com.galou.mynews.utils.TextUtil.convertQueryTermForDisplay;
 
 /**
  * Created by galou on 2019-04-10
@@ -83,10 +84,12 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     private void showNotification(SectionSearch section){
         int numberArticle = section.getResponse().getMeta().getHits();
+        String terms = convertQueryTermForDisplay(queryTerms);
         String contentTextNotification = String.format(context.getString(R.string.content_notification_message), numberArticle);
+        String titleNotification = String.format("New news for %s", terms);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.new_york_time_icon)
-                .setContentTitle(context.getString(R.string.title_notifications))
+                .setContentTitle(titleNotification)
                 .setContentText(contentTextNotification)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
