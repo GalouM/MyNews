@@ -96,9 +96,9 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
     // SEND INFOS VIEW
     // -----------------
 
-    private void sendListArticleMostPopular(List<ArticleMostPopular> articles) {
+    protected void sendListArticleMostPopular(List<ArticleMostPopular> articles) {
         this.articlesMostPopular = articles;
-        if (articlesMostPopular.size() < 0) {
+        if (articlesMostPopular.size() <= 0) {
             articleListView.showEmptyNewsMessage();
 
         } else {
@@ -110,9 +110,9 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
         articleListView.showErrorMessage();
     }
 
-    private void sendListArticleTopStories(List<ArticleTopStories> articles){
+    protected void sendListArticleTopStories(List<ArticleTopStories> articles){
         this.articlesTopStories = articles;
-        if (articlesTopStories.size() < 0) {
+        if (articlesTopStories.size() <= 0) {
             articleListView.showEmptyNewsMessage();
         } else {
             articleListView.setupRecyclerViewTopStories(articlesTopStories);

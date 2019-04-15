@@ -22,6 +22,9 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.shadows.ShadowIntent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.observers.TestObserver;
@@ -142,10 +145,26 @@ public class ArticleListPresenterUnitTest {
     }
 
     @Test
+    public void emptyListTopStoriesFetched_sendMessageView() {
+        List<ArticleTopStories> articlesList = new ArrayList<>();
+        presenter.sendListArticleTopStories(articlesList);
+
+        verify(articleListView).showEmptyNewsMessage();
+    }
+
+    @Test
+    public void emptyListMostPopularFetched_sendMessageView() {
+        List<ArticleMostPopular> articlesList = new ArrayList<>();
+        presenter.sendListArticleMostPopular(articlesList);
+
+        verify(articleListView).showEmptyNewsMessage();
+    }
+
+    @Test
     public void getUrlArticleTopStories_sentToView(){
         String url = "http://test";
         when(articleTopStories.getUrl()).thenReturn(url);
-        presenter.getUrlArticleTopStories(articleTopStories);
+        presenter.getUrlArticleTopStories(articleTopStories)
 
         verify(articleListView).showDetailsArticle(url);
     }
