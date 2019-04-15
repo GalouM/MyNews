@@ -164,7 +164,7 @@ public class ArticleListPresenterUnitTest {
     public void getUrlArticleTopStories_sentToView(){
         String url = "http://test";
         when(articleTopStories.getUrl()).thenReturn(url);
-        presenter.getUrlArticleTopStories(articleTopStories)
+        presenter.getUrlArticleTopStories(articleTopStories);
 
         verify(articleListView).showDetailsArticle(url);
     }
