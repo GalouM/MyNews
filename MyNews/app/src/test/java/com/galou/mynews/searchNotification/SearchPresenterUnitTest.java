@@ -1,25 +1,20 @@
 package com.galou.mynews.searchNotification;
 
-import com.galou.mynews.RxImmediateSchedulerRule;
 import com.galou.mynews.utils.TextUtil;
 
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 import static com.galou.mynews.utils.DateUtil.convertCalendarForDisplay;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by galou on 2019-04-03

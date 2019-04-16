@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import static com.galou.mynews.utils.DateUtil.convertCalendarForAPI;
 import static com.galou.mynews.utils.DateUtil.convertCalendarForDisplay;

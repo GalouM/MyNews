@@ -1,15 +1,10 @@
 package com.galou.mynews.consultArticles;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.galou.mynews.R;
 import com.galou.mynews.models.ArticleMostPopular;
 import com.galou.mynews.models.ArticleTopStories;
 import com.galou.mynews.models.SectionMostPopular;
@@ -18,13 +13,10 @@ import com.galou.mynews.models.SectionTopStories;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +25,6 @@ import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**

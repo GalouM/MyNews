@@ -5,14 +5,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import static com.galou.mynews.utils.DateUtil.isEndDateBeforeBeginDate;
 import static com.galou.mynews.utils.TextUtil.convertListInStringForAPI;
 import static com.galou.mynews.utils.TextUtil.convertQueryTermForDisplay;
 import static com.galou.mynews.utils.TextUtil.convertSectionNameForDisplay;
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

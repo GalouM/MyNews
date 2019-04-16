@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.galou.mynews.R;
-import com.galou.mynews.models.SectionSearch;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
@@ -12,27 +11,16 @@ import com.galou.mynews.R;
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.SectionSearch;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
 import static com.galou.mynews.consultArticles.MainActivity.CHANNEL_ID;
 import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF;
-import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_ART;
-import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_BUSINESS;
-import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_ENTREPRENEURS;
-import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_POLITICS;
 import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_SECTION_FOR_API;
-import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_SPORT;
-import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_TERM;
 import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_TERM_FOR_API;
-import static com.galou.mynews.searchNotification.NotificationsView.KEY_PREF_TRAVEL;
 import static com.galou.mynews.searchNotification.NotificationsView.NOTIFICATION_ID;
-import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_SECTIONS;
-import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_TERM;
 import static com.galou.mynews.utils.DateUtil.convertCalendarForAPI;
 import static com.galou.mynews.utils.TextUtil.convertQueryTermForDisplay;
 

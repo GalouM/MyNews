@@ -1,13 +1,14 @@
 package com.galou.mynews;
 
 import android.support.annotation.NonNull;
-import io.reactivex.Observable;
-import io.reactivex.Single;
 
 import org.mockito.configuration.DefaultMockitoConfiguration;
 import org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
+import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class MockitoConfiguration extends DefaultMockitoConfiguration {
     public Answer<Object> getDefaultAnswer() {

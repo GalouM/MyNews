@@ -1,34 +1,23 @@
 package com.galou.mynews.searchNotification;
 
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
-import com.galou.mynews.ShadowSnackbar;
-import com.galou.mynews.searchNotification.NotificationsActivity;
-import com.galou.mynews.searchNotification.NotificationsView;
-
-import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.robolectric.Shadows.shadowOf;
 
 /**
  * Created by galou on 2019-03-25

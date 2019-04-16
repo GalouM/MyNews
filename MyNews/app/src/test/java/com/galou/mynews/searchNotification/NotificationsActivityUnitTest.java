@@ -1,19 +1,12 @@
 package com.galou.mynews.searchNotification;
 
 import com.galou.mynews.R;
-import com.galou.mynews.searchNotification.NotificationsActivity;
-import com.galou.mynews.searchNotification.NotificationsView;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadows.ShadowToast;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotNull;

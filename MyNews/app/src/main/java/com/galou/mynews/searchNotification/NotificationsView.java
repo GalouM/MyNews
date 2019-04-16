@@ -24,9 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_SECTIONS;
-import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_TERM;
-
 /**
  * A simple {@link Fragment} subclass.
  */

@@ -3,6 +3,7 @@ package com.galou.mynews.resultsSearch;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.library21.custom.SwipeRefreshLayoutBottom;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
@@ -35,7 +36,6 @@ import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_TE
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 /**
  * Created by galou on 2019-04-10
