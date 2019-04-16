@@ -118,7 +118,6 @@ public class ResultSearchPresenterUnitTest {
     public void noArticleFound_showMessage(){
         beginDate = "20501010";
         terms = TextUtil.convertQueryTermForAPI("555tttrrreezzaa");
-
         presenter = new ResultSearchPresenter(resultView, beginDate, endDate, terms, sections);
         presenter.getArticles();
 
