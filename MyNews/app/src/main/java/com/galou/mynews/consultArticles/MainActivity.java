@@ -167,10 +167,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @VisibleForTesting
-    public CountingIdlingResource getEspressoIdlingResourceForMainFragment() {
-        return this.presenter.getEspressoIdlingResource();
-    }
 
 
 
