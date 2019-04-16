@@ -67,6 +67,7 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     public void getNextArticles() {
         if (pageNumber < totalNumberPages) {
             pageNumber +=1;
+            this.incrementIdleResource();
             this.disposable = ApiStreams.streamFetchSearch(beginDate, endDate, querySections, queryTerms, pageNumber).subscribeWith(getObserverSearch());
         } else {
             resultView.showNoMoreNews();
