@@ -73,4 +73,13 @@ public class TextUtilUnitTest {
 
     }
 
+    @Test
+    public void convertSectionNameForDisplay_nullSection(){
+        String expectedString = "No section";
+        String section = null;
+
+        assertEquals(expectedString, convertSectionNameForDisplay(section));
+
+    }
+
 }
