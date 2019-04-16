@@ -89,4 +89,7 @@ dependencies {
     //ESPRESSO
     implementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.2'
     implementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
+
+    //SWIPEREFRESHBOTTOM
+    implementation project(":swiperefreshlayoutbottom-1.0")
 }

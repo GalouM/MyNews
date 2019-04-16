@@ -4,30 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.galou.mynews.R;
 import com.galou.mynews.models.ArticleSearch;
 import com.galou.mynews.models.ResponseSearch;
 import com.galou.mynews.models.SectionSearch;
-import com.galou.mynews.utils.SwipeRefreshLayoutBottom;
 import com.galou.mynews.utils.TextUtil;
-import com.galou.mynews.webViewArticle.WebViewArticleActivity;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.shadows.ShadowIntent;
 
 import java.util.ArrayList;
 import java.util.List;
