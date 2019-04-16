@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -166,8 +164,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             notificationManager.createNotificationChannel(channel);
         }
     }
-
-
 
 
 }
