@@ -18,12 +18,12 @@ import butterknife.ButterKnife;
 public class WebViewArticleActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.web_view) WebView webView;
-    @BindView(R.id.web_view_root_view) CoordinatorLayout rootView;
 
     private String url;
 
     public static final String KEY_URL = "url";
+    private WebViewView webViewView;
+    private WebViewPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,8 @@ public class WebViewArticleActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         configureToolbar();
         getUrl();
-        setWebView();
+        configureAndShowFragment();
+        setPresenter();
     }
 
     private void configureToolbar(){
@@ -44,23 +45,25 @@ public class WebViewArticleActivity extends AppCompatActivity {
 
     private void getUrl(){
         url = getIntent().getStringExtra(KEY_URL);
-        if (url == null || url.isEmpty()){
-            showSnackBar();
+
+    }
+
+    private void configureAndShowFragment(){
+        webViewView = (WebViewView) getSupportFragmentManager().findFragmentById(R.id.web_view_frame_layout);
+        if (webViewView == null){
+            webViewView = new WebViewView();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.web_view_frame_layout, webViewView)
+                    .commit();
         }
 
     }
 
-    private void showSnackBar(){
-        Snackbar snackbar = Snackbar.make(rootView, R.string.incorrect_url, Snackbar.LENGTH_LONG);
-        snackbar.setAction(R.string.hide_button_snackbar, view -> snackbar.dismiss());
-        snackbar.show();
+    private void setPresenter(){
+        presenter = new WebViewPresenter(webViewView, url);
 
     }
 
-    private void setWebView(){
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(url);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

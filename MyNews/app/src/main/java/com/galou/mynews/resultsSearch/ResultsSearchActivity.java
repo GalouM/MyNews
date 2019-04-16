@@ -24,7 +24,6 @@ public class ResultsSearchActivity extends AppCompatActivity {
 
     private ResultsSearchView resultsSearchView;
     private ResultSearchPresenter presenter;
-    private SectionSearch searchQuery;
 
     private String beginDate;
     private String endDate;
