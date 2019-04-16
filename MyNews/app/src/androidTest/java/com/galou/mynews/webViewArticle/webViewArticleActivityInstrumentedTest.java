@@ -42,4 +42,9 @@ public class webViewArticleActivityInstrumentedTest {
         assertThat(webViewActivityTestRule.getActivityResult(), hasResultCode(Activity.RESULT_CANCELED));
     }
 
+    @Test
+    public void webView_visible(){
+        onView(withId(R.id.web_view)).check(matches(isDisplayed()));
+        
+    }
 }
