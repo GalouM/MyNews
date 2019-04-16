@@ -70,46 +70,62 @@ public class NotificationViewUnitTest {
 
 
     @Test
-    public void noQueryTermShowErrorMessage() throws Exception {
+    public void noQueryTerm_showErrorMessage() throws Exception {
         queryTerm.setText("");
-        notificationEnabled.performClick();
+        notificationEnabled.setChecked(true);
 
         assertTrue(queryTermInputLayout.isErrorEnabled());
     }
 
 
     @Test
-    public void queryTermIncorrectShowErrorMessage() throws Exception {
+    public void queryTermIncorrect_showErrorMessage() throws Exception {
         queryTerm.setText("$!@");
-        notificationEnabled.performClick();
+        notificationEnabled.setChecked(true);
 
         assertTrue(queryTermInputLayout.isErrorEnabled());
     }
 
     @Test
-    public void noSectionSelectedShowErrorMessage() throws Exception {
+    public void noSectionSelected_showErrorMessage() throws Exception {
         artCheck.setChecked(false);
         businessCheck.setChecked(false);
         entrepreneurCheck.setChecked(false);
         sportCheck.setChecked(false);
-        notificationEnabled.performClick();
+        notificationEnabled.setChecked(true);
 
         assertTrue(querySectionInputLayout.isErrorEnabled());
     }
 
     @Test
-    public void enableNotificationAllDataCorrect() throws Exception {
+    public void enableNotification_allDataCorrect() throws Exception {
         notificationEnabled.performClick();
-
-        List<String> querySections = new ArrayList<>();
-        querySections.add(artCheck.getText().toString());
-        querySections.add(businessCheck.getText().toString());
-        querySections.add(entrepreneurCheck.getText().toString());
-        querySections.add(sportCheck.getText().toString());
 
         assertFalse(querySectionInputLayout.isErrorEnabled());
         assertFalse(queryTermInputLayout.isErrorEnabled());
 
+    }
+
+
+    @Test
+    public void onNotificationEnabledNoSelection_showError() throws Exception {
+        notificationEnabled.setChecked(true);
+        artCheck.setChecked(false);
+        businessCheck.setChecked(false);
+        entrepreneurCheck.setChecked(false);
+        politicsCheck.setChecked(false);
+        sportCheck.setChecked(false);
+        travelCheck.setChecked(false);
+
+        assertTrue(querySectionInputLayout.isErrorEnabled());
+    }
+
+    @Test
+    public void onQueryTextChangedIncorrect_showError() throws Exception {
+        notificationEnabled.setChecked(true);
+        queryTerm.setText("test,");
+
+        assertTrue(queryTermInputLayout.isErrorEnabled());
     }
 
 
