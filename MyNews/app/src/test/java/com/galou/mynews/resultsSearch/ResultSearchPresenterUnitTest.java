@@ -107,23 +107,6 @@ public class ResultSearchPresenterUnitTest {
         verify(resultView).showNextArticles(presenter.getArticlesForTesting());
     }
 
-    @Test
-    public void nextArticleFoundNoNew_showMessage(){
-        presenter.getNextArticles();
-
-        verify(resultView).showNoMoreNews();
-    }
-
-    @Test
-    public void noArticleFound_showMessage(){
-        beginDate = "20501010";
-        terms = TextUtil.convertQueryTermForAPI("555tttrrreezzaa");
-        presenter = new ResultSearchPresenter(resultView, beginDate, endDate, terms, sections);
-        presenter.getArticles();
-
-        verify(resultView).showEmptyNewsMessage();
-
-    }
 
     @Test
     public void getUrlArticle_sentToView(){
