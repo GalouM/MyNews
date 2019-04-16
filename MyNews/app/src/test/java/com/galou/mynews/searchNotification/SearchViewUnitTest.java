@@ -188,8 +188,8 @@ public class SearchViewUnitTest {
 
     @Test
     public void endDateBeforeBeginDateShowErrorMessage() throws Exception {
-        beginDate.setText("03/03/2019");
-        endDate.setText("02/03/2019");
+        beginDate.setText("03/03/19");
+        endDate.setText("02/03/19");
         searchButton.performClick();
 
         assertTrue(endDateInputLayout.isErrorEnabled());

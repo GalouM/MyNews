@@ -3,7 +3,9 @@ package com.galou.mynews.resultsSearch;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.idling.CountingIdlingResource;
 
+import com.galou.mynews.BuildConfig;
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.ArticleSearch;
 import com.galou.mynews.models.SectionSearch;
@@ -32,6 +34,10 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
 
     private Disposable disposable;
 
+    // FOR TESTING
+    @VisibleForTesting
+    protected CountingIdlingResource espressoTestIdlingResource;
+
     public ResultSearchPresenter(@NonNull ResultSearchContract.View resultView, @Nullable String beginDate,
                                  @Nullable String endDate, String querySection, String queryTerms){
         this.resultView = resultView;
@@ -40,6 +46,8 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
         this.endDate = endDate;
         this.querySections = querySection;
         this.queryTerms = queryTerms;
+
+        this.configureEspressoIdlingResource();
 
     }
 
@@ -50,6 +58,7 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     @Override
     public void getArticles() {
         pageNumber = 0;
+        this.incrementIdleResource();
         this.disposable = ApiStreams.streamFetchSearch(beginDate, endDate, querySections, queryTerms, 0).subscribeWith(getObserverSearch());
 
     }
@@ -112,6 +121,7 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     // -----------------
 
     private void sendArticlesToView(SectionSearch section){
+        this.decrementIdleResource();
         this.articles = section.getResponse().getDocs();
         if(articles.size() > 0) {
             if(pageNumber == 0) {
@@ -126,6 +136,7 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     }
 
     private void sendErrorToView(){
+        this.decrementIdleResource();
         resultView.showErrorMessage();
     }
 
@@ -137,4 +148,21 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
     protected List<ArticleSearch> getArticlesForTesting(){
         return this.articles;
     }
+
+    @VisibleForTesting
+    public CountingIdlingResource getEspressoIdlingResource() { return espressoTestIdlingResource; }
+
+    @VisibleForTesting
+    private void configureEspressoIdlingResource(){
+        this.espressoTestIdlingResource = new CountingIdlingResource("Network_Call");
+    }
+
+    protected void incrementIdleResource(){
+        if (BuildConfig.DEBUG) this.espressoTestIdlingResource.increment();
+    }
+
+    protected void decrementIdleResource(){
+        if (BuildConfig.DEBUG) this.espressoTestIdlingResource.decrement();
+    }
+
 }

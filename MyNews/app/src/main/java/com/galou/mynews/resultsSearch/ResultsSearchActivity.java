@@ -1,6 +1,8 @@
 package com.galou.mynews.resultsSearch;
 
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -79,6 +81,11 @@ public class ResultsSearchActivity extends AppCompatActivity {
         querySections = bundle.getString(BUNDLE_KEY_QUERY_SECTIONS);
         queryTerms = bundle.getString(BUNDLE_KEY_QUERY_TERM);
 
+    }
+
+    @VisibleForTesting
+    public CountingIdlingResource getEspressoIdlingResourceForMainFragment() {
+        return this.presenter.getEspressoIdlingResource();
     }
 
 
