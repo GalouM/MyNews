@@ -67,7 +67,6 @@ public class ResultSearchViewInstrumentedTest {
         this.waitForNetworkCall();
         onView(withId(R.id.result_search_recycler_view)).check(matches(isDisplayed()));
         onView(withId(R.id.result_search_recycler_view)).perform(swipeDown());
-        onView(withId(R.id.result_search_recycler_view)).perform(swipeUp());
     }
 
     @Test
