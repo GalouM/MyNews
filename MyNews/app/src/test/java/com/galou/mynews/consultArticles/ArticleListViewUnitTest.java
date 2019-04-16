@@ -60,14 +60,6 @@ public class ArticleListViewUnitTest {
     private SectionMostPopular sectionMostPopular;
     @Mock
     private SectionTopStories sectionTopStories;
-    @Mock
-    private ArticleMostPopular article;
-
-    private ArticleListView fragment;
-
-    private LinearLayoutManager mockLayoutManager;
-    @InjectMocks
-    private ArticleMostPopularAdapter articleMostPopularAdapter;
 
     private Context context;
 
@@ -78,7 +70,6 @@ public class ArticleListViewUnitTest {
                 .start()
                 .resume()
                 .get();
-        mockLayoutManager = Mockito.mock(LinearLayoutManager.class);
         context = activity.getBaseContext();
 
     }

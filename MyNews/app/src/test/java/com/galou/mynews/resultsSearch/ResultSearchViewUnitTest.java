@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.galou.mynews.R;
 import com.galou.mynews.models.ArticleSearch;
+import com.galou.mynews.models.ResponseSearch;
+import com.galou.mynews.models.SectionSearch;
+import com.galou.mynews.utils.SwipeRefreshLayoutBottom;
 import com.galou.mynews.utils.TextUtil;
 import com.galou.mynews.webViewArticle.WebViewArticleActivity;
 
@@ -29,12 +32,16 @@ import org.robolectric.shadows.ShadowIntent;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
+
 import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_BEGIN_DATE;
 import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_END_DATE;
 import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_SECTIONS;
 import static com.galou.mynews.searchNotification.SearchView.BUNDLE_KEY_QUERY_TERM;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 /**
@@ -47,6 +54,7 @@ public class ResultSearchViewUnitTest {
 
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
+    private SwipeRefreshLayoutBottom refreshLayoutBottom;
     private ArticleSearchAdapter adapter;
     private Context context;
     private List<ArticleSearch> listArticles;
@@ -55,6 +63,8 @@ public class ResultSearchViewUnitTest {
 
     @Mock
     private ResultSearchContract.Presenter presenter;
+    @Mock
+    private SectionSearch section;
 
     @Before
     public void setUp() throws Exception {
@@ -78,6 +88,7 @@ public class ResultSearchViewUnitTest {
         activity = Robolectric.buildActivity(ResultsSearchActivity.class, intent).create().resume().get();
         recyclerView = (RecyclerView) activity.findViewById(R.id.result_search_recycler_view);
         refreshLayout = (SwipeRefreshLayout) activity.findViewById(R.id.result_search_swipe_refresh);
+        refreshLayoutBottom = (SwipeRefreshLayoutBottom) activity.findViewById(R.id.result_search_swipe_refresh_bottom);
         adapter = (ArticleSearchAdapter) recyclerView.getAdapter();
 
         context = activity.getBaseContext();
@@ -98,8 +109,38 @@ public class ResultSearchViewUnitTest {
     }
 
     @Test
+    public void swipeLayoutBottom_isVisible() throws Exception{
+        assertNotNull(refreshLayoutBottom);
+    }
+
+    @Test
     public void recyclerViewAdapter_isSet() throws Exception{
         assertNotNull(adapter);
+
+    }
+
+    @Test
+    public void numberItemInRecyclerView_equalToNumberArticleFromAPI() throws Exception{
+        ArticleSearch article1 = new ArticleSearch();
+        ArticleSearch article2 = new ArticleSearch();
+        List<ArticleSearch> articles = new ArrayList<>();
+        articles.add(article1);
+        articles.add(article2);
+        ResponseSearch responseSearch = new ResponseSearch();
+        responseSearch.setDocs(articles);
+        when(section.getResponse()).thenReturn(responseSearch);
+        Observable<SectionSearch> observable = Observable.just(section);
+        TestObserver<SectionSearch> testObserver = new TestObserver<>();
+        observable.subscribeWith(testObserver)
+                .awaitTerminalEvent();
+
+        SectionSearch sectionFetched = testObserver.values().get(0);
+
+        List<ArticleSearch> listArticles = sectionFetched.getResponse().getDocs();
+
+        ArticleSearchAdapter adapter = new ArticleSearchAdapter(listArticles, Glide.with(context));
+
+        assertEquals(sectionFetched.getResponse().getDocs().size(), adapter.getItemCount());
 
     }
 
