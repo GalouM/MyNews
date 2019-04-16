@@ -108,6 +108,13 @@ public class ResultSearchPresenterUnitTest {
     }
 
     @Test
+    public void nextArticleFoundNoNew_showMessage(){
+        presenter.getNextArticles();
+
+        verify(resultView).showNoMoreNews();
+    }
+
+    @Test
     public void noArticleFound_showMessage(){
         beginDate = "20501010";
         terms = TextUtil.convertQueryTermForAPI("555tttrrreezzaa");
