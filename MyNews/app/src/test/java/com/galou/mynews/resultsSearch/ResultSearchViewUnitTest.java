@@ -136,20 +136,4 @@ public class ResultSearchViewUnitTest {
         assertEquals(sectionFetched.getResponse().getDocs().size(), adapter.getItemCount());
 
     }
-
-    @Test
-    public void titleDisplay_sameTitleArticle() throws Exception{
-        //recyclerView.measure(0,0);
-        //recyclerView.layout(0,0,100,1000);
-        //TextView textView = (TextView)recyclerView.getChildAt(0).findViewById();
-        //recyclerView.findViewHolderForAdapterPosition(0).itemView.findViewById(R.id.recycler_view_title_article);
-        //recyclerView.measure(0,0);
-        //recyclerView.layout(0,0,100,1000);
-        //String title = adapter.getArticle(0).getHeadline().getPrintHeadline();
-        //presenter.getArticles();
-
-        //assertNotNull(adapter.getArticle(0));
-        assertNotNull(adapter);
-
-    }
 }
