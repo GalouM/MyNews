@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="2"
-        android:rowCount="3">
+        android:rowCount="3"
+        android:layout_margin="@dimen/small_margin">
         <CheckBox
             android:id="@+id/search_item_art"
             android:layout_width="wrap_content"
