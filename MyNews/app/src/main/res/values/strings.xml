@@ -25,6 +25,8 @@
     <!-- Activities Names -->
     <string name="search_articles_name_activity">Search Articles</string>
     <string name="notifications_articles_name_activity">Notifications</string>
+    <string name="result_activity_name">Results</string>
+    <string name="webview_activity_name">Details</string>
 
     <!-- CheckBoxes Names -->
     <string name="search_item_arts">Arts</string>
@@ -32,6 +34,7 @@
     <string name="search_item_entrepreneurs">Entrepreneurs</string>
     <string name="search_item_politics">Politics</string>
     <string name="search_item_travel">Travel</string>
+    <string name="search_item_sports">Sports</string>
     <string name="search_button">SEARCH</string>
 
     <!-- Notification Fragment text -->
@@ -46,7 +49,7 @@
     <string name="begin_date">Begin Date</string>
     <string name="search_query_term">Search query term</string>
 
-    <!-- Error Message -->
+    <!-- Error Message UI -->
     <string name="error_message_end_date_before_begin">Has to be after begin date</string>
     <string name="error_message_query_empty">Field can\'t be empty</string>
     <string name="error_message_query_incorrect">Cannot contains special characters</string>
@@ -56,23 +59,24 @@
 
 
     <string name="no_published_date">no date</string>
+
+    <!-- SnackBar Message -->
     <string name="connection_failed">Connection failed, please check your Internet connection</string>
-    <string name="result_activity_name">Results</string>
     <string name="no_news">No news to show</string>
     <string name="incorrect_url">Incorrect URL</string>
-    <string name="webview_activity_name">Details</string>
+    <string name="notification_enabled_message">Notifications are enabled</string>
+    <string name="notification_disabled_message">Notifications are disabled</string>
+    <string name="no_more_news">No more news to show</string>
+    <string name="hide_button_snackbar">Hide</string>
+
+    <!-- Notifications Message -->
     <string name="content_notification_message">%d new news available today</string>
     <string name="title_notifications">"New news for %s"</string>
     <string name="error_notifications">Error Request</string>
     <string name="error_notification_message">An error happened during your request please reset your notification settings</string>
-    <string name="notification_enabled_message">Notifications are enabled</string>
-    <string name="notification_disabled_message">Notifications are disabled</string>
-    <string name="no_more_news">No more news to show</string>
-    <string name="search_item_sports">Sports</string>
-    <string name="hide_button_snackbar">Hide</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 
 
 </resources>
