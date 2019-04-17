@@ -14,7 +14,8 @@
     <FrameLayout
         android:id="@+id/results_activity_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:transitionName="@string/animation_search_to_result_zoom"/>
 
 
 

@@ -96,7 +96,8 @@
             android:background="@color/colorPrimary"
             android:textColor="@color/textPrimaryColor"
             android:layout_margin="@dimen/small_margin"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:transitionName="@string/animation_search_to_result_zoom"/>
 
 
     </android.support.constraint.ConstraintLayout>

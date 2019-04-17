@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_margin="@dimen/small_margin">
+    android:layout_margin="@dimen/small_margin"
+    android:transitionName="@string/animation_item_recycler_view_to_web_view_zoom">
 
     <ImageView
         android:id="@+id/recycler_view_image_article"
         android:layout_width="80dip"
         android:layout_height="80dip"
         android:background="@drawable/the_new_york_times"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,5 +1,7 @@
 package com.galou.mynews.consultArticles;
 
+import android.view.View;
+
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.ArticleMostPopular;
 import com.galou.mynews.models.ArticleTopStories;
@@ -41,6 +43,8 @@ public class ArticleListPresenterUnitTest {
 
     @Mock
     private ArticleListContract.View articleListView;
+    @Mock
+    private View view;
 
     @Mock
     private ArticleTopStories articleTopStories;
@@ -157,18 +161,18 @@ public class ArticleListPresenterUnitTest {
     public void getUrlArticleTopStories_sentToView(){
         String url = "http://test";
         when(articleTopStories.getUrl()).thenReturn(url);
-        presenter.getUrlArticleTopStories(articleTopStories);
+        presenter.getUrlArticleTopStories(articleTopStories, view);
 
-        verify(articleListView).showDetailsArticle(url);
+        verify(articleListView).showDetailsArticle(url, view);
     }
 
     @Test
     public void getUrlArticleMostPopular_sentToView(){
         String url = "http://test";
         when(articleMostPopular.getUrl()).thenReturn(url);
-        presenter.getUrlArticleMostPopular(articleMostPopular);
+        presenter.getUrlArticleMostPopular(articleMostPopular, view);
 
-        verify(articleListView).showDetailsArticle(url);
+        verify(articleListView).showDetailsArticle(url, view);
     }
 
     @AfterClass

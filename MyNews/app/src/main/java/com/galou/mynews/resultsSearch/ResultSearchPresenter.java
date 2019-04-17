@@ -112,8 +112,8 @@ public class ResultSearchPresenter implements ResultSearchContract.Presenter {
 
 
     @Override
-    public void getUrlArticle(ArticleSearch article) {
-        resultView.showDetailsArticle(article.getWebUrl());
+    public void getUrlArticle(ArticleSearch article, android.view.View v) {
+        resultView.showDetailsArticle(article.getWebUrl(), v);
 
     }
 

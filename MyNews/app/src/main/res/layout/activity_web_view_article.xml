@@ -13,7 +13,8 @@
     <FrameLayout
         android:id="@+id/web_view_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:transitionName="@string/animation_item_recycler_view_to_web_view_zoom"/>
 
 
 

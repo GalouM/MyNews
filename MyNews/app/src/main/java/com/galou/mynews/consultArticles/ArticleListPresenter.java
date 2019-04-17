@@ -1,6 +1,7 @@
 package com.galou.mynews.consultArticles;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.ArticleMostPopular;
@@ -124,13 +125,13 @@ public class ArticleListPresenter implements ArticleListContract.Presenter{
     // -----------------
 
     @Override
-    public void getUrlArticleMostPopular(ArticleMostPopular article) {
-        articleListView.showDetailsArticle(article.getUrl());
+    public void getUrlArticleMostPopular(ArticleMostPopular article, View view) {
+        articleListView.showDetailsArticle(article.getUrl(), view);
     }
 
     @Override
-    public void getUrlArticleTopStories(ArticleTopStories article) {
-        articleListView.showDetailsArticle(article.getUrl());
+    public void getUrlArticleTopStories(ArticleTopStories article, View view) {
+        articleListView.showDetailsArticle(article.getUrl(), view);
 
     }
 

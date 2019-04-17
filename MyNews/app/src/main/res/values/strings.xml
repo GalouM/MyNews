@@ -21,6 +21,9 @@
 
     <!-- Animation -->
     <string name="animation_main_to_search_zoom" translatable="false">AnimationMainToSearch</string>
+    <string name="animation_item_recycler_view_to_web_view_zoom" translatable="false">AnimationRVToWB</string>
+    <string name="animation_main_to_notification_zoom" translatable="false">AnimationMainToNotification</string>
+    <string name="animation_search_to_result_zoom" translatable="false">AnimationSearchToResult</string>
 
     <!-- Activities Names -->
     <string name="search_articles_name_activity">Search Articles</string>

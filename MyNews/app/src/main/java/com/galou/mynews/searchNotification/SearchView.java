@@ -1,7 +1,9 @@
 package com.galou.mynews.searchNotification;
 
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -10,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.galou.mynews.R;
@@ -37,6 +40,7 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
     @BindView(R.id.begin_date_input_layout) TextInputLayout beginDateInputLayout;
     @BindView(R.id.end_date_input_layout) TextInputLayout endDateInputLayout;
     @BindView(R.id.search_view_root_view) CoordinatorLayout rootView;
+    @BindView(R.id.search_fragment_search_button) Button button;
 
     public static final int DIALOG_CODE = 12345;
 
@@ -184,7 +188,12 @@ public class SearchView extends BaseView implements PickDateView.OnOKButtonListe
         bundle.putString(BUNDLE_KEY_QUERY_SECTIONS, querySection);
         bundle.putString(BUNDLE_KEY_QUERY_TERM, queryTerms);
         intent.putExtras(bundle);
-        startActivity(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), button, getString(R.string.animation_main_to_search_zoom));
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(intent);
+        }
 
     }
 

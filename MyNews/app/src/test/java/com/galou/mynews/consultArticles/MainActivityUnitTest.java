@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenuItem;
 
 import static junit.framework.TestCase.assertTrue;
@@ -24,6 +25,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 19)
 public class MainActivityUnitTest {
 
     private MainActivity activity;

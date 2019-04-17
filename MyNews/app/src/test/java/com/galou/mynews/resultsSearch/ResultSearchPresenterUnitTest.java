@@ -1,5 +1,7 @@
 package com.galou.mynews.resultsSearch;
 
+import android.view.View;
+
 import com.galou.mynews.models.ApiStreams;
 import com.galou.mynews.models.ArticleSearch;
 import com.galou.mynews.models.SectionSearch;
@@ -40,6 +42,8 @@ public class ResultSearchPresenterUnitTest {
 
     @Mock
     private ResultSearchContract.View resultView;
+    @Mock
+    private View view;
 
     @Mock
     private ArticleSearch article;
@@ -103,9 +107,9 @@ public class ResultSearchPresenterUnitTest {
     public void getUrlArticle_sentToView(){
         String url = "http://test";
         when(article.getWebUrl()).thenReturn(url);
-        presenter.getUrlArticle(article);
+        presenter.getUrlArticle(article, view);
 
-        verify(resultView).showDetailsArticle(url);
+        verify(resultView).showDetailsArticle(url, view);
     }
 
     @AfterClass

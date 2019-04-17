@@ -14,13 +14,13 @@ public interface ArticleListContract {
         void showErrorMessage();
         void setupRecyclerViewMostPopular(List<ArticleMostPopular> articles);
         void setupRecyclerViewTopStories(List<ArticleTopStories> articles);
-        void showDetailsArticle(String url);
+        void showDetailsArticle(String url, android.view.View v);
         void showEmptyNewsMessage();
     }
     interface Presenter {
         void getArticlesFromNYT(String section);
-        void getUrlArticleMostPopular(ArticleMostPopular article);
-        void getUrlArticleTopStories(ArticleTopStories article);
+        void getUrlArticleMostPopular(ArticleMostPopular article, android.view.View v);
+        void getUrlArticleTopStories(ArticleTopStories article, android.view.View v);
         void disposeWhenDestroy();
 
     }

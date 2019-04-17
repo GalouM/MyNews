@@ -1,9 +1,11 @@
 package com.galou.mynews.resultsSearch;
 
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.bumptech.glide.Glide;
+import com.galou.mynews.BuildConfig;
 import com.galou.mynews.R;
 import com.galou.mynews.models.ArticleSearch;
 import com.galou.mynews.utils.ItemClickSupport;
@@ -121,7 +124,7 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(recyclerView, R.layout.article_item_view)
                 .setOnItemClickListener((recyclerView, position, v)
-                        -> presenter.getUrlArticle(adapter.getArticle(position)));
+                        -> presenter.getUrlArticle(adapter.getArticle(position), v));
 
     }
 
@@ -160,10 +163,15 @@ public class ResultsSearchView extends Fragment implements ResultSearchContract.
     // -----------------
 
     @Override
-    public void showDetailsArticle(String url) {
+    public void showDetailsArticle(String url, View viewClicked) {
         Intent intent = new Intent(getContext(), WebViewArticleActivity.class);
         intent.putExtra(WebViewArticleActivity.KEY_URL, url);
-        startActivity(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), viewClicked, getString(R.string.animation_item_recycler_view_to_web_view_zoom));
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(intent);
+        }
 
     }
 

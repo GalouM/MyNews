@@ -13,12 +13,12 @@ public interface ResultSearchContract {
         void showArticles(List<ArticleSearch> articles);
         void showNextArticles(List<ArticleSearch> articles);
         void showErrorMessage();
-        void showDetailsArticle(String url);
+        void showDetailsArticle(String url, android.view.View v);
         void showEmptyNewsMessage();
         void showNoMoreNews();
     }
     interface Presenter {
-        void getUrlArticle(ArticleSearch article);
+        void getUrlArticle(ArticleSearch article, android.view.View v);
         void getArticles();
         void getNextArticles();
         void disposeWhenDestroy();

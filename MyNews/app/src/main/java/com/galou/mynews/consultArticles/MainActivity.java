@@ -1,5 +1,6 @@
 package com.galou.mynews.consultArticles;
 
+import android.app.ActivityOptions;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -16,7 +17,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.galou.mynews.BuildConfig;
 import com.galou.mynews.R;
 import com.galou.mynews.searchNotification.NotificationsActivity;
 import com.galou.mynews.searchNotification.SearchActivity;
@@ -111,9 +114,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id  = item.getItemId();
+        View view = toolbar.findViewById(id);
         switch (id){
             case R.id.menu_main_activity_search:
-                this.startSearchActivity();
+                startSearchActivityFromToolBar(view);
                 return true;
             case R.id.menu_main_activity_notifications:
                 this.startNotificationsActivity();
@@ -143,11 +147,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    private void startSearchActivityFromToolBar(View view){
+        Intent intent = new Intent(this, SearchActivity.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.animation_main_to_search_zoom));
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(intent);
+        }
+    }
+
+
+
     private void startNotificationsActivity(){
         Intent intent = new Intent(this, NotificationsActivity.class);
         startActivity(intent);
 
     }
+
 
     // -----------------
     // CREATE NOTIFICATION CHANNEL
