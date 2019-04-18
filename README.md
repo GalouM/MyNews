@@ -5,15 +5,19 @@ You can choose between 3 categories:
 * Top Stories
 * Most Popular (the most shared news)
 * Sports (top stories in the sport category)
-	<img src="./screenshots/main_activity.jpg" width="30%" height="30%">
+	
+<img src="./screenshots/main_activity.jpg" width="30%" height="30%">
 
 You can also search for news, if the query is wrong the UI will let you know. All the result will be display in a new screen.
+
 <img src="./screenshots/search_activity.jpg" width="30%" height="30%">&ensp;<img src="./screenshots/error_search.jpg" width="30%" height="30%">&ensp;<img src="./screenshots/seach_result.jpg" width="30%" height="30%">
 
 You can display the details of a new by clicking a it it contents will be display in the application.
+
 <img src="./screenshots/details.jpg" width="30%" height="30%">
 
 You also activate notifiction for a special query and be notify once a day if new articles have been published
+
 <img src="./screenshots/notification_screen.jpg" width="30%" height="30%">&ensp;<img src="./screenshots/notification.jpg" width="30%" height="30%">
 
 
