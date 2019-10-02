@@ -16,7 +16,7 @@ You can display the details of a new by clicking a it it contents will be displa
 
 <img src="./screenshots/details.jpg" width="30%" height="30%">
 
-You also activate notifiction for a special query and be notify once a day if new articles have been published
+You can also activate notifiction for a special query and be notify once a day if new articles have been published
 
 <img src="./screenshots/notification_screen.jpg" width="30%" height="30%">&ensp;<img src="./screenshots/notification.jpg" width="30%" height="30%">
 
@@ -32,6 +32,9 @@ You also activate notifiction for a special query and be notify once a day if ne
 * [Mockito](https://site.mockito.org/)
 * [Espresso](https://developer.android.com/training/testing/espresso)
 * [Robolectric](http://robolectric.org/)
+
+## Pattern
+MVP
 
 ## Developed By
 
