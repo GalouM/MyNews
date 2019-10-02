@@ -36,8 +36,9 @@ You can also activate notifiction for a special query and be notify once a day i
 ## API
 * [New York Times API]("https://api.nytimes.com)
 
-## Pattern
-MVP
+## Architecture
+* MVP
+* Java
 
 ## Developed By
 
