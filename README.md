@@ -44,4 +44,4 @@ You can also activate notifiction for a special query and be notify once a day i
 
 Galou Minisini
 
-    Copyright 2018 Galou Minisini
+    Copyright 2019 Galou Minisini
